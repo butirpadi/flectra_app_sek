@@ -34,6 +34,7 @@
                       <field name="is_bulanan" />
                       <field name="is_different_by_gender" />
                       <field name="is_siswa_baru_only" />
+                      <field name="is_siswa_lama_only" />
                       <field name="is_optional" />                         
                   </group>
               </sheet>
