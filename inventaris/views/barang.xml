@@ -1,0 +1,157 @@
+<flectra>
+	<data>
+
+		<record model="ir.ui.view" id="barang_list_view">
+			<field name="name">barang.list.view</field>
+			<field name="model">inventaris.barang</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" invisible="1" />
+					<field name="nama" />
+					<field name="kategori_id" />
+					<field name="brand_id" />
+					<field name="code" />
+					<field name="internal_reference" />
+					<field name="serial_number" />
+					<field name="color_id" />
+					<field name="lokasi_id" />
+					<field name="sumber_id" />
+					<field name="partner_id" />
+					<field name="kondisi" />
+					<field name="cost" sum="Total Price" string="Price" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="barang_filter_view" model="ir.ui.view">
+			<field name="name">barang.filter.view</field>
+			<field name="model">inventaris.barang</field>
+			<field name="arch" type="xml">
+				<search string="Search Barang">
+					<field name="name" string="Nama"
+						filter_domain="['|','|','|','|','|','|','|','|',
+							('name','ilike',self),
+							('code','ilike',self),
+							('internal_reference','ilike',self),
+							('serial_number','ilike',self),
+							('kategori_id','ilike',self),
+							('brand_id','ilike',self),
+							('lokasi_id','ilike',self),
+							('sumber_id','ilike',self),
+							('partner_id','ilike',self),
+							]" />
+					<group expand="0" string="Group By">
+						<filter name="kategori_id" string="Kategori" domain="[]"
+							context="{'group_by':'kategori_id'}" />
+						<filter name="brand_id" string="Brand" domain="[]"
+							context="{'group_by':'brand_id'}" />
+						<filter name="lokasi_id" string="Lokasi" domain="[]"
+							context="{'group_by':'lokasi_id'}" />
+						<filter name="vendor_id" string="Vendor" domain="[]"
+							context="{'group_by':'partner_id'}" />
+						<filter name="kondisi" string="Kondisi" domain="[]"
+							context="{'group_by':'kondisi'}" />
+							<filter name="sumber_id" string="Sumber Dana" domain="[]"
+							context="{'group_by':'sumber_id'}" />
+							<filter name="purchase_number" string="Purchase Number" domain="[]"
+							context="{'group_by':'purchase_number'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="barang_action_window">
+			<field name="name">Asset</field>
+			<field name="res_model">inventaris.barang</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="barang_view_form" model="ir.ui.view">
+			<field name="name">barang.view.form</field>
+			<field name="model">inventaris.barang</field>
+			<field name="arch" type="xml">
+				<form duplicate="0" string="Barang" class="o_sale_order">
+					<header>
+						<button class="btn btn-danger" type="object"
+							name="action_scrap" string="Scrap"
+							attrs="{'invisible': [ ('kondisi', '=', 'rusak')]}"
+							confirm="Are you sure ?" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<strong>
+								<field name="code" readonly="1" />
+							</strong>
+							<h1>
+								<field name="nama" placeholder="Nama..." required="1" />
+							</h1>
+							<field name="name" invisible="1" />
+						</div>
+						<notebook>
+							<page name="general_info" string="General Information">
+								<group>
+									<group>
+										<field name="tanggal_pengadaan" required="1" />
+										<field name="sumber_id" required="1" />
+										<field name="kategori_id" required="1" />
+										<field name="internal_reference" />
+										<field name="brand_id" />
+										<field name="lokasi_id" required="1" />
+										<field name="satuan_id" />
+									</group>
+									<group>
+										<field name="serial_number" />
+										<field name="color_id" />
+										<field name="panjang" />
+										<field name="lebar" />
+										<field name="tinggi" />
+										<field name="volume" />
+										<field name="kondisi" readonly="1" />
+										<field name="qty" invisible="1" />
+										<!-- <label for="nilai_penyusutan" string="Penyusutan" /> <div 
+											class="o_address_format"> <field name="nilai_penyusutan" placeholder="Nilai 
+											Penyusutan" class="o_address_city" />/ <field name="interval_penyusutan" 
+											placeholder="Bulan" class="o_address_zip" /> <strong> Bulan</strong> </div> -->
+
+									</group>
+								</group>
+							</page>
+							<page name="purchase_page" string="Purchase Data">
+								<group>
+									<group>
+										<field name="purchase_number" />
+										<field name="purchase_date" />
+									</group>
+									<group>
+										<field name="partner_id"
+											context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+											domain="[('supplier','=',True)]" />
+										<field name="cost" string="Price" required="1" />
+									</group>
+								</group>
+							</page>
+							<page name="barang_move" string="Asset Move">
+								<field name="lokasi_move_id" readonly="1">
+									<tree>
+										<field name="move_date" />
+										<field name="lokasi_id" />
+										<field name="active" invisible="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+						<div class="oe_clear" />
+						<group class="oe_subtotal_footer oe_right" colspan="2"
+							name="sale_total">
+						</group>
+						<field name="desc" class="oe_inline"
+							placeholder="Keterangan" />
+						<div class="oe_clear" />
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</flectra>

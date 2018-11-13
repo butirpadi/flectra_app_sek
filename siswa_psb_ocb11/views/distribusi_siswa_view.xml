@@ -1,0 +1,90 @@
+<flectra>
+    <data>
+
+    <record id="view_distribusi_siswa_filter" model="ir.ui.view">
+        <field name="name">distribusi.siswa.list.select</field>
+        <field name="model">siswa_psb_ocb11.distribusi_siswa</field>
+        <field name="arch" type="xml">
+            <search string="Search Distribusi Siswa">
+                <field name="name" string="Name" filter_domain="['|',
+                                                                    ('name','ilike',self),
+                                                                    ('jenjang_id','ilike',self)
+                                                                    ]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_tahunajaran_id" string="Tahun Ajaran" domain="[]" context="{'group_by':'tahunajaran_id'}"/>
+                    <filter name="group_jenjang" string="Jenjang" domain="[]" context="{'group_by':'jenjang_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="siswa_psb_ocb11.formulir_list">
+        <field name="name">siswa_psb_ocb11_distribusi_siswa_list</field>
+        <field name="model">siswa_psb_ocb11.distribusi_siswa</field>
+        <field name="arch" type="xml">
+            <tree  >
+                <field name="name" invisible="1" />
+                <field name="tahunajaran_id" context="{'active_test': False}"/>
+                <field name="jenjang_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+        <record id="siswa_psb_ocb11.distribusi_siswa_form" model="ir.ui.view">
+            <field name="name">ocb11.distribusi.siswa.form</field>
+            <field name="model">siswa_psb_ocb11.distribusi_siswa</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Distribusi Siswa" class="o_sale_order" create="false">
+                    <header>
+                        <button type="object" name="action_reset" string="Reset" class="oe_edit_only" attrs="{'invisible':[('is_distributed','=',False)]}" confirm="Are you sure you want to do this?" groups="siswa_psb_ocb11.siswa_psb_group_admin" />
+                        <button type="object" name="action_confirm_distribute" string="Confirm" class="oe_edit_only btn-primary" attrs="{'invisible':['|',('is_manual', '=', True),('is_distributed','=',True)]}" />
+                        <button type="object" name="action_auto_distribute" string="Auto Distribute" class="oe_edit_only" attrs="{'invisible':['|',('is_manual', '=', True),('is_distributed','=',True)]}" />
+                        <!-- <button type="object" name="action_manual_distribute" string="Manual Distribute" class="oe_edit_only" attrs="{'invisible':['|',('is_manual', '=', True),('is_distributed','=',True)]}" /> -->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title oe_read_only">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="tahunajaran_id" options="{'no_create_edit': True,'no_open':True,'no_create':True,'no_edit':True}" attrs="{'readonly':[('name', '!=', '0')]}" context="{'active_test': False}"/>
+                            </group>
+                            <group>
+                                <field name="jenjang_id" options="{'no_create_edit': True,'no_open':True,'no_create':True,'no_edit':True}" attrs="{'readonly':[('name', '!=', '0')]}" />
+                                <field name="rombel_ids" required="1" widget="many2many_tags" options="{'no_create_edit': True,'no_open':True,'no_create':True,'no_edit':True}" attrs="{'readonly':[('name', '!=', '0')]}" />
+                                <field name="is_manual" invisible="1" />
+                                <field name="is_distributed" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook  >
+                            <page attrs="{'invisible':[('name', '=', '0')]}" name="data_siswa" string="Data Calon Siswa" >
+                                <field name='calon_siswa_ids' >
+                                    <tree delete="false" editable="bottom" create="false" >
+                                        <field name='name' readonly="1" />
+                                        <field name='reg_number' readonly="1" />
+                                        <field name='jenis_kelamin' readonly="1" />
+                                        <field name='jenjang_id' invisible="1" />
+                                        <!-- <field name='rombel_id' domain="[('jenjang_id','=','get_current_jenjang_id()')]" /> -->
+                                        <field name='rombel_id' options="{'no_create_edit': True,'no_open':True,'no_create':True,'no_edit':True}" />
+                                    </tree>
+                                </field>
+                            </page>                  
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="siswa_psb_ocb11.distribusi_siswa_action_window">
+            <field name="name">Distribusi Siswa</field>
+            <field name="res_model">siswa_psb_ocb11.distribusi_siswa</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_tahunajaran_id':1,'search_default_group_jenjang':1}</field>
+        </record>
+
+    </data>
+</flectra>

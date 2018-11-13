@@ -1,0 +1,126 @@
+<flectra>
+    <data>
+
+        <report
+            id="report_rekap_siswa_action"
+            model="siswa_ocb11.wizard_report_rekap_siswa"
+            string="Rekapitulasi Data Siswa"
+            report_type="qweb-html"
+            name="siswa_ocb11.report_rekap_siswa"
+            file="siswa_ocb11.report_rekap_siswa"
+            attachment_use="False"
+            print_report_name="'Data Siswa-%s' % (object.tahunajaran_id.name + '-' + object.rombel_id.name)"
+            menu="False"
+            paperformat="format_report_general"
+        />
+
+        <template id="report_rekap_siswa">
+            <t t-call="web.html_container">            
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.table{
+                                    background-color:transparent!important;
+                                }
+
+                                table.table tbody tr td {
+                                    background-color:transparent!important;
+                                }
+
+                                table.table-data thead tr th{
+                                    border-top: thin solid black !important;
+                                    border-bottom: thin solid black !important;
+                                }
+                            </style>
+                            <div class="row" >
+                                
+                                <div class="col-xs-12">
+                                    <div class="text-center">
+                                        <h3><strong>DATA SISWA</strong></h3>
+                                        <span t-esc="o.tahunajaran_id.name" /> / <span t-esc="o.rombel_id.name" />
+                                    </div>
+                                    <br/><![CDATA[&nbsp;]]>
+                                    <table class="table table-condensed table-data" >
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" >No</th>
+                                                <th class="text-center" >No. Induk</th>
+                                                <th >Nama</th>
+                                                <th class="text-center" >Jenis Kelamin</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="row_num" t-value="1" />
+                                            <t t-set="sum_laki" t-value="0" />
+                                            <t t-set="sum_perempuan" t-value="0" />
+                                            <t t-foreach="o.siswa_ids.sorted(key=lambda x: x.induk)" t-as="cs">
+                                                <tr>
+                                                    <td class="text-center" >
+                                                        <t t-esc="row_num" />
+                                                        <t t-set="row_num" t-value="row_num+1" />
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <span t-field="cs.induk" />                                                        
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="cs.name" />
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <t t-if="cs.jenis_kelamin=='laki'">
+                                                            Laki-laki
+                                                            <t t-set="sum_laki" t-value="sum_laki+1" />
+                                                        </t>
+                                                        <t t-if="cs.jenis_kelamin=='perempuan'">
+                                                            Perempuan
+                                                            <t t-set="sum_perempuan" t-value="sum_perempuan+1" />
+                                                        </t>
+                                                    </td>
+                                                </tr>                                                
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-xs-3" >
+                                    <table class="table table-bordered" >
+                                        <tbody>
+                                            <tr>
+                                                <td  >
+                                                    <strong>Laki-laki</strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <t t-esc="sum_laki"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                    <strong>Perempuan</strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <t t-esc="sum_perempuan"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <t t-esc="sum_laki+sum_perempuan" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="footer" >
+                            <span>Page </span><span class="page" /> of <span class="topage" />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</flectra>

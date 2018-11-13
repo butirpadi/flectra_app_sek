@@ -1,0 +1,137 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="siswa_ocb11.rombel_list">
+            <field name="name">siswa_ocb11_rombel_list</field>
+            <field name="model">siswa_ocb11.rombel</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="name"/>
+                    <field name="jenjang_id"/>
+                    <field name="kapasitas" invisible="1" />
+                    <field name="is_show_on_dashboard" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="siswa_ocb11.rombel_new_action_window">
+            <field name="name">Rombongan Belajar</field>
+            <field name="res_model">siswa_ocb11.rombel</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_rombel_form" model="ir.ui.view">
+            <field name="name">rombel.ocb11.form</field>
+            <field name="model">siswa_ocb11.rombel</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Rombongan Belajar" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="jenjang_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                            <field name="kapasitas" invisible="1" />
+                            <field name="is_show_on_dashboard"  invisible="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_rombel_kanban_form" model="ir.ui.view">
+            <field name="name">rombel.ocb11.kanban</field>
+            <field name="model">siswa_ocb11.rombel</field>
+            <field name="arch" type="xml">
+                <kanban
+                    class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban"
+                    create="0">
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                                <div>
+                                    <div t-attf-class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary">
+                                                <field name="name"/>
+                                            </div>
+                                            <div class="o_secondary">
+                                                <field class="o_secondary" name="jenjang_id"/>
+                                            </div>
+                                        </div>
+                                        <div class="o_kanban_manage_button_section">
+                                            <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_content">
+                                        <div class="row">
+                                            <div class="col-xs-6 o_kanban_primary_left">
+                                                <button
+                                                    class="btn btn-primary"
+                                                    name="get_jumlah_siswa"
+                                                    type="object">
+                                                    <span >
+                                                        <t t-esc="record.get_jumlah_siswa"/>
+                                                        Siswa
+                                                    </span>
+                                                    <!-- <span t-if="record.code.raw_value =='outgoing'">
+                                                        <t t-esc="record.count_picking_ready.value"/>
+                                                        To Do
+                                                    </span>
+                                                    <span t-if="record.code.raw_value =='internal'">
+                                                        <t t-esc="record.count_picking_ready.value"/>
+                                                        Transfers
+                                                    </span> -->
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-6 o_kanban_primary_right">
+                                                <!-- <div t-if="record.count_picking_ready.raw_value &gt; 0" class="row"></div>
+                                                -->
+
+                                                <!-- <div t-if="record.count_picking_waiting.raw_value &gt; 0" class="row"> <div
+                                                class="col-xs-9"> <a name="get_action_picking_tree_waiting" type="object">
+                                                Waiting </a> </div> <div class="col-xs-3"> <field name="count_picking_waiting"/>
+                                                </div> </div> -->
+
+                                                <!-- <div t-if="record.count_picking_late.raw_value &gt; 0" class="row"> <div
+                                                class="col-xs-9"> <a class="oe_kanban_stock_picking_type_list"
+                                                name="get_action_picking_tree_late" type="object"> Late </a> </div> <div
+                                                class="col-xs-3"> <field name="count_picking_late"/> </div> </div> -->
+
+                                                <!-- <div t-if="record.count_picking_backorders.raw_value &gt; 0" class="row">
+                                                <div class="col-xs-9"> <a class="oe_kanban_stock_picking_type_list"
+                                                name="get_action_picking_tree_backorder" type="object"> Back Orders </a> </div>
+                                                <div class="col-xs-3"> <field name="count_picking_backorders"/> </div> </div>
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_manage_pane">
+                                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                            <div class="col-xs-12">
+                                                <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record
+            model="ir.actions.act_window"
+            id="siswa_ocb11.siswa_dashboard_view_action">
+            <field name="name">Dashboard</field>
+            <field name="res_model">siswa_ocb11.rombel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban</field>
+            <field name="form_view_id" ref="siswa_ocb11.view_rombel_kanban_form"/>
+        </record>
+
+    </data>
+</flectra>

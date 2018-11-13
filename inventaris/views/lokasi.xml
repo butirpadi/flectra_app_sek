@@ -1,0 +1,43 @@
+<flectra>
+	<data>
+
+		<record model="ir.actions.act_window" id="lokasi_action_window">
+			<field name="name">Lokasi</field>
+			<field name="res_model">inventaris.lokasi</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="lokasi_view_form" model="ir.ui.view">
+			<field name="name">barang.view.form</field>
+			<field name="model">inventaris.lokasi</field>
+			<field name="arch" type="xml">
+				<form duplicate="0" string="Barang" class="o_sale_order">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+							<group></group>
+						</group>
+						
+						<notebook>
+							<page name="asset_page" string="Asset" >
+								<field name="barang_move_ids" >
+									<tree>
+										<field name="barang_id" string="Nama" />
+										<field name="code" />
+										<field name="internal_reference" />
+										<field name="serial_number" />
+										<field name="kategori_id" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</flectra>

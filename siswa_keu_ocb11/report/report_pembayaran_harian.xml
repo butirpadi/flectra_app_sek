@@ -1,0 +1,144 @@
+<flectra>
+    <data>
+
+        <report
+            id="report_pembayaran_harian_action"
+            model="siswa_keu_ocb11.wizard_pembayaran_harian"
+            string="Report Pembayaran Harian"
+            report_type="qweb-html"
+            name="siswa_keu_ocb11.report_wiz_pembayaran_harian"
+            file="siswa_keu_ocb11.report_wiz_pembayaran_harian"
+            attachment_use="False"
+            print_report_name="'Report_Pembayaran_Harian%s' % ('_'+object.awal+'_'+object.akhir)"
+            menu="False"
+            paperformat="siswa_ocb11.format_report_landscape"
+        />
+    
+         <template id="report_wiz_pembayaran_harian">
+            <t t-call="web.html_container">            
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.noborder,table.noborder tbody tr, table.noborder tr td{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    border-bottom:none!important;
+                                    border-top:none!important;
+                                    background-color:transparent!important
+                                }
+                                table.noborder tbody tr, table.noborder tr td{
+                                    margin: 0!important;
+                                    padding: 0!important;
+                                    border:none!important;
+                                }
+                                
+                                table.table thead tr.head, table.table thead tr.head th{
+                                    border-bottom-width: thin!important;
+                                    border-bottom-style: solid!important;
+                                    border-bottom-color: black!important;
+                                    border-top-width: thin!important;
+                                    border-top-style: solid!important;
+                                    border-top-color: black!important;
+                                }
+                                
+                                table tbody tr.table-row-footer td{
+                                    border-top: thin solid black !important;
+                                }
+                                
+                            </style>
+
+                            <div class="row" >
+                                <div class="col-xs-12" >
+                                    <div class="text-center" >
+                                        <h3><strong>REPORT PEMBAYARAN HARIAN</strong></h3>
+                                        <span t-field="o.awal" t-field-options='{"format": "dd MMMM y"}' /> - <span t-field="o.akhir" t-field-options='{"format": "dd MMMM y"}' />
+                                    </div>  
+                                    
+                                    <br/><![CDATA[&nbsp;]]>
+                                    
+                                    <table class="table table-condensed" >
+                                        <thead >
+                                            <tr class="head" >
+                                                <th class="text-center" >
+                                                    <strong>NO</strong>
+                                                </th>
+                                                <th class="text-center" >
+                                                    <strong>REF#</strong>
+                                                </th>
+                                                <th class="text-center" >
+                                                    <strong>TANGGAL</strong>
+                                                </th>
+                                                <th class="text-center" >
+                                                    <strong>TAHUN AJARAN</strong>
+                                                </th>
+                                                <th class="text-center" >
+                                                    <strong>NO. INDUK</strong>
+                                                </th>
+                                                <th class="text-left" >
+                                                    <strong>SISWA</strong>
+                                                </th>
+                                                <th  >
+                                                    <strong>ROMBEL</strong>
+                                                </th>
+                                                <th class="text-right" >
+                                                    <strong>TOTAL</strong>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="row_num" t-value="1"/>
+                                            <t t-set="total_bayar" t-value="0"/>
+                                            <t t-foreach="o.pembayaran_ids" t-as="pay">
+                                                <tr>
+                                                    <td class="text-center" >
+                                                        <t t-esc="row_num" />
+                                                        <t t-set="row_num" t-value="row_num+1"/>
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <span t-field="pay.name" />
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <span t-field="pay.tanggal" t-field-options='{"format": "dd MMMM y"}' /> 
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <span t-field="pay.tahunajaran_id" /> 
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span t-field="pay.induk" />
+                                                    </td>
+                                                    <td class="text-left" >
+                                                        <span t-field="pay.siswa_id.name" />
+                                                    </td>
+                                                    <td >
+                                                        <span t-field="pay.rombel_id" />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <t t-esc="'{0:,.2f}'.format(pay.total)" />
+                                                        <t t-set="total_bayar" t-value="total_bayar+pay.total"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <tr class="last table-row-footer" >
+                                                <td colspan="7" class="text-center " >
+                                                    <strong>TOTAL</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <strong><t t-esc="'{0:,.2f}'.format(total_bayar)" /></strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                
+                        </div>
+                        <div class="footer" >
+                            <span>Page </span><span class="page" /> of <span class="topage" />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    
+    </data>
+</flectra>

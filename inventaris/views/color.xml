@@ -1,0 +1,11 @@
+<flectra>
+	<data>
+
+		<record model="ir.actions.act_window" id="color_action_window">
+			<field name="name">Color</field>
+			<field name="res_model">inventaris.color</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+	</data>
+</flectra>

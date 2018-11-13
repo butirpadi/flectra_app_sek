@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <!-- <record id="login_form_background_default" model="ir.config_parameter">
+            <field name="key">login_form_background_default</field>
+            <field name="value">/siswa_ocb11/static/src/img/default_login.jpg</field>
+        </record> -->
+
+        <function name="write" model="ir.config_parameter">
+            <function name="search" model="ir.config_parameter">
+                <value eval="[('key', '=', 'login_form_background_default')]"/>
+            </function>
+            
+            <value eval="{'value': '/siswa_ocb11/static/src/img/default_login.jpg'}"/>
+        </function>
+        
+        <function name="write" model="ir.config_parameter">
+            <function name="search" model="ir.config_parameter">
+                <value eval="[('key', '=', 'login_form_change_background_by_hour')]"/>
+            </function>
+            
+            <value eval="{'value': 'False'}"/>
+        </function>
+
+        <!-- Set default currency ke rupiah -->
+        <!-- <function name="write" model="res.currency">
+            <function name="search" model="res.currency">
+                <value eval="[('name', '=', 'EUR')]"/>
+            </function>
+            
+            <value eval="{'active': 'False'}"/>
+        </function>
+
+        <function name="write" model="res.currency">
+            <function name="search" model="res.currency">
+                <value eval="[('name', '=', 'USD')]"/>
+            </function>
+            
+            <value eval="{'active': 'False'}"/>
+        </function>
+
+        <function name="write" model="res.currency">
+            <function name="search" model="res.currency">
+                <value eval="[('name', '=', 'IDR')]"/>
+            </function>
+            
+            <value eval="{'active': 'True'}"/>
+        </function> -->
+
+        
+        
+        <!-- add default domain to hide root user -->
+        <!-- <function name="write" model="ir.actions.act_window">
+            <function name="search" model="ir.model.data">
+                <value eval="[('name', '=', 'action_res_users')]"/>
+            </function>
+            
+            <value eval="{'domain': [('login','!=','root')]}"/>
+        </function> -->
+
+    </data>
+</flectra>

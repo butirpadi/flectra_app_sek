@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="default_data_jenjang_tpa" model="siswa_ocb11.jenjang">
+            <field name="name">TPA</field>
+            <field name="order">1</field>
+        </record>
+
+        <record id="default_data_jenjang_pra" model="siswa_ocb11.jenjang">
+            <field name="name">PRA PAUD</field>
+            <field name="order">2</field>
+        </record>
+
+        <record id="default_data_jenjang_kb" model="siswa_ocb11.jenjang">
+            <field name="name">KB</field>
+            <field name="order">3</field>
+        </record>
+        
+        <record id="default_data_jenjang_tk_a" model="siswa_ocb11.jenjang">
+            <field name="name">TK A</field>
+            <field name="order">4</field>
+        </record>
+        
+        <record id="default_data_jenjang_tk_b" model="siswa_ocb11.jenjang">
+            <field name="name">TK B</field>
+            <field name="order">5</field>
+        </record>
+
+    </data>
+</flectra>

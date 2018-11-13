@@ -1,0 +1,419 @@
+<flectra>
+    <data>
+
+        <report
+            id="report_rekap_kas_action"
+            model="siswa_keu_ocb11.wizard_report_kas"
+            string="Rekapitulasi Kas"
+            report_type="qweb-html"
+            name="siswa_keu_ocb11.report_rekap_kas"
+            file="siswa_keu_ocb11.report_rekap_kas"
+            attachment_use="False"
+            print_report_name="'RekapitulasiKas-%s' % (object.awal+'-'+object.akhir)"
+            menu="False"
+            paperformat="siswa_ocb11.format_report_general"
+        />
+
+        <template id="report_rekap_kas">
+            <t t-call="web.html_container">            
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.table{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    background-color:transparent!important;
+                                }
+
+                                table.table tbody tr td {
+                                    border-right:none!important;
+                                    padding-top:0;
+                                    padding-bottom:0;
+                                    background-color:transparent!important;
+                                }
+                            </style>
+
+                            <div class="row" >
+                                <!-- <div class="col-xs-6" >
+                                    <strong><p style="margin-top:0;margin-bottom:0;text-transform:uppercase;font-weight:bolder;" t-esc="user.company_id.name"/></strong>
+                                    <p style="margin-top:0;margin-bottom:0;" ><span t-esc="user.company_id.street" ></span> <span t-esc="user.company_id.street2" ></span></p>
+                                    <p style="margin-top:0;margin-bottom:0;" ><span t-esc="user.company_id.city" ></span> <span t-esc="user.company_id.state_id.name" ></span> <span t-esc="user.company_id.zip" ></span></p>
+                                    <p style="margin-top:0;margin-bottom:0;" >Telp: <span t-esc="user.company_id.phone" ></span></p>
+                                </div> -->
+
+                                <!-- <div class="col-xs-6 text-right" >
+                                    <h3><strong>REPORT KAS</strong></h3>
+                                    <span t-field="o.awal" t-field-options='{"format": "dd MMMM y"}' /> - <span t-field="o.akhir" t-field-options='{"format": "dd MMMM y"}' />
+                                </div> -->
+
+                                <div class="col-xs-12" >  
+                                    <div class="text-center" >
+                                        <h3><strong>REPORT KAS</strong></h3>
+                                        <span t-field="o.awal" t-field-options='{"format": "dd MMMM y"}' /> - <span t-field="o.akhir" t-field-options='{"format": "dd MMMM y"}' />
+                                    </div>
+
+                                    <!-- <hr style="border-top: 4px double black;" /> -->
+                                    <table class="table table-condensed" >
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" >Tanggal</th>
+                                                <th class="" >Kategori</th>
+                                                <th class="" >Keterangan</th>
+                                                <th class="text-right " >Debit</th>
+                                                <th class="text-right " >Kredit</th>
+                                                <th class="text-right " >Saldo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="total_debet" t-value="0" />
+                                            <t t-set="total_kredit" t-value="0" />
+                                            <t t-set="saldo" t-value="o.saldo_begining" />
+
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Saldo
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="text-right" >
+                                                    <t t-esc="'{0:,.2f}'.format(o.saldo_begining)" />
+                                                </td>
+                                            </tr>
+
+                                            <t t-foreach="o.kas_ids.sorted(key=lambda x: x.tanggal)" t-as="kas">
+                                                <tr>
+                                                    <td class="text-center" >
+                                                        <span t-field="kas.tanggal" t-field-options='{"format": "dd/MM/y"}'/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="kas.kas_kategori_id" />
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="kas.is_related">
+                                                            <span t-field="kas.pembayaran_id" />
+                                                        </t>
+                                                        <t t-if="not kas.is_related">
+                                                            <span t-field="kas.desc" />
+                                                        </t>
+                                                    </td>
+                                                    <td class="text-right" >
+                                                        <t t-esc="'{0:,.2f}'.format(kas.debet)" />
+                                                    </td>
+                                                    <td class="text-right" >
+                                                        <t t-esc="'{0:,.2f}'.format(kas.kredit)" />
+                                                    </td>
+                                                    <td class="text-right" >
+                                                        <t t-if="kas.kas_kategori_id.tipe=='in'">
+                                                            <t t-set="saldo" t-value="saldo + kas.jumlah" />
+                                                        </t>
+                                                        <t t-if="kas.kas_kategori_id.tipe=='out'">
+                                                            <t t-set="saldo" t-value="saldo - kas.jumlah" />
+                                                        </t>
+                                                        <t t-esc="'{0:,.2f}'.format(saldo)" />
+                                                    </td>
+                                                </tr>
+                                                <t t-set="total_debet" t-value="total_debet+kas.debet" />
+                                                <t t-set="total_kredit" t-value="total_kredit+kas.kredit" />
+                                                
+                                            </t>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-right" colspan="3">
+                                                    <strong>TOTAL</strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <strong><t t-esc="'{0:,.2f}'.format(total_debet)" /></strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <strong><t t-esc="'{0:,.2f}'.format(total_kredit)" /></strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <strong><t t-esc="'{0:,.2f}'.format(saldo)" /></strong>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    
+                                    <!-- <br/><![CDATA[&nbsp;]]>
+                                    <div class="col-xs-10 text-right">
+                                        <strong>Saldo Begining</strong>
+                                    </div>
+                                    <div class="col-xs-2 text-right">
+                                        <t t-if="o.saldo_begining &lt; 0">(</t>
+                                            <t t-esc="'{0:,.2f}'.format(abs(o.saldo_begining))" />
+                                        <t t-if="o.saldo_begining &lt; 0">)</t>
+                                    </div> -->
+
+                                    <!-- <div class="col-xs-8">.</div>
+                                    <div class="col-xs-2">
+                                        <strong>Saldo Ending</strong>
+                                    </div>
+                                    <div class="col-xs-2 text-right">
+                                        <t t-if="o.saldo_ending &lt; 0">(</t>
+                                            <t t-esc="'{0:,.2f}'.format(abs(o.saldo_ending))" />
+                                        <t t-if="o.saldo_ending &lt; 0">)</t>
+                                    </div> -->
+
+                                    <!-- <br/><![CDATA[&nbsp;]]>
+                                    <div class="col-xs-10 text-right">
+                                        <strong>TOTAL SALDO</strong>
+                                    </div>
+                                    <div class="col-xs-2 text-right" style="border-top:solid thin black;" >
+                                        <t t-set="total_saldo" t-value="o.saldo_begining + o.saldo_current + o.saldo_ending"/>
+                                        <t t-if="total_saldo  &lt; 0">(</t>
+                                            <strong><t t-esc="'{0:,.2f}'.format(abs(total_saldo))" /></strong>
+                                        <t t-if="total_saldo &lt; 0">)</t>
+                                    </div>
+
+                                    <br/><![CDATA[&nbsp;]]> -->
+                                </div>
+                            </div>                        
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- Report Summary -->
+        <report
+            id="report_rekap_kas_summary_action"
+            model="siswa_keu_ocb11.wizard_report_kas"
+            string="Rekapitulasi Kas"
+            report_type="qweb-html"
+            name="siswa_keu_ocb11.report_rekap_kas_summary"
+            file="siswa_keu_ocb11.report_rekap_kas_summary"
+            attachment_use="False"
+            print_report_name="'RekapitulasiSummaryKas-%s' % (object.awal+'-'+object.akhir)"
+            menu="False"
+            paperformat="siswa_ocb11.format_report_general"
+        />
+
+        <template id="report_rekap_kas_summary">
+            <t t-call="web.html_container">            
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.noborder,table.noborder tbody tr, table.noborder tr td{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    border-bottom:none!important;
+                                    border-top:none!important;
+                                    background-color:transparent!important
+                                }
+                                table.table thead tr.head, table.table thead tr.head th{
+                                    border-bottom-width: thin!important;
+                                    border-bottom-style: solid!important;
+                                    border-bottom-color: black!important;
+                                    border-top-width: thin!important;
+                                    border-top-style: solid!important;
+                                    border-top-color: black!important;
+                                }
+                                
+                                tr.last, tr.last td{
+                                    border-bottom-width: thin!important;
+                                    border-bottom-style: solid!important;
+                                    border-bottom-color: black!important;
+                                    border-top-width: thin!important;
+                                    border-top-style: solid!important;
+                                    border-top-color: black!important;
+                                }
+
+                                tr.detail, tr.detail td{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    border-bottom:none!important;
+                                    border-top:none!important;
+                                    background-color:transparent!important
+                                }
+
+                                tr.total-detail, tr.total-detail td{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    border-bottom:none!important;
+                                    border-top:none!important;
+                                }
+                                
+                                tr.main-data, tr.main-data td{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    border-bottom:none!important;
+                                    border-top:none!important;
+
+                                    border-top:thin solid grey!important;
+                                    border-bottom:thin solid #ddd!important;
+                                }
+                            </style>
+
+                            <div class="row" >
+                                <!-- <div class="col-xs-6" >
+                                    <strong><p style="margin-top:0;margin-bottom:0;text-transform:uppercase;font-weight:bolder;" t-esc="user.company_id.name"/></strong>
+                                    <p style="margin-top:0;margin-bottom:0;" ><span t-esc="user.company_id.street" ></span> <span t-esc="user.company_id.street2" ></span></p>
+                                    <p style="margin-top:0;margin-bottom:0;" ><span t-esc="user.company_id.city" ></span> <span t-esc="user.company_id.state_id.name" ></span> <span t-esc="user.company_id.zip" ></span></p>
+                                    <p style="margin-top:0;margin-bottom:0;" >Telp: <span t-esc="user.company_id.phone" ></span></p>
+                                </div>
+
+                                <div class="col-xs-6 text-right" >
+                                    <h3><strong>REPORT KAS</strong></h3>
+                                    <span t-field="o.awal" t-field-options='{"format": "dd MMMM y"}' /> - <span t-field="o.akhir" t-field-options='{"format": "dd MMMM y"}' />
+                                </div> -->
+
+                                <div class="col-xs-12" >                                
+                                    <div class="text-center" >
+                                        <h3><strong>REPORT KAS</strong></h3>
+                                        <span t-field="o.awal" t-field-options='{"format": "dd MMMM y"}' /> - <span t-field="o.akhir" t-field-options='{"format": "dd MMMM y"}' />
+                                    </div>
+                                    <!-- <hr style="border-top: 4px double black;" />    -->
+                                    <table class="table noborder table-condensed" >
+                                        <tbody>
+                                            <t t-set="total_pendapatan" t-value="0" />
+                                            <t t-set="total_pengeluaran" t-value="0" />
+                                            <t t-set="sum_pendapatan" t-value="o.get_summary_pendapatan()" />
+                                            <t t-set="sum_pengeluaran" t-value="o.get_summary_pengeluaran()" />
+                                            <!-- Pendapatan -->
+                                            <tr>
+                                                <td colspan="2" >
+                                                    <strong>Pendapatan</strong>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="sum_pendapatan" t-as="kas">
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="kas[1]" />
+                                                    </td>
+                                                    <td class="text-right" >
+                                                        <t t-esc="'{0:,.2f}'.format(kas[3])" />
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <t t-set="total_pendapatan" t-value="total_pendapatan+kas[3]" />
+                                            </t>
+                                            <tr>
+                                                <td colspan="3" ></td>
+                                            </tr>
+                                            <tr >
+                                                <td style="padding-left:50px;" >
+                                                    <strong>Total Pendapatan</strong>
+                                                </td>
+                                                <td style="border-top: thin solid darkgrey !important;" ></td>
+                                                <td class="text-right" style="border-top: none!important;" >
+                                                        <t t-esc="'{0:,.2f}'.format(total_pendapatan)" />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="3" ></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" ></td>
+                                            </tr>
+
+                                            <!-- Pengeluaran -->
+                                            <tr>
+                                                <td colspan="3" >
+                                                    <strong>Pengeluaran</strong>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="sum_pengeluaran" t-as="kas">
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="kas[1]" />
+                                                    </td>
+                                                    <td class="text-right" >
+                                                        <t t-esc="'{0:,.2f}'.format(kas[3])" />
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <t t-set="total_pengeluaran" t-value="total_pengeluaran+kas[3]" />
+                                            </t>
+                                            <tr>
+                                                <td colspan="3" ></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:50px;" >
+                                                    <strong>Total Pengeluaran</strong>
+                                                </td>
+                                                <td style="border-top: thin solid darkgrey !important;" ></td>
+                                                <td class="text-right" >
+                                                    (<t t-esc="'{0:,.2f}'.format(total_pengeluaran)" />)
+                                                </td>
+                                            </tr>
+
+                                            
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td class="text-right" style="border-top: thin solid darkgrey !important;" > 
+                                                    <strong>
+                                                    <t t-if="total_pendapatan &lt; total_pengeluaran">(</t>
+                                                    <t t-esc="'{0:,.2f}'.format(total_pendapatan - total_pengeluaran)" />
+                                                    <t t-if="total_pendapatan &lt; total_pengeluaran">)</t>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    
+                                    
+
+<!--                                     
+
+                                    <br/><![CDATA[&nbsp;]]>
+                                    <div class="col-xs-10 text-right">
+                                        <strong>TOTAL SALDO</strong>
+                                    </div>
+                                    <div class="col-xs-2 text-right" style="border-top:solid thin black;" >
+                                        <t t-set="total_saldo" t-value="o.saldo_begining + o.saldo_current + o.saldo_ending"/>
+                                        <t t-if="total_saldo  &lt; 0">(</t>
+                                            <strong><t t-esc="'{0:,.2f}'.format(abs(total_saldo))" /></strong>
+                                        <t t-if="total_saldo &lt; 0">)</t>
+                                    </div>
+
+                                    <br/><![CDATA[&nbsp;]]> -->
+                                </div>
+
+                                <div class="col-xs-12" >
+                                    <br/><![CDATA[&nbsp;]]>
+                                </div>
+                                <div class="col-xs-8 "></div>
+                                <div class="col-xs-2 ">
+                                    <strong>Saldo Awal</strong>
+                                </div>
+                                <div class="col-xs-2 text-right" style="border-bottom:thin solid darkgrey !important;" >
+                                    <t t-if="o.saldo_begining &lt; 0">(</t>
+                                        <t t-esc="'{0:,.2f}'.format(abs(o.saldo_begining))" />
+                                    <t t-if="o.saldo_begining &lt; 0">)</t>
+                                </div>
+
+                                <div class="col-xs-12" >
+                                    
+                                </div>
+                                <div class="col-xs-8 "></div>
+                                <div class="col-xs-2 ">
+                                    <strong>Saldo Akhir</strong>
+                                </div>
+                                <div class="col-xs-2 text-right">
+                                    <strong>
+                                    <t t-if="o.saldo_begining &lt; 0">(</t>
+                                        <t t-esc="'{0:,.2f}'.format(abs(o.saldo_begining + total_pendapatan - total_pengeluaran))" />
+                                    <t t-if="o.saldo_begining &lt; 0">)</t>
+                                    </strong>
+                                </div>
+                            </div>                        
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</flectra>

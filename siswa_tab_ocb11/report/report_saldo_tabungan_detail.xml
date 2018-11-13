@@ -1,0 +1,130 @@
+<flectra>
+    <data>
+
+        <report
+            id="report_saldo_tabungan_detail_action"
+            model="siswa_tab_ocb11.wizard_saldo_tabungan"
+            string="Saldo Tabungan"
+            report_type="qweb-html"
+            name="siswa_tab_ocb11.report_saldo_tabungan_detail"
+            file="siswa_tab_ocb11.report_saldo_tabungan_detail"
+            attachment_use="False"
+            print_report_name="'ReportSaldoTabunganDetail'"
+            menu="False"
+            paperformat="siswa_ocb11.format_report_general"
+        />
+
+        <template id="report_saldo_tabungan_detail">
+            <t t-call="web.html_container">            
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.table{
+                                    border-left:none!important;
+                                    border-right:none!important;
+                                    background-color:transparent!important;
+                                }
+
+                                table.table tbody tr td {
+                                    border-right:none!important;
+                                    padding-top:0;
+                                    padding-bottom:0;
+                                    background-color:transparent!important;
+                                }
+
+                                table.table-data thead tr th{
+                                    border-top:thin solid black !important;
+                                    border-bottom:thin solid black !important;
+                                {
+                            </style>
+
+                            <div class="row" >
+                                <div class="col-xs-12" >  
+                                    <div class="text-center" >
+                                        <h3><strong>SALDO TABUNGAN</strong></h3>
+                                        <span t-field="o.tahunajaran_id.name" />
+                                    </div>
+
+                                    <br/><![CDATA[&nbsp;]]>
+                                    
+                                    <table class="table table-condensed table-data" >
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" >No</th>
+                                                <th class="text-center" >No. Induk</th>
+                                                <th >Nama Siswa</th>
+                                                <th class="text-right" >Saldo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="total_saldo" t-value="0" />
+                                            <t t-foreach="o.rombel_ids" t-as="rb">
+                                                <tr  >  
+                                                    <td colspan="4" style="padding-top:5px!important;padding-bottom:5px!important;border-top:thin solid black!important;" >
+                                                        <strong>Rombongan Belajar : <span t-field="rb.name" /></strong>
+                                                    </td>
+                                                </tr>
+                                                <t t-set="row_num" t-value="1" />
+                                                <t t-set="sum_saldo_per_rombel" t-value="0" />
+                                                <t t-foreach="o.saldo_per_siswa_ids" t-as="cs">
+                                                    <t t-if="cs.rombel_id.id == rb.id">
+                                                        <tr>
+                                                            <td class="text-center" >
+                                                                <t t-esc="row_num" />
+                                                                <t t-set="row_num" t-value="row_num+1" />
+                                                            </td>
+                                                            <td class="text-center" >
+                                                                <span t-field="cs.siswa_id.induk" />                                                        
+                                                            </td>
+                                                            <td>
+                                                                <span t-field="cs.siswa_id.name" />                                                        
+                                                            </td>
+                                                            <td class="text-right" >
+                                                                <!-- <span t-field="cs.saldo" /> -->
+                                                                <t t-esc="'{0:,.2f}'.format(cs.saldo)" />
+                                                            </td>
+                                                            <t t-set="total_saldo" t-value="total_saldo + cs.saldo" />
+                                                        </tr>    
+                                                        <!-- sum jumlah saldo per rombel -->
+                                                        <t t-set="sum_saldo_per_rombel" t-value="sum_saldo_per_rombel + cs.saldo" />                                          
+                                                    </t>  
+                                                </t>
+                                                <tr  >  
+                                                    <td colspan="3" class="text-right" style="padding-top:5px!important;padding-bottom:5px!important;border-bottom:thin solid black!important;" >
+                                                        <strong>Total <span t-field="rb.name" /></strong>
+                                                    </td>
+                                                    <td class="text-right" style="padding-top:5px!important;padding-bottom:5px!important;border-bottom:thin solid black!important;" >
+                                                        <strong><t t-esc="'{0:,.2f}'.format(sum_saldo_per_rombel)" /></strong>
+                                                    </td>
+                                                </tr>
+                                            </t>
+
+                                            <!-- GRAND TOTAL -->
+                                            <tr>
+                                                <td colspan="3" class="text-center" >
+                                                    <strong>TOTAL</strong>
+                                                </td>
+                                                <td class="text-right" >
+                                                    <strong>
+                                                        <t t-esc="'{0:,.2f}'.format(total_saldo)" />
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+
+                            </div>                        
+                        </div>
+                        <div class="footer" >
+                            <span>Page </span><span class="page" /> of <span class="topage" />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</flectra>

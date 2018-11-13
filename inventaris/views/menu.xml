@@ -1,0 +1,43 @@
+<flectra>
+	<data>
+
+		<menuitem name="Inventaris" id="menu_inventaris_root" web_icon="inventaris,static/description/icon.png" />
+
+		<menuitem name="Master" id="menu_inventaris"
+			parent="menu_inventaris_root" sequence="1" />
+
+		<menuitem name="Asset" id="menu_barang"
+			parent="menu_inventaris" action="barang_action_window" sequence="1" />
+		<menuitem name="Lokasi" id="menu_lokasi_barang"
+			parent="menu_inventaris" action="lokasi_action_window" sequence="2" />
+		<menuitem name="Satuan" id="menu_satuan"
+			parent="menu_inventaris" action="satuan_action_window" sequence="3" />
+		<menuitem name="Brand" id="menu_brand"
+			parent="menu_inventaris" action="brand_action_window" sequence="4" />
+		<menuitem name="Color" id="menu_color"
+			parent="menu_inventaris" action="color_action_window" sequence="5" />
+		<menuitem name="Kategori" id="menu_kategori_barang"
+			parent="menu_inventaris" action="kategori_action_window" sequence="6" />
+		<menuitem name="Sumber Dana" id="menu_sumber_dana_barang"
+			parent="menu_inventaris" action="sumber_dana_action_window"
+			sequence="7" />
+		<menuitem id="menu_inventaris_vendor" name="Vendor"
+			parent="menu_inventaris" action="inventaris_vendor_action"
+			sequence="8" />
+
+		<menuitem name="Operations" id="menu_inventaris_operation"
+			parent="menu_inventaris_root" sequence="2" />
+
+		<menuitem name="Asset Move" id="menu_asset_move"
+			parent="menu_inventaris_operation"
+			action="inventaris_wizard_asset_move_action" sequence="1" />
+		<menuitem name="Asset Scrap" id="menu_asset_scrap"
+			parent="menu_inventaris_operation"
+			action="inventaris_wizard_scrap_action" sequence="2" />
+
+		<menuitem id="menu_inventaris_setting" name="Configurations"
+			parent="menu_inventaris_root" action="inventaris_setting_action" groups="inventaris.inventaris_group_admin" />
+
+
+	</data>
+</flectra>

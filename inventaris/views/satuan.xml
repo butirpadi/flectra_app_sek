@@ -1,0 +1,11 @@
+<flectra>
+	<data>
+
+		<record model="ir.actions.act_window" id="satuan_action_window">
+			<field name="name">Satuan</field>
+			<field name="res_model">inventaris.satuan</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+	</data>
+</flectra>

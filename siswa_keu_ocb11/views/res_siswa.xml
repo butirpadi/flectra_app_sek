@@ -1,0 +1,77 @@
+<flectra>
+    <data>
+
+         <record id="res_siswa_keu_tree" model="ir.ui.view">
+            <field name="name">res.siswa.keu.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field eval="22" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="email" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="display_name" position="after">
+                    <field name="induk" string="Induk"/>
+                    <field name="nis" string="NIS"/>
+                    <field name="panggilan" string="Panggilan"/>
+                    <field name="active_rombel_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_siswa_keu_filter" model="ir.ui.view">
+            <field name="name">siswa.keu.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field eval="22" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="name" filter_domain="['|','|','|','|',('display_name','ilike',self),('ref','=',self),('induk','ilike',self),('nis','ilike',self),('panggilan','ilike',self)]" />
+                </field>
+            </field>
+        </record>
+
+        <record id="siswa_keu_ocb11.siswa_keu_form" model="ir.ui.view" >
+            <field name="name">siswa_keu_ocb11.siswa_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="siswa_ocb11.siswa_form"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <xpath expr='//div[@name="button_box"]/button[1]' position="after">
+                    <button class="oe_stat_button"
+                        name="%(siswa_keu_ocb11.biaya_persiswa_window_action)d"
+                        icon="fa fa-dollar"
+                        type="action"
+                        attrs="{'invisible':[('induk', '=', 'New')]}" >
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="amount_due_biaya" readonly="1" />
+                            </span>
+                            <span class="o_stat_text">Tagihan</span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button"
+                        groups="base.group_system"
+                        name="%(siswa_keu_ocb11.biaya_persiswa_root_window_action)d"
+                        icon="fa fa-cogs"
+                        type="action"
+                        attrs="{'invisible':[('induk', '=', 'New')]}" >
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="amount_due_biaya" readonly="1" />
+                            </span>
+                            <span class="o_stat_text">Manage Tagihan</span>
+                        </div>
+                    </button>
+                </xpath>
+                <!-- <xpath expr='//div[@name="button_box"]/button[1]' position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>                 -->
+            </field>
+        </record>
+
+    </data>
+</flectra>

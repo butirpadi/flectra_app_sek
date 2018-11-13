@@ -1,0 +1,11 @@
+<flectra>
+	<data>
+
+		<record model="ir.actions.act_window" id="sumber_dana_action_window">
+			<field name="name">Sumber Dana</field>
+			<field name="res_model">inventaris.sumber.dana</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+	</data>
+</flectra>

@@ -1,0 +1,43 @@
+<flectra>
+  <data>
+    
+    <!-- Top menu item -->    
+    <!-- <menuitem name="Master" id="siswa_ocb11.master_menu"/> -->
+    <menuitem name="Kesiswaan" id="siswa_ocb11.kesiswaan_menu" sequence="1" web_icon="siswa_ocb11,static/description/icon.png" />
+
+    <!-- menu categories -->    
+    <!-- <menuitem name="Dashboard" id="siswa_ocb11.menu_rombel_kanban" parent="siswa_ocb11.kesiswaan_menu" action="siswa_ocb11.siswa_dashboard_view_action" sequence="1"/> -->
+    <menuitem name="Dashboard" id="siswa_ocb11.menu_rombel_dashboard_kanban" parent="siswa_ocb11.kesiswaan_menu" action="siswa_ocb11.rombel_dashboard_view_action" sequence="1"/>
+    <menuitem name="Master" id="siswa_ocb11.submenu_master" parent="siswa_ocb11.kesiswaan_menu" sequence="2" />
+    <!-- <menuitem name="Kesiswaan" id="siswa_ocb11.submenu_kesiswaan" parent="siswa_ocb11.kesiswaan_menu" sequence="3" /> -->
+    <menuitem name="Operations" id="siswa_ocb11.submenu_operation" parent="siswa_ocb11.kesiswaan_menu" sequence="4" />
+    <menuitem name="Reports" id="siswa_ocb11.submenu_report" parent="siswa_ocb11.kesiswaan_menu" sequence="5" />
+
+    <menuitem name="Configuration" id="siswa_ocb11.menu_configuration" parent="siswa_ocb11.kesiswaan_menu" 
+        sequence="6" groups="base.group_system" />
+    <menuitem name="Dashboard Manager" id="siswa_ocb11.menu_dashboard_manager" parent="siswa_ocb11.menu_configuration" 
+        sequence="61" action="siswa_ocb11.rombel_dashboard_manager_view_action" />
+
+    <!-- actions -->    
+    <menuitem name="Jenjang" id="siswa_ocb11.menu_jenjang" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.jenjang_action_window" sequence="1"/>
+    <menuitem name="Tahun Ajaran" id="siswa_ocb11.menu_tahunajaran" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.tahunajaran_new_action_window" sequence="2"/>
+    <menuitem name="Rombongan Belajar" id="siswa_ocb11.menu_rombel" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.rombel_new_action_window" sequence="3"/>
+    <menuitem name="Pekerjaan" id="siswa_ocb11.menu_pekerjaan" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.pekerjaan_action_window"  sequence="4"/>
+    <!-- <menuitem name="Guru" id="siswa_ocb11.menu_guru" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.guru_action_window"  sequence="4"/> -->
+    <!-- <menuitem name="Siswa" id="siswa_ocb11.menu_siswa" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.siswa_action_window"  sequence="5"/> -->
+    <menuitem name="Siswa" id="siswa_ocb11.menu_siswa" parent="siswa_ocb11.submenu_master" action="siswa_ocb11.res_siswa_action_window"  sequence="5"/>
+
+    <!-- Kesisswaan -->
+
+    <menuitem name="Pindah Kelas" id="siswa_ocb11.menu_pindah_kelas" parent="siswa_ocb11.submenu_operation" action="siswa_ocb11.wizard_pindah_kelas"  sequence="1"/>
+    <menuitem name="Non Aktif" id="siswa_ocb11.menu_nonaktifkan_siswa" parent="siswa_ocb11.submenu_operation" action="siswa_ocb11.wizard_non_aktif_action"  sequence="3"/>
+    
+    <!-- Report -->
+    <menuitem name="Siswa Aktif" id="siswa_ocb11.menu_siswa_by_rombel_new" parent="siswa_ocb11.submenu_report" action="siswa_ocb11.rombel_siswa_action_window"  sequence="1"/>
+    <menuitem name="Non Aktif" id="siswa_ocb11.menu_siswa_non_aktif" parent="siswa_ocb11.submenu_report" action="siswa_ocb11.siswa_non_aktif_action_window"  sequence="2"/>    
+    <menuitem name="Siswa Per Rombel" id="siswa_ocb11.menu_rekapitulasi_siswa" parent="siswa_ocb11.submenu_report" action="siswa_ocb11.wizard_rekap_siswa_action"  sequence="3"/>
+    <menuitem name="Form Presensi" id="siswa_ocb11.menu_form_presensi" parent="siswa_ocb11.submenu_report" action="siswa_ocb11.wizard_form_presensi_action"  sequence="4"/>
+    
+    
+  </data>
+</flectra>
