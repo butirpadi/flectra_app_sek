@@ -8,9 +8,10 @@ class biaya(models.Model):
     name = fields.Char(string='Nama', requred=True)
     is_bulanan = fields.Boolean('Bulanan',default=False)
     is_different_by_gender = fields.Boolean('Different by Gender?', default=False)
-    is_siswa_baru_only = fields.Boolean('Hanya untuk siswa baru ?', default=False)
-    is_siswa_lama_only = fields.Boolean('Hanya untuk siswa lama ?', default=False)
-    is_optional = fields.Boolean('Biaya Opsional?', default=False) 
+#     is_siswa_baru_only = fields.Boolean('Hanya untuk siswa baru ?', default=False)
+#     is_siswa_lama_only = fields.Boolean('Hanya untuk siswa lama ?', default=False)
+    is_optional = fields.Boolean('Biaya Opsional?', default=False)
+    assign_to = fields.Selection([('baru','Siswa Baru'),('lama', 'Siswa Lama'),('all','All')], string="Assign to", default="all", required=True) 
 
 
     @api.model
