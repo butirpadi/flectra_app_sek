@@ -141,8 +141,30 @@ class calon_siswa(models.Model):
             ('siswa_id', '=', self.siswa_id.id),
         ]).rombel_id
         
-        # set name from siswa_id
+        # set name from siswa_id & set data-data dari ssiswa lama
         self.name = self.siswa_id.name
+        self.panggilan = self.siswa_id.panggilan
+        self.jenis_kelamin = self.siswa_id.jenis_kelamin
+        self.tempat_lahir = self.siswa_id.tempat_lahir
+        self.tanggal_lahir  = self.siswa_id.tanggal_lahir
+        self.nis = self.siswa_id.nis
+        self.anak_ke = self.siswa_id.anak_ke
+        self.dari_bersaudara = self.siswa_id.dari_bersaudara
+        self.street = self.siswa_id.street
+        self.street2 = self.siswa_id.street2
+        self.city = self.siswa_id.city
+        self.state_id = self.siswa_id.state_id.id
+        self.zip= self.siswa_id.zip
+        self.country_id = self.siswa_id.country_id.id
+        self.phone = self.siswa_id.phone
+        self.mobile = self.siswa_id.mobile
+        self.ayah = self.siswa_id.ayah
+        self.pekerjaan_ayah_id = self.siswa_id.pekerjaan_ayah_id.id 
+        self.telp_ayah = self.siswa_id.telp_ayah
+        self.ibu = self.siswa_id.ibu
+        self.pekerjaan_ibu_id = self.siswa_id.pekerjaan_ibu_id.id 
+        self.telp_ibu = self.siswa_id.telp_ibu
+        
 
         # filter jenjang 
         domain = {'jenjang_id':[('order', '>', rombel_siswa.jenjang_id.order)]}
