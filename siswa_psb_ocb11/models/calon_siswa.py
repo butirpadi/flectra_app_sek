@@ -580,10 +580,11 @@ class calon_siswa(models.Model):
         
 #         biaya_ids = []
         for by in get_biaya_ta_jenjang_ids:
-            if self.is_siswa_lama and by.biaya_id.is_siswa_baru_only:
-                    print('skip')
-                    continue
-            else:
+            if by.biaya_id.assign_to == 'all' or (self.is_siswa_lama and by.biaya_id.assign_to == 'lama') or (not self.is_siswa_lama and by.biaya_id.assign_to == 'baru'):
+#             if self.is_siswa_lama and by.biaya_id.is_siswa_baru_only:
+#                     print('skip')
+#                     continue
+#             else:
                 print(by.biaya_id.name)
                 if not by.biaya_id.is_optional:          
                     get_harga = by.harga 
@@ -661,10 +662,11 @@ class calon_siswa(models.Model):
             
             for by_reg in biaya_registrasi_ids.biaya_ta_jenjang_ids:
                 self.ensure_one()
-                if self.is_siswa_lama and by_reg.biaya_id.is_siswa_baru_only:
-                    print('skip')
-                    continue
-                else:                
+                if by_reg.biaya_id.assign_to == 'all' or (self.is_siswa_lama and by_reg.biaya_id.assign_to == 'lama') or (not self.is_siswa_lama and by_reg.biaya_id.assign_to == 'baru'):
+#                 if self.is_siswa_lama and by_reg.biaya_id.is_siswa_baru_only:
+#                     print('skip')
+#                     continue
+#                 else:                
                     harga = by_reg.harga
                               
                     if by_reg.biaya_id.is_different_by_gender and self.jenis_kelamin == 'perempuan':

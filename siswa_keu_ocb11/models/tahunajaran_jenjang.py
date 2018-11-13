@@ -4,6 +4,7 @@ from flectra import models, fields, api, exceptions, _
 from pprint import pprint
 import calendar
 
+
 class tahunajaran_jenjang(models.Model):
     _inherit = 'siswa_ocb11.tahunajaran_jenjang'
 
@@ -11,16 +12,16 @@ class tahunajaran_jenjang(models.Model):
 
     def action_reset(self):
         # delete siswa_biaya
-        rombel_ids = self.env['siswa_ocb11.rombel'].search([('jenjang_id','=',self.jenjang_id.id)]).ids
+        rombel_ids = self.env['siswa_ocb11.rombel'].search([('jenjang_id', '=', self.jenjang_id.id)]).ids
         siswas = self.env['siswa_ocb11.rombel_siswa'].search([
-                    ('tahunajaran_id','=',self.tahunajaran_id.id),
-                    ('rombel_id','in',rombel_ids),
+                    ('tahunajaran_id', '=', self.tahunajaran_id.id),
+                    ('rombel_id', 'in', rombel_ids),
                 ])
         siswa_ids = []
         for sis in siswas:
             siswa_ids.append(sis.siswa_id.id)
             
-        self.env['siswa_keu_ocb11.siswa_biaya'].search([('tahunajaran_id','=',self.tahunajaran_id.id),('siswa_id','in',siswa_ids)]).unlink()        
+        self.env['siswa_keu_ocb11.siswa_biaya'].search([('tahunajaran_id', '=', self.tahunajaran_id.id), ('siswa_id', 'in', siswa_ids)]).unlink()        
         # update state 
         self.state = 'draft'
         # delete biaya
@@ -30,21 +31,22 @@ class tahunajaran_jenjang(models.Model):
         self.ensure_one()
         if self.biayas and len(self.biayas) > 0:
             # rombel_ids = self.env['siswa_ocb11.rombel'].search([('jenjang','=',int(self.jenjang))]).ids
-            rombel_ids = self.env['siswa_ocb11.rombel'].search([('jenjang_id','=',self.jenjang_id.id)]).ids
+            rombel_ids = self.env['siswa_ocb11.rombel'].search([('jenjang_id', '=', self.jenjang_id.id)]).ids
             siswas = self.env['siswa_ocb11.rombel_siswa'].search([
-                        ('tahunajaran_id','=',self.tahunajaran_id.id),
-                        ('rombel_id','in',rombel_ids),
+                        ('tahunajaran_id', '=', self.tahunajaran_id.id),
+                        ('rombel_id', 'in', rombel_ids),
                     ])
             
             # create/insert biaya to siswa
             for sis in siswas:
                 total_biaya = 0
                 for by in self.biayas:
-                    if sis.siswa_id.is_siswa_lama and by.biaya_id.is_siswa_baru_only:
-                        print('skip')
-                    else:
+                    if by.biaya_id.assign_to == 'all' or (sis.siswa_id.is_siswa_lama and by.biaya_id.assign_to == 'lama') or (not sis.siswa_id.is_siswa_lama and by.biaya_id.assign_to == 'baru'):
+#                     if sis.siswa_id.is_siswa_lama and by.biaya_id.is_siswa_baru_only:
+#                         print('skip')
+#                     else:
                         if by.biaya_id.is_bulanan:
-                            for bulan_index in range(1,13):
+                            for bulan_index in range(1, 13):
                                 harga = by.harga
                                 if by.is_different_by_gender:
                                     if sis.siswa_id.jenis_kelamin == 'perempuan':
@@ -78,12 +80,12 @@ class tahunajaran_jenjang(models.Model):
                             
                 # set total_biaya dan amount_due
                 # total_biaya = sum(by.harga for by in self.biayas)
-                self.env['res.partner'].search([('id','=',sis.siswa_id.id)]).write({
+                self.env['res.partner'].search([('id', '=', sis.siswa_id.id)]).write({
                     'total_biaya' : total_biaya,
                     'amount_due_biaya' : total_biaya,
                 })
                 # print(sis.siswa_id.name + ' ' + sis.siswa_id.active_rombel_id.name)
-            #update state
+            # update state
             self.write({
                 'state' : 'valid'
             })
@@ -96,7 +98,7 @@ class tahunajaran_jenjang(models.Model):
         print('Recompute Biaya Siswa')
         if self.biayas and len(self.biayas) > 0:
             # siswas = self.env['siswa_ocb11.rombel_siswa'].search([('tahunajaran_id','=',self.tahunajaran_id.id),('jenjang','=',self.jenjang)])
-            siswas = self.env['siswa_ocb11.rombel_siswa'].search([('tahunajaran_id','=',self.tahunajaran_id.id),('jenjang_id','=',self.jenjang_id.id)])
+            siswas = self.env['siswa_ocb11.rombel_siswa'].search([('tahunajaran_id', '=', self.tahunajaran_id.id), ('jenjang_id', '=', self.jenjang_id.id)])
             for biy in self.biayas:
                 for sis in siswas:
                     found = False
@@ -107,11 +109,12 @@ class tahunajaran_jenjang(models.Model):
                     if not found:
                         print('Add biaya to : ' + sis.siswa_id.name)
                         # jika tidak tersedia maka inputkan baru
-                        if sis.siswa_id.is_siswa_lama and biy.biaya_id.is_siswa_baru_only:
-                            print('skip')
-                        else:
+                        if biy.biaya_id.assign_to == 'all' or (sis.siswa_id.is_siswa_lama and biy.biaya_id.assign_to == 'lama') or (not sis.siswa_id.is_siswa_lama and biy.biaya_id.assign_to == 'baru'):
+#                         if sis.siswa_id.is_siswa_lama and biy.biaya_id.is_siswa_baru_only:
+#                             print('skip')
+#                         else:
                             if biy.biaya_id.is_bulanan:
-                                for bulan_index in range(1,13):
+                                for bulan_index in range(1, 13):
                                     harga = biy.harga
                                     if biy.is_different_by_gender:
                                         if sis.siswa_id.jenis_kelamin == 'perempuan':
