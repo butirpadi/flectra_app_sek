@@ -37,6 +37,7 @@
         'views/guru.xml',
         'views/rombel_siswa.xml',
         'views/rombel_dashboard.xml',
+        'views/res_company.xml',
         # 'views/siswa_dashboard_view.xml',
         'views/wizard_pindah_kelas.xml',
         # 'views/wizard_mutasi.xml',
