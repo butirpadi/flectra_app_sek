@@ -13,6 +13,7 @@
                     <field name="active_rombel_id" string="Rombel" />
                     <field name="street" string="Alamat" invisible="1"/>
                     <field name="phone" />
+                    <field name="mobile" />
                     <field name="ayah"/>
                     <field name="telp_ayah"/>
                     <field name="ibu"/>
