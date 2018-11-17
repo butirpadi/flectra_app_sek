@@ -1,7 +1,7 @@
-<flectra>
+<odoo>
 	<data>
 		<record model="ir.ui.view"
-			id="siswa_keu_ocb11.biaya_ta_jenjang_list">
+			id="siswa_psb_ocb11.biaya_ta_jenjang_list">
 			<field name="name">siswa_keu_ocb11_biaya_ta_jenjang_list</field>
 			<field name="model">siswa_keu_ocb11.biaya_ta_jenjang</field>
 			<field name="arch" type="xml">
@@ -112,4 +112,4 @@
 			<field name="context">{'search_default_group_by_tahunajaran':1}</field>
 		</record>
 	</data>
-</flectra>
+</odoo>

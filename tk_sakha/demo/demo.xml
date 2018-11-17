@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <!--  -->
         <!--   <record id="object0" model="tk_sakha.tk_sakha"> -->
@@ -27,4 +27,4 @@
         <!--   </record> -->
         <!--  -->
     </data>
-</flectra>
+</odoo>

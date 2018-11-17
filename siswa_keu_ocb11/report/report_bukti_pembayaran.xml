@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
 
         <record id="format_bukti_pembayaran" model="report.paperformat">
@@ -201,4 +201,4 @@
         </template>
     
     </data>
-</flectra>
+</odoo>

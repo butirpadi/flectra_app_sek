@@ -22,15 +22,15 @@
 ##############################################################################
 
 import ast
-from flectra.addons.web.controllers.main import Home
+from odoo.addons.web.controllers.main import Home
 import pytz
 import datetime
 import logging
 
-import flectra
-import flectra.modules.registry
-from flectra import http
-from flectra.http import request
+import odoo
+import odoo.modules.registry
+from odoo import http
+from odoo.http import request
 _logger = logging.getLogger(__name__)
 
 

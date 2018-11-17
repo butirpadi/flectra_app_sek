@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 		<!-- Top menu item -->
 		<!-- <menuitem name="Master" id="siswa_ocb11.master_menu"/> -->
@@ -92,4 +92,4 @@
 			sequence="1"/> -->
 
 	</data>
-</flectra>
+</odoo>
