@@ -12,7 +12,7 @@ class non_aktif(models.TransientModel):
     # non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('lulus', 'Lulus'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     keterangan = fields.Char('Keterangan')
-    tanggal  = fields.Date('Tanggal', required=True, default=datetime.today())
+    tanggal  = fields.Date('Tanggal', required=True, default=datetime.today().date())
 
     @api.depends('siswa_id')
     def _compute_rombel_asal(self):

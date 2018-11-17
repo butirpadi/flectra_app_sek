@@ -6,8 +6,8 @@ class wizard_pembayaran_harian(models.TransientModel):
     _name = 'siswa_keu_ocb11.wizard_pembayaran_harian'
     
     name = fields.Char('Nama', default="0")
-    awal = fields.Date('Periode Awal', default=datetime.today(), required=True)
-    akhir = fields.Date('Periode Akhir', default=datetime.today(), required=True)
+    awal = fields.Date('Periode Awal', default=datetime.today().date(), required=True)
+    akhir = fields.Date('Periode Akhir', default=datetime.today().date(), required=True)
     pembayaran_ids = fields.Many2many('siswa_keu_ocb11.pembayaran',relation='wizard_pembayaran_harian_rel', column1='report_id',column2='pembayaran_id', string="Data Pembayaran")
     tipe = fields.Selection([('sum', 'Summary'), ('det', 'Detail')], required=True, default='sum')
 

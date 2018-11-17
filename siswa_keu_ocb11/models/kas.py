@@ -8,7 +8,7 @@ class kas(models.Model):
     _name = 'siswa_keu_ocb11.kas'
 
     name = fields.Char(string='Nama', requred=True, default=_('New'))
-    tanggal = fields.Date('Tanggal', required=True, default=datetime.today())
+    tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())
     desc = fields.Char('Keterangan')
     jumlah = fields.Float('Jumlah', required=True)
     debet = fields.Float('Debet' )

@@ -6,8 +6,8 @@ class wizard_report_tabungan(models.TransientModel):
     _name = 'siswa_tab_ocb11.wizard_report_tabungan'
 
     name = fields.Char('Name', default='Report Tabungan')
-    awal = fields.Date('Periode Awal', default=datetime.today(), required=True)
-    akhir = fields.Date('Periode Akhir', default=datetime.today(), required=True)
+    awal = fields.Date('Periode Awal', default=datetime.today().date(), required=True)
+    akhir = fields.Date('Periode Akhir', default=datetime.today().date(), required=True)
     siswa_id = fields.Many2one('res.partner', string='Siswa')
     tabungan_ids = fields.Many2many('siswa_tab_ocb11.tabungan', relation='siswa_tab_ocb11_wizard_report_report_tabungan_rel', column1='report_id',column2='tabungan_id', string="Data Tabungan")
     saldo_begining = fields.Float('Saldo Begining', default=0)
