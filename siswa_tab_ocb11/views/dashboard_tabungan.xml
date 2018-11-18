@@ -27,26 +27,30 @@
                                     </div>
                                     <div class="container o_kanban_card_content">
                                         <div class="row">
-                                            <div class="col-xs-12 text-right" >
+                                            <div class="col-12 text-right" >
                                                 <h3 style="font-size:24pt;" ><field name="saldo" /></h3>
                                             </div>
                                             
                                         </div>
                                     </div>
-                                    <div class="container o_kanban_card_manage_pane">
-                                        <div class="row">
-                                            <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <div
+										class="container o_kanban_card_manage_pane dropdown-menu"
+										role="menu">
+										<div class="row">
+                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
                                                 <div class="o_kanban_card_manage_title">
                                                     <label>Set Color</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
-                                            <div class="col-xs-12">
-                                                <ul class="oe_kanban_colorpicker" data-field="color"/>
-                                            </div>
-                                        </div>
-                                    </div>
+										<div t-if="widget.editable"
+											class="o_kanban_card_manage_settings row">
+											<div class="col-12" role="menuitem" aria-haspopup="true">
+												<ul class="oe_kanban_colorpicker" data-field="color"
+													role="menu" />
+											</div>
+										</div>
+									</div>
                                 </div>
                             </div>
                         </t>
