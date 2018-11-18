@@ -10,7 +10,7 @@ class formulir(models.Model):
     is_registered = fields.Boolean('is registered', default=False)
     nama_calon = fields.Char('Nama', requred=True)
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]))
-    tanggal = fields.Date('Tanggal', required=True, default=datetime.today())
+    tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())
     harga = fields.Float('Harga', required=True, default=0)
     # jenjang = fields.Selection([(1, 'PG'), (2, 'TK A'), (3, 'TK B')], string='Jenjang', required=True, default=1)
     jenjang_id = fields.Many2one('siswa_ocb11.jenjang', string='Jenjang', required=True)

@@ -6,8 +6,8 @@ class wizard_rekap_kas(models.TransientModel):
     _name = 'siswa_keu_ocb11.wizard_rekap_kas'
 
     name = fields.Char('Name', default='Rekapitulasi Kas')
-    awal = fields.Date('Periode Awal', default=datetime.today(), required=True)
-    akhir = fields.Date('Periode Akhir', default=datetime.today(), required=True)
+    awal = fields.Date('Periode Awal', default=datetime.today().date(), required=True)
+    akhir = fields.Date('Periode Akhir', default=datetime.today().date(), required=True)
     jenis = fields.Selection([(1, 'All'), (2, 'Pendaptan'), (3, 'Pengeluaran')], string='Jenis Kas', required=True, default=1)
     # kas_ids = fields.Many2many('siswa_keu_ocb11.kas', string='Data Kas')
     kas_ids = fields.Many2many('siswa_keu_ocb11.kas',relation='siswa_keu_ocb11_rekapitulasi_kas_rel', column1='report_id',column2='kas_id', string="Data Kas")

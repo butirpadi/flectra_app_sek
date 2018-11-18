@@ -27,7 +27,7 @@ class calon_siswa(models.Model):
     phone = fields.Char()
     mobile = fields.Char()
     jenjang_id = fields.Many2one('siswa_ocb11.jenjang', string='Jenjang', required=True)
-    tanggal_registrasi = fields.Date('Tanggal Registrasi', required=True, default=datetime.today())
+    tanggal_registrasi = fields.Date('Tanggal Registrasi', required=True, default=datetime.today().date())
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Diterima')
     induk = fields.Char(string='Internal Reference', required=False, copy=False, readonly=True, default="New")
     nis = fields.Char(string="NIS", required=False)

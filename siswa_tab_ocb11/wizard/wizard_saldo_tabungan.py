@@ -6,13 +6,13 @@ class wizard_saldo_tabungan(models.TransientModel):
     _name = 'siswa_tab_ocb11.wizard_saldo_tabungan'
 
     name = fields.Char('Name', default='Report Saldo Tabungan')
-    tanggal = fields.Date('Tanggal', default=datetime.today(), required=True)
+    tanggal = fields.Date('Tanggal', default=datetime.today().date(), required=True)
     saldo_rombel_ids = fields.One2many('siswa_tab_ocb11.wizard_report_tabungan_rombel_rel', inverse_name="wizard_id", string="Rombongan Belajar")
     saldo_per_siswa_ids = fields.One2many('siswa_tab_ocb11.saldo_tabungan_per_siswa_rel', inverse_name="wizard_id", string="Saldo Detail")
     rombel_ids = fields.Many2many('siswa_ocb11.rombel', relation='siswa_tab_ocb11_wizard_saldo_tabungan_rombel_rel', column1='wizard_id',column2='rombel_id', string="Rombongan Belajar")
     report_type = fields.Selection([('sum', 'Summary'), ('det', 'Detail')], string='Tipe', required=True, default='sum')
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran')
-    # akhir = fields.Date('Periode Akhir', default=datetime.today(), required=True)
+    # akhir = fields.Date('Periode Akhir', default=datetime.today().date(), required=True)
     # tabungan_ids = fields.Many2many('siswa_tab_ocb11.tabungan', relation='siswa_tab_ocb11_wizard_report_report_tabungan_rel', column1='report_id',column2='tabungan_id', string="Data Tabungan")
     # siswa_id = fields.Many2one('res.partner', string='Siswa')
     # tabungan_ids = fields.Many2many('siswa_tab_ocb11.tabungan', relation='siswa_tab_ocb11_wizard_report_report_tabungan_rel', column1='wizard_id',column2='tabungan_id', string="Data Tabungan")

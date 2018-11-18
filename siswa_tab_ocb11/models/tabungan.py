@@ -14,7 +14,7 @@ class tabungan(models.Model):
     induk = fields.Char(string='Induk', related='siswa_id.induk')
     saldo_tabungan = fields.Float('Saldo Tabungan', compute="_compute_get_saldo", store=True)
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
-    tanggal = fields.Date(string='Tanggal', required=True, default=datetime.today())
+    tanggal = fields.Date(string='Tanggal', required=True, default=datetime.today().date())
     jumlah = fields.Float(string='Jumlah', required=True, default=0)
     jumlah_temp = fields.Float(string='Jumlah', required=True, default=0)
     jenis = fields.Selection([('setor', 'Setoran'), ('tarik', 'Tarik Tunai')], string='Jenis', required=True, default='setor')
@@ -41,7 +41,7 @@ class tabungan(models.Model):
 
         if can_draw:
             if vals.get('name', _('New')) == _('New'):
-                vals['name'] = 'DRAFT/TAB/'+str(datetime.today().strftime('%d%m%y/%H%M%S'))
+                vals['name'] = 'DRAFT/TAB/'+str(datetime.today().date().strftime('%d%m%y/%H%M%S'))
 
             if vals['jenis'] == 'tarik' :
                 vals['jumlah_temp'] = -vals['jumlah_temp']

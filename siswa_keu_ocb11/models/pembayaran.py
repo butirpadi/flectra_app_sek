@@ -16,7 +16,7 @@ class pembayaran(models.Model):
     induk = fields.Char(string='No. Induk', related='siswa_id.induk')
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
     rombel_id = fields.Many2one('siswa_ocb11.rombel', string="Rombongan Belajar", compute="_compute_set_rombel", store=True)
-    tanggal = fields.Date('Tanggal', required=True, default=datetime.today())
+    tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())
     total = fields.Float('Total', required=True, default=0.00, compute="_compute_biaya")
     terbilang = fields.Char('Terbilang', compute="_compute_terbilang", store=True)
     pembayaran_lines = fields.One2many('siswa_keu_ocb11.pembayaran_line', inverse_name='pembayaran_id' , string='Biaya-biaya', require=True)
