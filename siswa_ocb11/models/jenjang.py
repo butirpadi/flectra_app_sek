@@ -81,9 +81,9 @@ class jenjang(models.Model):
         for rec in self:
             # re order other data yang sort_order nya lebih besar dari ini
             my_sort_order = rec.sort_order 
-            jenjang_ids = self.env['siswa_ocb11.jenjang'].search([('sort_order','>',my_sort_order)])
+            jenjang_ids = self.env['siswa_ocb11.jenjang'].search([('sort_order', '>', my_sort_order)])
             
             for jj in jenjang_ids:
-                jj.sort_order = jj.sort_order- 1
+                jj.sort_order = jj.sort_order - 1
                  
         return super(jenjang, self).unlink()
