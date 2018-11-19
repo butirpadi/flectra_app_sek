@@ -90,7 +90,7 @@
             <field name="name">Tabungan Dashboard Manager</field>
             <field name="res_model">siswa_tab_ocb11.dashboard_tabungan</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree, form</field>
+            <field name="view_mode">tree</field>
             <field name="tree_view_id" ref="siswa_tab_ocb11.dashboard_tabungan_view_manager_list" />
             <field name="context">{'active_test': False}</field>
         </record>

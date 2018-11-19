@@ -80,7 +80,7 @@
 			<field name="name">Keuangan Dashboard</field>
 			<field name="res_model">siswa_keu_ocb11.keuangan_dashboard</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree, form</field>
+			<field name="view_mode">tree</field>
 		</record>
 
 		<!-- detail keuangan dashboard, tampilkan keuangan_siswa -->
