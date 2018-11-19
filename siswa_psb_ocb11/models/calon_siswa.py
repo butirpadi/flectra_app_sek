@@ -146,7 +146,7 @@ class calon_siswa(models.Model):
         self.panggilan = self.siswa_id.panggilan
         self.jenis_kelamin = self.siswa_id.jenis_kelamin
         self.tempat_lahir = self.siswa_id.tempat_lahir
-        self.tanggal_lahir  = self.siswa_id.tanggal_lahir
+        self.tanggal_lahir = self.siswa_id.tanggal_lahir
         self.nis = self.siswa_id.nis
         self.anak_ke = self.siswa_id.anak_ke
         self.dari_bersaudara = self.siswa_id.dari_bersaudara
@@ -154,7 +154,7 @@ class calon_siswa(models.Model):
         self.street2 = self.siswa_id.street2
         self.city = self.siswa_id.city
         self.state_id = self.siswa_id.state_id.id
-        self.zip= self.siswa_id.zip
+        self.zip = self.siswa_id.zip
         self.country_id = self.siswa_id.country_id.id
         self.phone = self.siswa_id.phone
         self.mobile = self.siswa_id.mobile
@@ -164,7 +164,6 @@ class calon_siswa(models.Model):
         self.ibu = self.siswa_id.ibu
         self.pekerjaan_ibu_id = self.siswa_id.pekerjaan_ibu_id.id 
         self.telp_ibu = self.siswa_id.telp_ibu
-        
 
         # filter jenjang 
         domain = {'jenjang_id':[('order', '>', rombel_siswa.jenjang_id.order)]}
@@ -548,7 +547,8 @@ class calon_siswa(models.Model):
         # remove tabungan siswa
         print('Delete Data Tabungan : ')
         tabungan = self.env['siswa_tab_ocb11.tabungan'].search([
-                                ('siswa_id', '=', id_siswa)
+                                ('siswa_id', '=', id_siswa),
+                                ('tahunajaran_id', '=', self.tahunajaran_id.id)
                             ])
         pprint(tabungan)
         for tab in tabungan:
@@ -557,7 +557,10 @@ class calon_siswa(models.Model):
             tab.unlink()            
 
         # remove siswa biaya
-        siswa_biaya = self.env['siswa_keu_ocb11.siswa_biaya'].search([('siswa_id', '=', id_siswa)])
+        siswa_biaya = self.env['siswa_keu_ocb11.siswa_biaya'].search([
+                            ('siswa_id', '=', id_siswa),
+                            ('tahunajaran_id', '=', self.tahunajaran_id.id),
+                            ])
         # remove potongan biaya
         for sis_by in siswa_biaya:
             for pot in sis_by.potongan_ids:
@@ -569,8 +572,42 @@ class calon_siswa(models.Model):
         print('Siswa Deleted')
 
         # remove res_partner
+        print('Deleting Registered Siswa')
         if not self.is_siswa_lama:
             self.env['res.partner'].search([('id', '=', id_siswa)]).unlink()
+        else:
+#             # change siswa_id.calon_siswa_id to previouse
+#             print('Sort Order Tahun Ajaran : ' + str(self.tahunajaran_id.sort_order))
+#             prev_tahun_ajaran_id = self.env['siswa_ocb11.tahunajaran'].search([
+#                                             ('sort_order', '=', 1)
+#                                         ]).id
+#             print('Prev Tahun ajaran')
+#             pprint(prev_tahun_ajaran_id)
+            print('Get Prev Tahun Ajaran')
+            self.env.cr.execute('select id from siswa_ocb11_tahunajaran where sort_order = ' + str(self.tahunajaran_id.sort_order - 1))
+            prev_tahun_ajaran_id = self.env.cr.fetchone()
+            pprint(prev_tahun_ajaran_id)
+            print(prev_tahun_ajaran_id[0])
+#             print('Prev Tahn Ajara : ' + str(prev_tahun_ajaran_id.id))
+            
+            if prev_tahun_ajaran_id:
+                prev_calon_siswa_id = self.env['siswa_psb_ocb11.calon_siswa'].search([
+                            '&','|',
+                            ('tahunajaran_id', '=', prev_tahun_ajaran_id[0]),
+                            ('siswa_id', '=', self.siswa_id.id),
+                            ('registered_siswa_id','=',self.siswa_id.id)
+                            
+                        ])
+                pprint(prev_calon_siswa_id)
+                if prev_calon_siswa_id:
+#                     self.siswa_id.calon_siswa_id = [(3, self.id)]
+#                     self.siswa_id.calon_siswa_id = [(4, prev_calon_siswa_id.id)]
+                    self.siswa_id.calon_siswa_id = prev_calon_siswa_id.id
+                else:
+#                     self.siswa_id.calon_siswa_id = [(3, self.id)]
+                    self.siswa_id.calon_siswa_id = None
+            else:
+                self.siswa_id.calon_siswa_id = [(3, self.id)]
 
         # update calon_siswa state
         self.state = 'draft'
