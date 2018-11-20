@@ -1,25 +1,24 @@
 <odoo>
 	<data>
 		<menuitem name="PSB" id="siswa_psb_ocb11.root_menu"
-			sequence="4" web_icon="siswa_psb_ocb11,static/description/icon.png"  />
+			sequence="4" web_icon="siswa_psb_ocb11,static/description/icon.png" />
 
 		<menuitem name="Master"
 			id="siswa_psb_ocb11.master_menu_registrasi"
 			parent="siswa_psb_ocb11.root_menu" sequence="1" />
-		<menuitem name="Operations"
-			id="siswa_psb_ocb11.categories_menu_registrasi"
-			parent="siswa_psb_ocb11.root_menu" sequence="2" />
-
 		<menuitem name="Biaya Registrasi"
 			id="siswa_psb_ocb11.action_menu_registrasi_manager"
 			parent="siswa_psb_ocb11.master_menu_registrasi"
 			action="siswa_psb_ocb11.registrasi_manager_action_window"
 			sequence="1" />
+
+		<menuitem name="Operations"
+			id="siswa_psb_ocb11.categories_menu_registrasi"
+			parent="siswa_psb_ocb11.root_menu" sequence="2" />
 		<menuitem name="Registrasi"
 			id="siswa_psb_ocb11.action_menu_registrasi"
 			parent="siswa_psb_ocb11.categories_menu_registrasi"
 			action="siswa_psb_ocb11.registrasi_action_window" sequence="2" />
-
 		<menuitem name="Distribusi Siswa"
 			id="siswa_psb_ocb11.action_menu_distribusi_siswa"
 			parent="siswa_psb_ocb11.categories_menu_registrasi"
