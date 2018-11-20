@@ -2,7 +2,7 @@
 	<data>
 		<record model="ir.ui.view"
 			id="siswa_psb_ocb11.biaya_ta_jenjang_list">
-			<field name="name">siswa_keu_ocb11_biaya_ta_jenjang_list</field>
+			<field name="name">siswa_psb_ocb11_biaya_ta_jenjang_list</field>
 			<field name="model">siswa_keu_ocb11.biaya_ta_jenjang</field>
 			<field name="arch" type="xml">
 				<tree>

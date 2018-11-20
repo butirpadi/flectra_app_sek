@@ -81,6 +81,7 @@
                                 <field name="siswa_id" domain="[('is_siswa','=',True)]" options="{'no_create':True, 'no_edit':True,'no_create_edit': True,'no_open':True}" attrs="{'readonly':[('name', '!=', 'New')]}" />
                                 <field name="induk" />                        
                                 <field name="active_rombel_id" />
+                            	<field name="tahunajaran_id" />
                             </group>
                             <group>
                                 <field name="saldo_tabungan" attrs="{'invisible':[('name', '!=', 'New')]}" />

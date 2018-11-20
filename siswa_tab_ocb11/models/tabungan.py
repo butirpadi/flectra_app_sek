@@ -10,7 +10,7 @@ class tabungan(models.Model):
 
     name = fields.Char(string='Kode Pembayaran', requred=True, default='New')
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')], string='State', required=True, default='draft')
-    siswa_id = fields.Many2one('res.partner',string="Siswa", required=True)
+    siswa_id = fields.Many2one('res.partner', string="Siswa", required=True)
     induk = fields.Char(string='Induk', related='siswa_id.induk')
     saldo_tabungan = fields.Float('Saldo Tabungan', compute="_compute_get_saldo", store=True)
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
@@ -20,6 +20,7 @@ class tabungan(models.Model):
     jenis = fields.Selection([('setor', 'Setoran'), ('tarik', 'Tarik Tunai')], string='Jenis', required=True, default='setor')
     confirm_ids = fields.One2many('siswa_tab_ocb11.action_confirm', inverse_name="tabungan_id")
     desc = fields.Char('Keterangan')
+    tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
 
     @api.depends('siswa_id')
     def _compute_get_saldo(self):
@@ -29,7 +30,7 @@ class tabungan(models.Model):
     @api.model
     def create(self, vals):
         # # cek saldo siswa
-        siswa = self.env['res.partner'].search([('id','=',vals['siswa_id'])])
+        siswa = self.env['res.partner'].search([('id', '=', vals['siswa_id'])])
 
         can_draw = True
         if siswa.saldo_tabungan == 0:
@@ -41,7 +42,7 @@ class tabungan(models.Model):
 
         if can_draw:
             if vals.get('name', _('New')) == _('New'):
-                vals['name'] = 'DRAFT/TAB/'+str(datetime.today().strftime('%d%m%y/%H%M%S'))
+                vals['name'] = 'DRAFT/TAB/' + str(datetime.today().date().strftime('%d%m%y/%H%M%S'))
 
             if vals['jenis'] == 'tarik' :
                 vals['jumlah_temp'] = -vals['jumlah_temp']
@@ -77,9 +78,9 @@ class tabungan(models.Model):
     def update_saldo_siswa(self):
         self.ensure_one()
         # update saldo siswa
-        tabs = self.env['siswa_tab_ocb11.tabungan'].search([('siswa_id','=',self.siswa_id.id), ('state','=','post')])
-        self.env['res.partner'].search([('id','=',self.siswa_id.id)]).write({
-            'saldo_tabungan' : sum(x.jumlah for x in tabs )
+        tabs = self.env['siswa_tab_ocb11.tabungan'].search([('siswa_id', '=', self.siswa_id.id), ('state', '=', 'post')])
+        self.env['res.partner'].search([('id', '=', self.siswa_id.id)]).write({
+            'saldo_tabungan' : sum(x.jumlah for x in tabs)
         })
 
     def action_confirm(self):
@@ -92,7 +93,7 @@ class tabungan(models.Model):
             'jumlah' : self.jumlah_temp,
             'state' : 'post'
         })
-        self.confirm_ids = (0,0,{
+        self.confirm_ids = (0, 0, {
             'name' : name_seq
         })
         self.update_saldo_siswa()
@@ -104,7 +105,7 @@ class tabungan(models.Model):
         # dash_tab_id = self.env['ir.model.data'].search([('name','=','default_dashboard_tabungan')]).res_id
         # dash_tab = self.env['siswa_tab_ocb11.dashboard_tabungan'].search([('id','=',dash_tab_id)])
         
-        dash_tab = self.env['siswa_tab_ocb11.dashboard_tabungan'].search([('id','ilike','%')])
+        dash_tab = self.env['siswa_tab_ocb11.dashboard_tabungan'].search([('id', 'ilike', '%')])
         for dash in dash_tab:
             dash.compute_saldo_tabungan()  
     
@@ -114,7 +115,7 @@ class tabungan(models.Model):
         self.confirm_ids.unlink()
         # update name to database
         self.write({
-            'name' : 'DRAFT/'+self.name,
+            'name' : 'DRAFT/' + self.name,
             'state' : 'draft',
             'jumlah' : 0
         })
