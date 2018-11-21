@@ -6,6 +6,7 @@ from pprint import pprint
 
 class PsbDashboard(models.Model):
     _name = 'psb_dashboard'
+    _order = 'tahunajaran_id desc' 
 
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', ondelete="cascade")
     jumlah_registered = fields.Integer('Registered', default=0)
@@ -16,20 +17,36 @@ class PsbDashboard(models.Model):
     color = fields.Integer(string='Color Index') 
     
     def regenerate_dashboard(self):
-        # clear data
-        print('Delete al jenjang rels')
-        self.jenjang_rel_ids.unlink()
+        calon_sis_ids = self.env['siswa_psb_ocb11.calon_siswa'].search([('tahunajaran_id','=',self.tahunajaran_id.id)])
         
-        print('Regenerate jenjang rels')
-        get_jenjang_ids = self.env['siswa_ocb11.jenjang'].search([])
-        jj_arr = []
-        for jj in get_jenjang_ids:
-            jj_arr.append((0, 0, {
-                    'jenjang_id' : jj.id
-                }))
+        registered_len = len(self.env['siswa_psb_ocb11.calon_siswa'].search([
+                        ('tahunajaran_id','=',self.tahunajaran_id.id),
+                        ('state','=','reg')
+                    ])
+            )
+        draft_len = len(self.env['siswa_psb_ocb11.calon_siswa'].search([
+                        ('tahunajaran_id','=',self.tahunajaran_id.id),
+                        ('state','=','draft')
+                    ])
+            )    
+        laki_len = len(self.env['siswa_psb_ocb11.calon_siswa'].search([
+                        ('tahunajaran_id','=',self.tahunajaran_id.id),
+                        ('jenis_kelamin','=','laki')
+                    ])
+            )        
+        perempuan_len = len(self.env['siswa_psb_ocb11.calon_siswa'].search([
+                        ('tahunajaran_id','=',self.tahunajaran_id.id),
+                        ('jenis_kelamin','=','perempuan')
+                    ])
+            )      
+                
         self.write({
-            'jenjang_rel_ids' : jj_arr
-        })
+                'jumlah_registered' : registered_len,
+                'jumlah_draft' : draft_len,
+                'total' : len(calon_sis_ids),
+                'qty_laki' : laki_len,
+                'qty_perempuan' : perempuan_len,
+            })
     
     @api.model
     def create(self, vals):
@@ -40,16 +57,63 @@ class PsbDashboard(models.Model):
         
         return res 
 
-#     def get_view_rombel(self):
-#         return {
-#                 'name': 'Data Siswa ' + self.rombel_id.name + ' ' + self.tahunajaran_id.name,
-#                 'view_type': 'form',
-#                 'view_mode': 'tree',
-#                 'res_model': 'siswa_ocb11.rombel_siswa',
-#                 'target': 'current',
-#                 'domain' : [('tahunajaran_id', '=', self.tahunajaran_id.id), ('rombel_id', '=', self.rombel_id.id)],
-#                 'type': 'ir.actions.act_window',
-#             }
+    def get_view_laki(self):
+        return self.get_view_by_gender('laki')
+    
+    def get_view_perempuan(self):
+        return self.get_view_by_gender('perempuan')
+    
+    def get_view_by_gender(self, gender):
+        return {
+                'name': 'Registrasi TA : ' + self.tahunajaran_id.name,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'siswa_psb_ocb11.calon_siswa',
+                'target': 'current',
+                'domain' : [('tahunajaran_id', '=', self.tahunajaran_id.id), ('jenis_kelamin', '=', gender)],
+                'type': 'ir.actions.act_window',
+            }
+    
+    def get_draft(self):
+        return self.get_view_by_state('draft')
+
+    def get_reg(self):
+        return self.get_view_by_state('reg')        
+    
+    def get_view_by_state(self, state):
+        return {
+                'name': 'Registrasi TA : ' + self.tahunajaran_id.name,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'siswa_psb_ocb11.calon_siswa',
+                'target': 'current',
+                'domain' : [('tahunajaran_id', '=', self.tahunajaran_id.id), ('state', '=', state)],
+                'type': 'ir.actions.act_window',
+            }
+    
+    def get_view_all(self):
+        return {
+                'name': 'Registrasi TA : ' + self.tahunajaran_id.name,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'siswa_psb_ocb11.calon_siswa',
+                'target': 'current',
+                'domain' : [('tahunajaran_id', '=', self.tahunajaran_id.id)],
+                'type': 'ir.actions.act_window',
+            }
+    
+    def create_register(self):
+        return {
+                'name': 'Registrasi TA : ' + self.tahunajaran_id.name,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'siswa_psb_ocb11.calon_siswa',
+                'target': 'current',
+                'context': {'default_tahunajaran_id':self.tahunajaran_id.id},
+                'type': 'ir.actions.act_window',
+            }
+    
+    
 #     
 #     def get_view_rombel_laki(self):
 #         return self.get_view_rombel_by_jk('laki')

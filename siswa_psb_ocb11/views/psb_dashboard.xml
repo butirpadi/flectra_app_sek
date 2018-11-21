@@ -27,15 +27,17 @@
 									</div>
 									<div class="container o_kanban_card_content">
 										<div class="row">
-											<div class="col-xs-6 o_kanban_primary_left">
-												<h3 style="font-size:32pt;margin:0;">
-													<field name="jumlah_registered" />
+											<div class="col-xs-4 o_kanban_primary_left text-center">
+												<h3 style="font-size:32pt;margin-top:0;">
+													<a type="object" name="get_view_all" style="color:black;">
+														<field name="total" />
+													</a>
 												</h3>
 											</div>
-											<div class="col-xs-6 o_kanban_primary_left">
+											<div class="col-xs-8 o_kanban_primary_left">
 												<div class="row">
 													<div class="col-xs-9">
-														<a name="get_view_rombel_laki" type="object">
+														<a name="get_view_laki" type="object">
 															Laki-laki
 														</a>
 													</div>
@@ -45,7 +47,7 @@
 												</div>
 												<div class="row">
 													<div class="col-xs-9">
-														<a name="get_view_rombel_perempuan" type="object">
+														<a name="get_view_perempuan" type="object">
 															Perempuan
 														</a>
 													</div>
@@ -55,20 +57,24 @@
 												</div>
 											</div>
 											<div class="col-xs-12">
-												<a type="object" name="get_registered"
-													class="label label-success"
-													style="padding-top:5px;padding-bottom:5px;">
+												<a type="object" name="get_reg"
+													class="btn btn-success btn-sm">
 													<i class="fa fa-check"></i>
 													<field name="jumlah_registered" />
 													Registered
 												</a>
-												<a type="object" name="get_registered" class="label"
-													style="background-color:orange; margin-left:10px;padding-top:5px;padding-bottom:5px;">
+												<a type="object" name="get_draft"
+													class="btn btn-danger btn-sm">
 													<i class="fa fa-edit"></i>
 													<field name="jumlah_draft" />
 													Draft
 												</a>
-												<a class="pull-right" type="object" name="regenerate_dashboard" groups="base.group_system" ><i class="fa fa-refresh" ></i></a>
+												<a class="btn pull-right" type="object"
+													name="create_register">
+													<i class="fa fa-file-o"></i>
+													add new
+												</a>
+
 											</div>
 										</div>
 									</div>

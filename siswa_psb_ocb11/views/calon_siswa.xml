@@ -76,9 +76,9 @@
 										<field name="jenjang_id"
 											attrs="{'readonly':[('state', '=', 'reg')] }"
 											options="{'no_create':True,'no_edit':True,'no_create_edit': True,'no_open':True}" />
-										<field name="panggilan"
-											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="jenis_kelamin"
+											attrs="{'readonly':[('state', '=', 'reg')] }" />
+										<field name="panggilan"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="tempat_lahir"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
@@ -276,5 +276,15 @@
 			<!-- <field name="view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
 			<!-- <field name="tree_view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
 		</record>
+		
+		<!-- Action for Create -->
+		<record model="ir.actions.act_window"
+			id="siswa_psb_ocb11.registrasi_action_create_window">
+			<field name="name">Registrasi</field>
+			<field name="res_model">siswa_psb_ocb11.calon_siswa</field>
+			<field name="view_mode">form</field>
+			<field name="view_type">form</field>
+		</record>
+		
 	</data>
 </flectra>
