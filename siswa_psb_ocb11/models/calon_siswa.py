@@ -166,7 +166,7 @@ class calon_siswa(models.Model):
         self.telp_ibu = self.siswa_id.telp_ibu
 
         # filter jenjang 
-        domain = {'jenjang_id':[('order', '>', rombel_siswa.jenjang_id.order)]}
+        domain = {'jenjang_id':[('sort_order', '>', rombel_siswa.jenjang_id.sort_order)]}
         return {'domain':domain, 'value':{'jenjang_id':[]}}
 
         # set data siswa
