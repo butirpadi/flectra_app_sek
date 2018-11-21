@@ -2,10 +2,15 @@
 	<data>
 		<menuitem name="PSB" id="siswa_psb_ocb11.root_menu"
 			sequence="4" web_icon="siswa_psb_ocb11,static/description/icon.png" />
+		
+		<menuitem name="Dashboard"
+			id="siswa_psb_ocb11.action_menu_dashboard"
+			parent="siswa_psb_ocb11.root_menu"
+			action="psb_dashboard_action" sequence="1" />
 
 		<menuitem name="Operations"
 			id="siswa_psb_ocb11.categories_menu_registrasi"
-			parent="siswa_psb_ocb11.root_menu" sequence="1" />
+			parent="siswa_psb_ocb11.root_menu" sequence="2" />
 		<menuitem name="Registrasi"
 			id="siswa_psb_ocb11.action_menu_registrasi"
 			parent="siswa_psb_ocb11.categories_menu_registrasi"
@@ -17,7 +22,7 @@
 
 		<menuitem name="Master"
 			id="siswa_psb_ocb11.master_menu_registrasi"
-			parent="siswa_psb_ocb11.root_menu" sequence="2" />
+			parent="siswa_psb_ocb11.root_menu" sequence="3" />
 		<menuitem name="Biaya Registrasi"
 			id="siswa_psb_ocb11.action_menu_registrasi_manager"
 			parent="siswa_psb_ocb11.master_menu_registrasi"
@@ -25,7 +30,7 @@
 			sequence="1" />
 
 		<menuitem name="Reports" id="siswa_psb_ocb11.menu_report"
-			parent="siswa_psb_ocb11.root_menu" sequence="2" />
+			parent="siswa_psb_ocb11.root_menu" sequence="4" />
 		<menuitem name="Calon Siswa"
 			id="siswa_psb_ocb11.action_menu_wizard_report_calon_siswa"
 			parent="siswa_psb_ocb11.menu_report"
@@ -37,11 +42,15 @@
 
 		<menuitem name="Configuration"
 			id="siswa_psb_ocb11.menu_configuration"
-			parent="siswa_psb_ocb11.root_menu" sequence="3"
+			parent="siswa_psb_ocb11.root_menu" sequence="5"
 			groups="base.group_system" />
 		<menuitem name="PSB Setting"
 			id="siswa_psb_ocb11.psb_setting_menu"
 			parent="siswa_psb_ocb11.menu_configuration" sequence="1"
 			action="siswa_psb_ocb11.psb_setting_form_action" />
+		<menuitem name="Dashboard"
+			id="psb_menu_dashboard_setting"
+			parent="siswa_psb_ocb11.menu_configuration" sequence="2"
+			action="config_psb_dashboard_action" />
 	</data>
 </flectra>

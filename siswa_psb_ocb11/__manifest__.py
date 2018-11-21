@@ -43,6 +43,7 @@
         # 'views/biaya_registrasi.xml',
         'views/psb_setting_view.xml',
         'views/biaya_registrasi_manager_view.xml',
+        'views/psb_dashboard.xml',
         'views/menu.xml',
         # 'views/templates.xml',
     ],
