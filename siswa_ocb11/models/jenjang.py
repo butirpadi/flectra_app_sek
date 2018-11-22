@@ -16,8 +16,11 @@ class jenjang(models.Model):
         # get max sort_order
         self.env.cr.execute('select max(sort_order) from siswa_ocb11_jenjang')
         max_order = self.env.cr.fetchone()
-        vals['sort_order'] = max_order[0] + 1
-        
+        if max_order:
+            vals['sort_order'] = max_order[0] + 1
+        else:
+            vals['sort_order'] = 1
+            
         result = super(jenjang, self).create(vals)
         
         print('--------------------------------------------------------------------------')
