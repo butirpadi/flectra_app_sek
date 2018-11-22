@@ -38,3 +38,11 @@ class tahunajaran(models.Model):
 		psb_dash.regenerate_dashboard()
 				
 		return result
+	
+	def regenerate_psb_dashboard(self):
+		get_dashboard = self.env['psb_dashboard'].search([('tahunajaran_id','=',self.id)])
+		if not get_dashboard:
+			new_dash = self.env['psb_dashboard'].create({
+					'tahunajaran_id' : self.id
+				})
+			new_dash.regenerate_dashboard()
