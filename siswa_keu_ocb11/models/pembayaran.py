@@ -27,6 +27,13 @@ class pembayaran(models.Model):
     tabungan_id = fields.Many2one('siswa_tab_ocb11.tabungan', string="Transaksi Tabungan")
     saldo_tabungan_siswa = fields.Float(related='siswa_id.saldo_tabungan', store=True)
     total_temp = fields.Float('Total Bayar', default=0, readonly=True, store=True)
+    
+    @api.constrains('pembayaran_lines')
+    def pembayaran_lines_check(self):
+        for rec in self:
+            if len(rec.pembayaran_lines) > 8:
+                raise exceptions.ValidationError(_('Maximal jumlah pembayaran 8 item.'))
+
 
     @api.onchange('jumlah_potongan_tabungan')
     def jumlah_potongan_tabungan_change(self):

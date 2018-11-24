@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from flectra import models, fields, api, exceptions, _
 from flectra.addons import decimal_precision as dp
 
 class pembayaran_line(models.Model):
@@ -16,6 +16,14 @@ class pembayaran_line(models.Model):
     bayar = fields.Float('Bayar')
     biaya_id = fields.Many2one('siswa_keu_ocb11.siswa_biaya', string='Biaya', required=True )
     jumlah_potongan = fields.Float('Potongan', compute="_compute_potongan")
+    
+    @api.constrains('bayar')
+    def bayar_check(self):
+        for rec in self:
+            if rec.bayar <= 0.0:
+                raise exceptions.ValidationError(_('Nilai bayar tidak valid.'))
+            elif rec.bayar > rec.amount_due:
+                raise exceptions.ValidationError(_('Nilai bayar melebihi nilai Amount Due'))
 
     @api.depends('biaya_id')
     def _compute_amount_due(self):
