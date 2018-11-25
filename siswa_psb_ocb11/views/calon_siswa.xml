@@ -6,12 +6,33 @@
 			<field name="arch" type="xml">
 				<search string="Search Siswa">
 					<field name="name" string="Nama"
-						filter_domain="['|','|','|',
-                                                                        ('name','ilike',self),
-                                                                        ('panggilan','ilike',self),
-                                                                        ('ayah','ilike',self),
-                                                                        ('ibu','ilike',self),
-                                                                        ]" />
+						filter_domain="['|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|',
+                                         ('name','ilike',self),
+                                         ('panggilan','ilike',self),
+                                         ('ayah','ilike',self),
+                                         ('ibu','ilike',self),
+                                         ('reg_number','ilike',self),
+                                         ('jenis_kelamin','ilike',self),
+                                         ('tahunajaran_id','ilike',self),
+                                         ('jenjang_id','ilike',self),
+                                         ('tanggal_registrasi','ilike',self),
+                                         ('state','ilike',self),
+                                         ('mobile','ilike',self),
+                                         ('telp_ayah','ilike',self),
+                                         ('telp_ibu','ilike',self),
+                                         ('pekerjaan_ayah_id','ilike',self),
+                                         ('pekerjaan_ibu_id','ilike',self),
+                                         ('nis','ilike',self),
+                                         ('induk','ilike',self),
+                                         ('panggilan','ilike',self),
+                                         ('tempat_lahir','ilike',self),
+                                         ('tanggal_lahir','ilike',self),
+                                         ('city','ilike',self),
+                                         ('zip','ilike',self),
+                                         ('street','ilike',self),
+                                         ('street2','ilike',self),
+                                         ('country_id','ilike',self),
+                                         ]" />
 					<group expand="0" string="Group By">
 						<filter name="group_tahunajaran_id" string="Tahun Ajaran"
 							domain="[]" context="{'group_by':'tahunajaran_id'}" />
@@ -152,7 +173,8 @@
 									class="oe_edit_only">
 									<group>
 										<button name="generate_biaya_default"
-											string="Generate Biaya" type="object" class="oe_edit_only btn btn-primary" />
+											string="Generate Biaya" type="object"
+											class="oe_edit_only btn btn-primary" />
 										<!-- <button name="clear_biaya_default" string="Clear" type="object" 
 											class="oe_edit_only btn btn-danger" /> -->
 									</group>
@@ -172,9 +194,8 @@
 									<tree editable="bottom" create="false" delete="false">
 										<field name="biaya_id" readonly="1" />
 										<!-- <field name="is_bulanan" string="Bulanan" /> -->
-										<!-- <field name="bulan"
-											attrs="{'readonly':[('is_bulanan', '=', False)], 'required':[('is_bulanan', '=', True)]}"
-											invisible="1" /> -->
+										<!-- <field name="bulan" attrs="{'readonly':[('is_bulanan', '=', 
+											False)], 'required':[('is_bulanan', '=', True)]}" invisible="1" /> -->
 										<field name="harga" readonly="1" />
 										<field name="qty" readonly="1" />
 										<field name="potongan_harga" />
@@ -214,7 +235,8 @@
 											invisible="1" />
 										<field name="qty" invisible="1" />
 										<field name="harga" sum="Total Harga" />
-										<field name="potongan_harga" sum="Total Potongan" readonly="1" />
+										<field name="potongan_harga" sum="Total Potongan"
+											readonly="1" />
 										<field name="jumlah_harga_setelah_potongan"
 											sum="Total Harga" string="Jumlah" />
 										<field name="dibayar" sum="Total Bayar" readonly="1" />
@@ -276,7 +298,7 @@
 			<!-- <field name="view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
 			<!-- <field name="tree_view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
 		</record>
-		
+
 		<!-- Action for Create -->
 		<record model="ir.actions.act_window"
 			id="siswa_psb_ocb11.registrasi_action_create_window">
@@ -285,6 +307,6 @@
 			<field name="view_mode">form</field>
 			<field name="view_type">form</field>
 		</record>
-		
+
 	</data>
 </flectra>

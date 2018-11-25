@@ -45,6 +45,7 @@
         'views/biaya_registrasi_manager_view.xml',
         'views/tahunajaran.xml',
         'views/psb_dashboard.xml',
+        'views/pembayaran.xml',
         'views/menu.xml',
         # 'views/templates.xml',
     ],

@@ -1,0 +1,18 @@
+<flectra>
+	<data>
+
+		<record id="view_pembayaran_form" model="ir.ui.view">
+			<field name="name">pembayaran.ocb11.form</field>
+			<field name="model">siswa_keu_ocb11.pembayaran</field>
+			<field name="inherit_id"
+				ref="siswa_keu_ocb11.view_pembayaran_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='rombel_id']" position="after">
+					<field name="psb_reference_id" invisible="1" />
+					<field name="psb_reg_number" attrs="{'invisible':[('psb_reference_id', '=', False)]}" />
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</flectra>

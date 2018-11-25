@@ -233,6 +233,8 @@ class calon_siswa(models.Model):
             'tanggal' : self.tanggal_registrasi ,
             'tahunajaran_id' : self.tahunajaran_id.id,
             'siswa_id' : siswa.id,
+            'psb_reference_id' : self.id,
+            'psb_reg_number' : self.reg_number
         })
 
         # reset pembayaran_lines
