@@ -78,7 +78,7 @@
 									<h3>
 										<strong>BUKTI PEMBAYARAN</strong>
 									</h3>
-									<span t-esc="o.reg_number" />
+									<strong>PENERIMAAN SISWA BARU</strong>
 								</div>
 								<div class="col-xs-12">
 									<hr style="border-top: 4px double black;" />
@@ -89,15 +89,15 @@
 													<strong>Tanggal</strong>
 												</td>
 												<td style="width:10px;" class="text-left">:</td>
-												<td class="col-xs-3">
+												<td class="col-xs-2">
 													<span t-field="o.tanggal_registrasi"
-														t-field-options='{"format": "dd MMMM y"}' />
+														t-field-options='{"format": "dd/MM/y"}' />
 												</td>
-												<td class="col-xs-3">
-													<strong>No. Registrasi</strong>
+												<td class="col-xs-2">
+													<strong>No. Reg</strong>
 												</td>
 												<td style="width:10px;" class="text-left">:</td>
-												<td class="col-xs-3">
+												<td class="col-xs-5">
 													<span t-field="o.reg_number" />
 												</td>
 											</tr>
@@ -172,7 +172,7 @@
 
 												</td>
 											</tr>
-											<tr>
+											<!-- <tr>
 												<td colspan="3" style="vertical-align:bottom;">
 													<i>Catatan:</i>
 													<br />
@@ -192,9 +192,33 @@
 													<br />
 													(__________________________)
 												</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
+								</div>
+
+								<div class="col-xs-2">
+									<img t-att-src="'/report/barcode/QR/%s' % o.reg_number"
+										style="height:100px;width:100px;margin:0;padding:0;" />
+								</div>
+								<div class="col-xs-6">
+									<i>Catatan:</i>
+									<br />
+									<i>-Disimpan sebagai bukti pembayaran yang SAH.</i>
+									<br />
+									<i>-Uang yang telah dibayarkan tidak dapat dikembalikan.
+									</i>
+								</div>
+								<div class="col-xs-4 text-center">
+									<t t-esc="user.company_id.city" />
+									,
+									<span t-field="o.tanggal_registrasi"
+										t-field-options='{"format": "dd MMMM y"}' />
+									<p>Bagian Administrasi</p>
+									<br />
+									<br />
+									<br />
+									(__________________________)
 								</div>
 							</div>
 						</div>
