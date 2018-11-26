@@ -31,8 +31,8 @@ class pembayaran(models.Model):
     @api.constrains('pembayaran_lines')
     def pembayaran_lines_check(self):
         for rec in self:
-            if len(rec.pembayaran_lines) > 8:
-                raise exceptions.ValidationError(_('Maximal jumlah pembayaran 8 item.'))
+            if len(rec.pembayaran_lines) > 7:
+                raise exceptions.ValidationError(_('Maximal jumlah pembayaran 7 item.'))
 
 
     @api.onchange('jumlah_potongan_tabungan')
@@ -139,6 +139,12 @@ class pembayaran(models.Model):
         }
 
     def action_print(self):
+        # set terbilang
+        t = self.terbilang_(self.total)
+        while '' in t:
+            t.remove('')
+        self.terbilang = ' '.join(t)  
+        
         return self.env.ref('siswa_keu_ocb11.report_pembayaran_action').report_action(self)
 
     def action_cancel(self):

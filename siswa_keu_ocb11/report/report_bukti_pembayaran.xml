@@ -29,14 +29,16 @@
 					<t t-call="web.basic_layout">
 						<div class="page">
 							<style>
-								table.noborder,table.noborder tbody tr, table.noborder tr td{
+								table.noborder,table.noborder tbody tr, table.noborder tr
+								td{
 								border-left:none!important;
 								border-right:none!important;
 								border-bottom:none!important;
 								border-top:none!important;
 								background-color:transparent!important
 								}
-								.table tbody tr, .table tbody tr td, table.noborder tbody tr,
+								.table tbody tr, .table
+								tbody tr td, table.noborder tbody tr,
 								table.noborder tr td{
 								margin: 0!important;
 								padding: 0!important;
@@ -44,15 +46,19 @@
 								}
 								.table tbody tr:last, .table tbody tr:last td{
 								border-bottom-width: thin!important;
-								border-bottom-style: solid!important;
+								border-bottom-style:
+								solid!important;
 								border-bottom-color: black!important;
 								}
 
-								.table thead tr, .table thead tr th{
-								border-bottom-width: thin!important;
+								.table
+								thead tr, .table thead tr th{
+								border-bottom-width:
+								thin!important;
 								border-bottom-style: solid!important;
 								border-bottom-color: black!important;
-								border-top-width: thin!important;
+								border-top-width:
+								thin!important;
 								border-top-style: solid!important;
 								border-top-color: black!important;
 								padding-left:0!important;
@@ -84,7 +90,7 @@
 								<div class="col-xs-4 text-right">
 									<h3>
 										<strong>BUKTI PEMBAYARAN</strong>
-									</h3> 
+									</h3>
 									<span t-esc="o.name" />
 								</div>
 								<div class="col-xs-12">
@@ -172,13 +178,13 @@
 													</td>
 												</tr>
 											</t>
-											<tr style="border-top:solid thin black;">
+											<tr>
 												<td colspan="5"
-													style="padding-top:5px;padding-bottom:5px;">
+													style="padding-top:5px;padding-bottom:5px;border-top:solid thin black !important;">
 													<strong>Terbilang:</strong>
 												</td>
 												<td
-													style="border-bottom:solid thin black;padding-top:5px;padding-bottom:5px;"
+													style="border-top:solid thin black !important;padding-top:5px;padding-bottom:5px;"
 													class="text-right">
 													<strong style="padding-right:50px;">Total :</strong>
 													<t t-esc="'{0:,.2f}'.format(o.total)" />
@@ -194,12 +200,6 @@
 
 												</td>
 											</tr>
-											<!-- <tr> <td colspan="3" style="vertical-align:bottom;" > <i>Catatan:</i><br/> 
-												<i>-Disimpan sebagai bukti pembayaran yang SAH.</i><br/> <i>-Uang yang telah 
-												dibayarkan tidak dapat dikembalikan.</i> </td> <td colspan="3" class="text-center" 
-												> Sidoarjo, <span t-field="o.tanggal" t-field-options='{"format": "dd MMMM 
-												y"}'/> <p>Staff Administrasi</p> <br/> <br/> <br/> (__________________________) 
-												</td> </tr> -->
 										</tbody>
 									</table>
 								</div>
