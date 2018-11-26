@@ -6,10 +6,12 @@
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
                 <search string="Pembayaran">
-                    <field name="name" string="Nama" filter_domain="['|','|','|',
+                    <field name="name" string="Nama" filter_domain="['|','|','|','|','|',
                                                     ('name','ilike',self),
                                                     ('siswa_id','ilike',self),
                                                     ('induk','ilike',self),
+                                                    ('nis','ilike',self),
+                                                    ('rombel_id','ilike',self),
                                                     ('tahunajaran_id','ilike',self),
                                                     ]"
                                                     />
@@ -32,8 +34,8 @@
                 <field name="tahunajaran_id" context="{'active_test': False}"/>
                 <field name="siswa_id" />
                 <field name="default_siswa_number" invisible="1" />
-                <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" />
-                <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" />
+                <field name="induk" />
+                <field name="nis" />
                 <field name="rombel_id" />
                 <field name="total" sum="Total" />
                 <field name="state"/>
