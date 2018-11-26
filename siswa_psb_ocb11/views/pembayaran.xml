@@ -9,7 +9,7 @@
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='rombel_id']" position="after">
 					<field name="psb_reference_id" invisible="1" />
-					<field name="psb_reg_number" attrs="{'invisible':[('psb_reference_id', '=', False)]}" />
+					<field name="psb_reg_number" readonly="1" attrs="{'invisible':[('psb_reference_id', '=', False)]}" />
 				</xpath>
 			</field>
 		</record>

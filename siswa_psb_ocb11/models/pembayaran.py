@@ -11,3 +11,13 @@ class pembayaran(models.Model):
 
     psb_reference_id = fields.Many2one('siswa_psb_ocb11.calon_siswa', string="PSB Reference")
     psb_reg_number = fields.Char(related="psb_reference_id.reg_number", string="PSB Reference")
+    
+    def get_psb_view(self):
+        return {
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'siswa_psb_ocb11.calon_siswa',
+                'target': 'current',
+                'res_id' : self.psb_reference_id.id,
+                'type': 'ir.actions.act_window',
+            }
