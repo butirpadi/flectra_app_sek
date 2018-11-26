@@ -1,5 +1,5 @@
 <flectra>
-	<data >
+	<data noupdate="1" >
 		<function id="function_set_domain_res_user"
 			model="res.partner" name="set_default_domain_user" />
 

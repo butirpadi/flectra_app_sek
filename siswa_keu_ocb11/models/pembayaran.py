@@ -15,7 +15,7 @@ class pembayaran(models.Model):
     siswa_id = fields.Many2one('res.partner', string='Siswa', required=True)
     induk = fields.Char(string='No. Induk', related='siswa_id.induk')
     nis = fields.Char(string='NIS', related='siswa_id.nis')
-    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default='induk')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
     rombel_id = fields.Many2one('siswa_ocb11.rombel', string="Rombongan Belajar", compute="_compute_set_rombel", store=True)
     tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())

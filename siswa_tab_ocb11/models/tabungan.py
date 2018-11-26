@@ -12,6 +12,8 @@ class tabungan(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')], string='State', required=True, default='draft')
     siswa_id = fields.Many2one('res.partner', string="Siswa", required=True)
     induk = fields.Char(string='Induk', related='siswa_id.induk')
+    nis = fields.Char(string='NIS', related='siswa_id.nis')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     saldo_tabungan = fields.Float('Saldo Tabungan', compute="_compute_get_saldo", store=True)
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
     tanggal = fields.Date(string='Tanggal', required=True, default=datetime.today().date())
