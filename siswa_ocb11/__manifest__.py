@@ -28,6 +28,7 @@
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'data/ir_model_data.xml',
+        'data/ir_default_data.xml',
         'views/tahunajaran.xml',
         'views/jenjang.xml',
         'views/rombel.xml',
@@ -44,13 +45,13 @@
         'views/wizard_non_aktif.xml',
         'views/wizard_report_rekap_siswa.xml',
         'views/wizard_report_form_presensi.xml',
+        'views/setting.xml',
         # 'views/wizard_naik_kelas.xml',
         'report/report_master.xml',
         'report/report_siswa.xml',
         'report/report_rekap_siswa.xml',
         'report/report_form_presensi.xml',
         'views/menu.xml',
-        'data/ir_default_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

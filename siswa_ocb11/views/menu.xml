@@ -63,6 +63,8 @@
 			id="siswa_ocb11.menu_configuration"
 			parent="siswa_ocb11.kesiswaan_menu" sequence="5"
 			groups="base.group_system" />
+		<menuitem id="menu_siswa_setting" name="Setting"
+			parent="siswa_ocb11.menu_configuration" action="siswa_setting_action" />
 		<menuitem name="Dashboard Manager"
 			id="siswa_ocb11.menu_dashboard_manager"
 			parent="siswa_ocb11.menu_configuration" sequence="1"
