@@ -68,8 +68,6 @@
 										<span t-esc="user.company_id.city"></span>
 										<span t-esc="user.company_id.state_id.name"></span>
 										<span t-esc="user.company_id.zip"></span>
-									</p>
-									<p style="margin-top:0;margin-bottom:0;">
 										Telp:
 										<span t-esc="user.company_id.phone"></span>
 									</p>
@@ -172,27 +170,12 @@
 
 												</td>
 											</tr>
-											<!-- <tr>
-												<td colspan="3" style="vertical-align:bottom;">
-													<i>Catatan:</i>
-													<br />
-													<i>-Disimpan sebagai bukti pembayaran yang SAH.</i>
-													<br />
-													<i>-Uang yang telah dibayarkan tidak dapat dikembalikan.
-													</i>
-												</td>
-												<td colspan="3" class="text-center">
-													<t t-esc="user.company_id.city" />
-													,
-													<span t-field="o.tanggal_registrasi"
-														t-field-options='{"format": "dd MMMM y"}' />
-													<p>Staff Administrasi</p>
-													<br />
-													<br />
-													<br />
-													(__________________________)
-												</td>
-											</tr> -->
+											<!-- <tr> <td colspan="3" style="vertical-align:bottom;"> <i>Catatan:</i> 
+												<br /> <i>-Disimpan sebagai bukti pembayaran yang SAH.</i> <br /> <i>-Uang 
+												yang telah dibayarkan tidak dapat dikembalikan. </i> </td> <td colspan="3" 
+												class="text-center"> <t t-esc="user.company_id.city" /> , <span t-field="o.tanggal_registrasi" 
+												t-field-options='{"format": "dd MMMM y"}' /> <p>Staff Administrasi</p> <br 
+												/> <br /> <br /> (__________________________) </td> </tr> -->
 										</tbody>
 									</table>
 								</div>
