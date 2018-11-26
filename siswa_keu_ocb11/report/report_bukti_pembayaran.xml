@@ -107,11 +107,22 @@
 														t-field-options='{"format": "dd MMMM y"}' />
 												</td>
 												<td class="col-xs-3">
-													<strong>No. Induk</strong>
+													<t t-if="o.default_siswa_number=='nis'">
+														<strong>NIS</strong>
+													</t>
+													<t t-if="o.default_siswa_number=='induk'">
+														<strong>No. Induk</strong>
+
+													</t>
 												</td>
 												<td style="width:10px;" class="text-left">:</td>
 												<td class="col-xs-3">
-													<span t-field="o.siswa_id.induk" />
+													<t t-if="o.default_siswa_number=='nis'">
+														<span t-field="o.siswa_id.nis" />
+													</t>
+													<t t-if="o.default_siswa_number=='induk'">
+														<span t-field="o.siswa_id.induk" />
+													</t>
 												</td>
 											</tr>
 											<tr>

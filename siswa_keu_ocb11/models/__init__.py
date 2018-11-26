@@ -16,4 +16,5 @@ from . import tabungan
 from . import potongan
 from . import wizard_batch_create_potongan_rel
 from . import wizard_batch_create_potongan
+from . import setting
 
