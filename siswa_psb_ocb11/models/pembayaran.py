@@ -21,3 +21,9 @@ class pembayaran(models.Model):
                 'res_id' : self.psb_reference_id.id,
                 'type': 'ir.actions.act_window',
             }
+    
+    def action_cancel(self):
+        if self.psb_reference_id:
+            raise exceptions.ValidationError(_('Cancel not allowed at this state.'))
+        else:
+            return super(pembayaran,self).action_cancel()

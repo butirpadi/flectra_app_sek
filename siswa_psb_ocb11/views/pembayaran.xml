@@ -9,8 +9,18 @@
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='rombel_id']" position="after">
 					<field name="psb_reference_id" invisible="1" />
-					<field name="psb_reg_number" readonly="1" attrs="{'invisible':[('psb_reference_id', '=', False)]}" />
+					<field name="psb_reg_number" readonly="1"
+						attrs="{'invisible':[('psb_reference_id', '=', False)]}" />
 				</xpath>
+				<xpath expr="//button[@name='action_cancel']"
+					position="replace">
+					<button confirm="Are you sure you want to do this?"
+						name="action_cancel" type="object" string="Reset"
+						attrs="{'invisible':['|','|',('state', '=', 'draft'),('name', '=', 'New'),('psb_reference_id', '!=', False)]}"
+						class="oe_edit_only btn btn-default"
+						groups="siswa_keu_ocb11.siswa_keu_group_admin" />
+				</xpath>
+
 			</field>
 		</record>
 
