@@ -558,6 +558,9 @@ class calon_siswa(models.Model):
         if pembayaran:
             for pb in pembayaran:
                 if pb.state == 'paid':
+                    # remove link psb_reference on pembayaran
+                    print('Set none to psb_reference_id on pembayaran')
+                    pb.psb_reference_id = None
                     pb.action_cancel()
                 pb.unlink()
                 print('Pembayaran Deleted')
