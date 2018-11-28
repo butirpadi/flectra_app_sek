@@ -70,6 +70,7 @@
                         <button name="action_confirm" string="Confirm" type="object" class="btn btn-primary" attrs="{'invisible':['|',('state', '=', 'post'),('name', '=', 'New')]}" />
                         <button confirm="Are you sure you want to do this?" name="action_cancel" string="Reset" type="object" class="btn oe_edit_only" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" groups="siswa_tab_ocb11.siswa_tab_group_admin" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,post"  />
+                        <button string="Print" name="action_print" type="object" icon="fa-print" attrs="{'invisible':[('state', '!=', 'post')]}" />
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -84,7 +85,7 @@
                                 <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" readonly="1" />
                                 <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" readonly="1" />                        
                                 <field name="active_rombel_id" />
-                            	<field name="tahunajaran_id" />
+                            	<field name="tahunajaran_id" attrs="{'readonly':[('name', '!=', 'New')]}" />
                             	<field name="default_siswa_number" invisible="1" />
                             </group>
                             <group>

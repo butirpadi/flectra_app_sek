@@ -1,0 +1,212 @@
+<flectra>
+	<data>
+
+		<record id="format_bukti_setor_tabungan"
+			model="report.paperformat">
+			<field name="name">Report Bukti Setor Tabungan</field>
+			<field name="default" eval="True" />
+			<field name="format">custom</field>
+			<field name="page_height">99</field>
+			<field name="page_width">215</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">3</field>
+		</record>
+
+		<report id="report_setor_tabungan_action"
+			model="siswa_tab_ocb11.tabungan" string="Bukti Setor Tabungan"
+			report_type="qweb-pdf" name="siswa_tab_ocb11.report_setor_tabungan"
+			file="siswa_tab_ocb11.report_setor_tabungan" attachment_use="False"
+			print_report_name="'BuktiSetorTabungan-%s' % object.name"
+			menu="False" paperformat="format_bukti_setor_tabungan" />
+
+		<template id="report_setor_tabungan">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.basic_layout">
+						<div class="page">
+							<style>
+								table.noborder,table.noborder tbody tr, table.noborder tr
+								td{
+								border-left:none!important;
+								border-right:none!important;
+								border-bottom:none!important;
+								border-top:none!important;
+								background-color:transparent!important
+								}
+								.table tbody tr, .table
+								tbody tr td, table.noborder tbody tr,
+								table.noborder tr td{
+								margin: 0!important;
+								padding: 0!important;
+								border:none!important;
+								}
+								.table tbody tr:last, .table tbody tr:last td{
+								border-bottom-width: thin!important;
+								border-bottom-style:
+								solid!important;
+								border-bottom-color: black!important;
+								}
+
+								.table
+								thead tr, .table thead tr th{
+								border-bottom-width:
+								thin!important;
+								border-bottom-style: solid!important;
+								border-bottom-color: black!important;
+								border-top-width:
+								thin!important;
+								border-top-style: solid!important;
+								border-top-color: black!important;
+								padding-left:0!important;
+								}
+							</style>
+
+							<div class="row">
+								<div class="col-xs-1">
+									<img src='/web/binary/company_logo' style="max-height:60px" />
+								</div>
+								<div class="col-xs-8">
+									<h4
+										style="margin-top:0;margin-bottom:0;text-transform:uppercase;">
+										<strong>
+											<t t-esc="user.company_id.name" />
+										</strong>
+									</h4>
+									<span t-esc="user.company_id.street"></span>
+									<span t-esc="user.company_id.street2"></span>
+									<span t-esc="user.company_id.city"></span>
+									<span t-esc="user.company_id.state_id.name"></span>
+									<span t-esc="user.company_id.zip"></span>
+									Telp:
+									<span t-esc="user.company_id.phone"></span>
+								</div>
+								<div class="col-xs-3 text-right" style="margin-top:28px;" >
+									<h4>
+										<strong>SLIP TABUNGAN</strong>
+									</h4>
+								</div>
+
+								<div class="col-xs-12">
+									<hr style="border-top: 4px double black;" />
+									<table class="table noborder">
+										<tbody>
+											<tr>
+												<td class="col-xs-2">
+													<strong>No.</strong>
+												</td>
+												<td style="padding-left:3px;padding-right:3px;max-width:10px" >:</td>
+												<td class="col-xs-4">
+													<span t-esc="o.name" />
+												</td>
+												<td class="col-xs-2">
+													<strong>Tahun Ajaran</strong>
+												</td>
+												<td style="padding-left:3px;padding-right:3px;max-width:10px" >:</td>
+												<td >
+													<span t-field="o.tahunajaran_id" />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<strong>Nama</strong>
+												</td>
+												<td>:</td>
+												<td>
+													<span t-field="o.siswa_id.name" />
+												</td>
+												<td>
+													<t t-if="o.jenis=='setor'">
+														<strong>Jumlah Setor</strong>
+													</t>
+													<t t-if="o.jenis=='tarik'">
+														<strong>Jumlah Tarik</strong>
+													</t>
+												</td>
+												<td>:</td>
+												<td>
+													<t t-esc="'{0:,.2f}'.format(o.jumlah)" />
+												</td>
+											</tr>
+											<tr style="border-bottom:thin solid black;">
+												<td >
+													<t t-if="o.default_siswa_number=='nis'">
+														<strong>NIS</strong>
+													</t>
+													<t t-if="o.default_siswa_number=='induk'">
+														<strong>No. Induk</strong>
+													</t>
+												</td>
+												<td style="width:10px;" class="text-left">:</td>
+												<td>
+													<t t-if="o.default_siswa_number=='nis'">
+														<span t-field="o.nis" />
+													</t>
+													<t t-if="o.default_siswa_number=='induk'">
+														<span t-field="o.induk" />
+													</t>
+												</td>
+												<td>
+													<strong>Saldo</strong>
+												</td>
+												<td>:</td>
+												<td>
+													<t t-esc="'{0:,.2f}'.format(o.saldo_tabungan)" />
+												</td>
+											</tr>
+											<tr style="border-bottom:thin solid black;">
+												<td>
+													<strong>Rombongan Belajar</strong>
+												</td>
+												<td>:</td>
+												<td>
+													<span t-field="o.active_rombel_id.name" />
+												</td>
+
+												<td>
+													<strong>Keterangan</strong>
+												</td>
+												<td>:</td>
+												<td>
+													<span t-field="o.desc" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+								<div class="col-xs-2">
+									<img t-att-src="'/report/barcode/QR/%s' % o.name"
+										style="height:100px;width:100px;margin:0;padding:0;" />
+								</div>
+								<div class="col-xs-6">
+									<i>Catatan:</i>
+									<br />
+									<i>-Disimpan sebagai bukti pembayaran yang SAH.</i>
+								</div>
+								<div class="col-xs-4 text-center">
+									<t t-esc="user.company_id.city" />
+									,
+									<span t-field="o.tanggal"
+										t-field-options='{"format": "dd-MM-y"}' />
+									<p>Bagian Administrasi</p>
+									<br />
+									<br />
+									<br />
+									(__________________________)
+								</div>
+
+							</div>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</flectra>
