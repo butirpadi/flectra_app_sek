@@ -13,7 +13,8 @@ class rombel_dashboard(models.Model):
     jumlah_siswa = fields.Integer('Jumlah Siswa', compute="_compute_jumlah_siswa", store=True)    
     jumlah_laki = fields.Integer('Jumlah Laki-laki', compute="_compute_jumlah_siswa", store=True)    
     jumlah_perempuan = fields.Integer('Jumlah Perempuan', compute="_compute_jumlah_siswa", store=True)   
-    color = fields.Integer(string='Color Index') 
+    color = fields.Integer(string='Color Index')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id) 
 
     def get_view_rombel(self):
         return {

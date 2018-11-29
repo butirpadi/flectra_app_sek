@@ -11,9 +11,9 @@ class rombel(models.Model):
     jenjang_id = fields.Many2one('siswa_ocb11.jenjang',string='Jenjang', required=True)
     siswas = fields.One2many('siswa_ocb11.rombel_siswa', inverse_name='rombel_id' , string='Siswa')
     kapasitas = fields.Integer('Kapasitas', required=True, default=0)
-
     color = fields.Integer(string='Color Index')
     is_show_on_dashboard = fields.Boolean('Show on Dashboard', default=False)
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     @api.one
     def get_jumlah_siswa(self):        

@@ -13,6 +13,7 @@ class tahunajaran(models.Model):
 	rombels = fields.One2many('siswa_ocb11.rombel_siswa', inverse_name='tahunajaran_id')
 	jenjangs = fields.One2many('siswa_ocb11.tahunajaran_jenjang', inverse_name='tahunajaran_id' , string='Jenjang', ondelete='cascade')
 	sort_order = fields.Integer('Order')
+	company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
 	@api.multi
 	def write(self, values):

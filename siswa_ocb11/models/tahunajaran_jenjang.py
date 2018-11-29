@@ -15,3 +15,4 @@ class tahunajaran_jenjang(models.Model):
         ('draft', 'Draft'),
         ('valid', 'Validated'),
         ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)
