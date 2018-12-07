@@ -6,3 +6,4 @@ from . import tabungan
 from . import dashboard_tabungan
 from . import rombel
 from . import tahunajaran
+from . import setting

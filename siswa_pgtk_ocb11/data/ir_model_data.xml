@@ -3,17 +3,17 @@
     <data noupdate="1">
         <record id="default_data_jenjang_pg" model="siswa_ocb11.jenjang">
             <field name="name">PG</field>
-            <field name="order">1</field>
+            <field name="sort_order">1</field>
         </record>
 
         <record id="default_data_jenjang_tk_a" model="siswa_ocb11.jenjang">
             <field name="name">TK A</field>
-            <field name="order">2</field>
+            <field name="sort_order">2</field>
         </record>
 
         <record id="default_data_jenjang_tk_b" model="siswa_ocb11.jenjang">
             <field name="name">TK B</field>
-            <field name="order">3</field>
+            <field name="sort_order">3</field>
         </record>
     </data>
 </odoo>

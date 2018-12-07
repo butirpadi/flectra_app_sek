@@ -14,10 +14,14 @@ class jenjang(models.Model):
     @api.model
     def create(self, vals):        
         # get max sort_order
-        self.env.cr.execute('select max(sort_order) from siswa_ocb11_jenjang')
-        max_order = self.env.cr.fetchone()
-        vals['sort_order'] = max_order[0] + 1
-        
+        max_order = self.env['siswa_ocb11.jenjang'].search([],order='sort_order desc', limit=1)
+#         self.env.cr.execute('select max(sort_order) from siswa_ocb11_jenjang')
+#         max_order = self.env.cr.fetchone()
+        if max_order:
+            vals['sort_order'] = max_order.sort_order + 1
+        else:
+            vals['sort_order'] = 1
+            
         result = super(jenjang, self).create(vals)
         
         print('--------------------------------------------------------------------------')

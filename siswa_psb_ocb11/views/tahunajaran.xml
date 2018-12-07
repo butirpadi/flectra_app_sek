@@ -1,0 +1,18 @@
+<odoo>
+	<data>
+	
+		<record id="psb_tahunajaran_form" model="ir.ui.view">
+			<field name="name">psb.tahunajaran.form</field>
+			<field name="model">siswa_ocb11.tahunajaran</field>
+			<field name="inherit_id" ref="siswa_ocb11.view_tahunajaran_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet" position="before">
+					<header>
+						<button groups="base.group_system" type="object" name="regenerate_psb_dashboard" string="Create PSB Dashboard" class="btn btn-default btn-sm" />
+					</header>
+				</xpath>
+			</field>
+		</record>
+	
+	</data>
+</odoo>

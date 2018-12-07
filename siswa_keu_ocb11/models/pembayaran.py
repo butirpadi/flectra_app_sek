@@ -14,6 +14,8 @@ class pembayaran(models.Model):
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
     siswa_id = fields.Many2one('res.partner', string='Siswa', required=True)
     induk = fields.Char(string='No. Induk', related='siswa_id.induk')
+    nis = fields.Char(string='NIS', related='siswa_id.nis')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
     rombel_id = fields.Many2one('siswa_ocb11.rombel', string="Rombongan Belajar", compute="_compute_set_rombel", store=True)
     tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())
@@ -27,6 +29,13 @@ class pembayaran(models.Model):
     tabungan_id = fields.Many2one('siswa_tab_ocb11.tabungan', string="Transaksi Tabungan")
     saldo_tabungan_siswa = fields.Float(related='siswa_id.saldo_tabungan', store=True)
     total_temp = fields.Float('Total Bayar', default=0, readonly=True, store=True)
+    
+    @api.constrains('pembayaran_lines')
+    def pembayaran_lines_check(self):
+        for rec in self:
+            if len(rec.pembayaran_lines) > 7:
+                raise exceptions.ValidationError(_('Maximal jumlah pembayaran 7 item.'))
+
 
     @api.onchange('jumlah_potongan_tabungan')
     def jumlah_potongan_tabungan_change(self):
@@ -132,6 +141,12 @@ class pembayaran(models.Model):
         }
 
     def action_print(self):
+        # set terbilang
+        t = self.terbilang_(self.total)
+        while '' in t:
+            t.remove('')
+        self.terbilang = ' '.join(t)  
+        
         return self.env.ref('siswa_keu_ocb11.report_pembayaran_action').report_action(self)
 
     def action_cancel(self):

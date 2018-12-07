@@ -35,6 +35,7 @@
         'report/report_tabungan_template.xml',
         'report/report_saldo_tabungan.xml',
         'report/report_saldo_tabungan_detail.xml',
+        'report/report_bukti_setor_tabungan.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

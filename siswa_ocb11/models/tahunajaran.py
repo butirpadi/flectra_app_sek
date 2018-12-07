@@ -6,6 +6,7 @@ from pprint import pprint
 
 class tahunajaran(models.Model):
 	_name = 'siswa_ocb11.tahunajaran'
+	_order = "sort_order asc"
 
 	name = fields.Char(string="Nama", required=True)
 	active = fields.Boolean(default=False)

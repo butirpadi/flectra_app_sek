@@ -12,6 +12,8 @@ class tabungan(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')], string='State', required=True, default='draft')
     siswa_id = fields.Many2one('res.partner', string="Siswa", required=True)
     induk = fields.Char(string='Induk', related='siswa_id.induk')
+    nis = fields.Char(string='NIS', related='siswa_id.nis')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     saldo_tabungan = fields.Float('Saldo Tabungan', compute="_compute_get_saldo", store=True)
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
     tanggal = fields.Date(string='Tanggal', required=True, default=datetime.today().date())
@@ -21,6 +23,41 @@ class tabungan(models.Model):
     confirm_ids = fields.One2many('siswa_tab_ocb11.action_confirm', inverse_name="tabungan_id")
     desc = fields.Char('Keterangan')
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
+    terbilang = fields.Char('Terbilang')
+    satuan = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh',
+          'delapan', 'sembilan', 'sepuluh', 'sebelas']
+    
+    def terbilang_(self, n):
+        if n >= 0 and n <= 11:
+            hasil = [self.satuan[int(n)]]
+        elif n >= 12 and n <= 19:
+            hasil = self.terbilang_(n % 10) + ['belas']
+        elif n >= 20 and n <= 99:
+            hasil = self.terbilang_(n / 10) + ['puluh'] + self.terbilang_(n % 10)
+        elif n >= 100 and n <= 199:
+            hasil = ['seratus'] + self.terbilang_(n - 100)
+        elif n >= 200 and n <= 999:
+            hasil = self.terbilang_(n / 100) + ['ratus'] + self.terbilang_(n % 100)
+        elif n >= 1000 and n <= 1999:
+            hasil = ['seribu'] + self.terbilang_(n - 1000)
+        elif n >= 2000 and n <= 999999:
+            hasil = self.terbilang_(n / 1000) + ['ribu'] + self.terbilang_(n % 1000)
+        elif n >= 1000000 and n <= 999999999:
+            hasil = self.terbilang_(n / 1000000) + ['juta'] + self.terbilang_(n % 1000000)
+        else:
+            hasil = self.terbilang_(n / 1000000000) + ['milyar'] + self.terbilang_(n % 100000000)
+        return hasil
+    
+    def action_print(self):
+        # set terbilang
+        t = self.terbilang_(self.jumlah)
+        while '' in t:
+            t.remove('')
+        self.terbilang = ' '.join(t)
+        print(self.terbilang)  
+        
+        return self.env.ref('siswa_tab_ocb11.report_setor_tabungan_action').report_action(self)
+        
 
     @api.depends('siswa_id')
     def _compute_get_saldo(self):

@@ -6,12 +6,33 @@
 			<field name="arch" type="xml">
 				<search string="Search Siswa">
 					<field name="name" string="Nama"
-						filter_domain="['|','|','|',
-                                                                        ('name','ilike',self),
-                                                                        ('panggilan','ilike',self),
-                                                                        ('ayah','ilike',self),
-                                                                        ('ibu','ilike',self),
-                                                                        ]" />
+						filter_domain="['|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|','|',
+                                         ('name','ilike',self),
+                                         ('panggilan','ilike',self),
+                                         ('ayah','ilike',self),
+                                         ('ibu','ilike',self),
+                                         ('reg_number','ilike',self),
+                                         ('jenis_kelamin','ilike',self),
+                                         ('tahunajaran_id','ilike',self),
+                                         ('jenjang_id','ilike',self),
+                                         ('tanggal_registrasi','ilike',self),
+                                         ('state','ilike',self),
+                                         ('mobile','ilike',self),
+                                         ('telp_ayah','ilike',self),
+                                         ('telp_ibu','ilike',self),
+                                         ('pekerjaan_ayah_id','ilike',self),
+                                         ('pekerjaan_ibu_id','ilike',self),
+                                         ('nis','ilike',self),
+                                         ('induk','ilike',self),
+                                         ('panggilan','ilike',self),
+                                         ('tempat_lahir','ilike',self),
+                                         ('tanggal_lahir','ilike',self),
+                                         ('city','ilike',self),
+                                         ('zip','ilike',self),
+                                         ('street','ilike',self),
+                                         ('street2','ilike',self),
+                                         ('country_id','ilike',self),
+                                         ]" />
 					<group expand="0" string="Group By">
 						<filter name="group_tahunajaran_id" string="Tahun Ajaran"
 							domain="[]" context="{'group_by':'tahunajaran_id'}" />
@@ -50,8 +71,12 @@
 					<sheet>
 						<div class="oe_title">
 							<h1>
-								<field name="reg_number" readonly="1" />
+								<field name="reg_number" readonly="1" class="oe_edit_only" />
+								<field name="name"
+									attrs="{'invisible':[('is_siswa_lama', '=', True)], 'readonly':[('state', '=', 'reg')] }"
+									class="oe_read_only" />
 							</h1>
+							<field name="reg_number" readonly="1" class="oe_read_only" />
 						</div>
 						<notebook>
 							<page name="page_bioadata" string="Biodata">
@@ -63,22 +88,20 @@
 											context="{'active_test': False}" required="1" />
 										<field name="tanggal_registrasi"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
-										<!-- <field name="formulir_id" options="{'no_create':True,'no_edit':True,'no_create_edit': 
-											True,'no_open':True}" /> -->
 										<field name="is_siswa_lama"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="siswa_id"
 											attrs="{'invisible':[('is_siswa_lama', '=', False)], 'required':[('is_siswa_lama','=',True)], 'readonly':[('state', '=', 'reg')] }"
 											options="{'no_create':True,'no_edit':True,'no_create_edit': True,'no_open':True}" />
 										<field name="name"
-											attrs="{'invisible':[('is_siswa_lama', '=', True)], 'readonly':[('state', '=', 'reg')] }" />
-										<!-- <field name="formulir_tahunajaran_id"/> -->
+											attrs="{'invisible':[('is_siswa_lama', '=', True)], 'readonly':[('state', '=', 'reg')] }"
+											class="oe_edit_only" />
 										<field name="jenjang_id"
 											attrs="{'readonly':[('state', '=', 'reg')] }"
 											options="{'no_create':True,'no_edit':True,'no_create_edit': True,'no_open':True}" />
-										<field name="panggilan"
-											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="jenis_kelamin"
+											attrs="{'readonly':[('state', '=', 'reg')] }" />
+										<field name="panggilan"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="tempat_lahir"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
@@ -86,8 +109,6 @@
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
 										<field name="nis"
 											attrs="{'readonly':[('state', '=', 'reg')] }" />
-										<!-- <field name="tahunajaran_id" options="{'no_create':True,'no_edit':True,'no_create_edit': 
-											True,'no_open':True}" context="{'active_test': False}" invisible="1" /> -->
 									</group>
 									<group>
 										<field name="anak_ke"
@@ -152,9 +173,8 @@
 									class="oe_edit_only">
 									<group>
 										<button name="generate_biaya_default"
-											string="Generate Biaya" type="object" class="oe_edit_only btn btn-primary" />
-										<!-- <button name="clear_biaya_default" string="Clear" type="object" 
-											class="oe_edit_only btn btn-danger" /> -->
+											string="Generate Biaya" type="object"
+											class="oe_edit_only btn btn-primary" />
 									</group>
 									<group>
 										<field name="biaya_optional_ids" widget="many2many_tags"
@@ -171,10 +191,6 @@
 									attrs="{'readonly':[('state', '=', 'reg')] }">
 									<tree editable="bottom" create="false" delete="false">
 										<field name="biaya_id" readonly="1" />
-										<!-- <field name="is_bulanan" string="Bulanan" /> -->
-										<!-- <field name="bulan"
-											attrs="{'readonly':[('is_bulanan', '=', False)], 'required':[('is_bulanan', '=', True)]}"
-											invisible="1" /> -->
 										<field name="harga" readonly="1" />
 										<field name="qty" readonly="1" />
 										<field name="potongan_harga" />
@@ -183,16 +199,6 @@
 									</tree>
 								</field>
 
-								<!-- <group class="oe_subtotal_footer oe_right" colspan="2" name="total_bayar"> 
-									<field name="bayar_tunai" widget='monetary' attrs="{'readonly':[('state', 
-									'=', 'reg')] }" /> <label for="calculate_bayar_tunai" string="" invisible="1" 
-									/> <button name="calculate_bayar_tunai" string="Calculate Bayar Tunai" type="object" 
-									class="btn btn-success oe_edit_only" attrs="{'invisible':[('state', '=', 
-									'reg')] }" /> </group> -->
-
-								<!-- <group class="oe_subtotal_footer oe_right" colspan="2" name="total_biaya"> 
-									<field name="total_biaya" widget='monetary' options="{'currency_field': 'currency_id'}" 
-									readonly="1" /> </group> -->
 							</page>
 							<page name="page_bayar" string="Pembayaran Registrasi">
 								<group>
@@ -214,7 +220,8 @@
 											invisible="1" />
 										<field name="qty" invisible="1" />
 										<field name="harga" sum="Total Harga" />
-										<field name="potongan_harga" sum="Total Potongan" readonly="1" />
+										<field name="potongan_harga" sum="Total Potongan"
+											readonly="1" />
 										<field name="jumlah_harga_setelah_potongan"
 											sum="Total Harga" string="Jumlah" />
 										<field name="dibayar" sum="Total Bayar" readonly="1" />
@@ -271,10 +278,16 @@
 				'search_default_group_state':1
 				}
 			</field>
-			<!-- <field name="search_view_id" ref="view_registrasi_filter"/> -->
-			<!-- <field name="form_view_id" ref="siswa_psb_ocb11.view_form_registrasi"/> -->
-			<!-- <field name="view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
-			<!-- <field name="tree_view_id" ref="siswa_psb_ocb11.registrasi_form_list"/> -->
 		</record>
+
+		<!-- Action for Create -->
+		<record model="ir.actions.act_window"
+			id="siswa_psb_ocb11.registrasi_action_create_window">
+			<field name="name">Registrasi</field>
+			<field name="res_model">siswa_psb_ocb11.calon_siswa</field>
+			<field name="view_mode">form</field>
+			<field name="view_type">form</field>
+		</record>
+
 	</data>
 </odoo>

@@ -1,48 +1,41 @@
 <odoo>
-	<data>
-		<record id="view_keuangan_dashboard_kanban_form"
-			model="ir.ui.view">
-			<field name="name">keuangan.dashboard.ocb11.kanban</field>
-			<field name="model">siswa_keu_ocb11.keuangan_dashboard</field>
-			<field name="arch" type="xml">
-				<kanban
-					class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban"
-					create="0">
-					<field name="color" />
-					<templates>
-						<t t-name="kanban-box">
-							<div t-attf-class="#{kanban_color(record.color.raw_value)}">
-								<div>
-									<div t-attf-class="o_kanban_card_header">
-										<div class="o_kanban_card_header_title">
-											<div class="o_primary">
-												<field name="name" />
-											</div>
-											<div class="o_secondary">
-												<field class="o_secondary" name="subtitle" />
-											</div>
-										</div>
-										<div class="o_kanban_manage_button_section">
-											<a class="o_kanban_manage_toggle_button" href="#">
-												<i class="fa fa-ellipsis-v" />
-											</a>
-										</div>
-									</div>
-									<div class="container o_kanban_card_content">
-										<div class="row">
-											<div class="col-12 text-right">
-												<h3 style="font-size:24pt;">
-													<field name="amount_due" />
-												</h3>
-											</div>
-
-										</div>
-									</div>
-									<div
-										class="container o_kanban_card_manage_pane dropdown-menu"
-										role="menu">
-										<div class="row">
-                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+    <data>
+        <record id="view_keuangan_dashboard_kanban_form" model="ir.ui.view">
+            <field name="name">keuangan.dashboard.ocb11.kanban</field>
+            <field name="model">siswa_keu_ocb11.keuangan_dashboard</field>
+            <field name="arch" type="xml">
+                <kanban
+                    class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban"
+                    create="0">
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                                <div>
+                                    <div t-attf-class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary">
+                                                <field name="name"/>
+                                            </div>
+                                            <div class="o_secondary">
+                                                <field class="o_secondary" name="subtitle"/>
+                                            </div>
+                                        </div>
+                                        <div class="o_kanban_manage_button_section">
+                                            <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_content">
+                                        <div class="row">
+                                            <div class="col-xs-12 text-right" >
+                                                <h3 style="font-size:24pt;" ><field name="amount_due" /></h3>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_manage_pane">
+                                        <div class="row">
+                                            <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
                                                 <div class="o_kanban_card_manage_title">
                                                     <label>Set Color</label>
                                                 </div>
@@ -89,5 +82,5 @@
 			<field name="view_mode">tree</field> <field name="search_view_id" ref="siswa_keu_ocb11.view_keuangan_siswa_filter"/> 
 			</record> -->
 
-	</data>
+    </data>
 </odoo>

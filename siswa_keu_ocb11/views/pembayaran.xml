@@ -6,10 +6,12 @@
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
                 <search string="Pembayaran">
-                    <field name="name" string="Nama" filter_domain="['|','|','|',
+                    <field name="name" string="Nama" filter_domain="['|','|','|','|','|',
                                                     ('name','ilike',self),
                                                     ('siswa_id','ilike',self),
                                                     ('induk','ilike',self),
+                                                    ('nis','ilike',self),
+                                                    ('rombel_id','ilike',self),
                                                     ('tahunajaran_id','ilike',self),
                                                     ]"
                                                     />
@@ -31,7 +33,9 @@
                 <field name="tanggal"/>
                 <field name="tahunajaran_id" context="{'active_test': False}"/>
                 <field name="siswa_id" />
+                <field name="default_siswa_number" invisible="1" />
                 <field name="induk" />
+                <field name="nis" />
                 <field name="rombel_id" />
                 <field name="total" sum="Total" />
                 <field name="state"/>
@@ -73,8 +77,11 @@
                             </group>
                             <group>
                                 <field name="siswa_id" domain="[('is_siswa','=',True)]" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" attrs="{'readonly':[('name', '!=', 'New')]}" />
-                                <field name="induk" />
+                                <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" readonly="1" />
+                                <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" readonly="1" />
                                 <field name="rombel_id" />                        
+                                <field name="total" invisible="1" />                        
+                                <field name="default_siswa_number" invisible="1" />                        
                             </group>
                         </group>
                         <notebook attrs="{'invisible':[('siswa_id', '=', '')]}" >
@@ -85,8 +92,8 @@
                                         <field name="siswa_id" invisible="1" />
                                         <field name="biaya_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
                                         <field name="tahunajaran_id" readonly="1" />
-                                        <field name="harga" attrs="{'invisible':[('parent.state', '=', 'paid')]}" readonly="1" sum="Total Harga" />
-                                        <field name="amount_due" attrs="{'invisible':[('parent.state', '=', 'paid')]}" readonly="1"/>
+                                        <field name="harga" attrs="{'invisible':[('parent.state', '=', 'paid')]}" readonly="1"  />
+                                        <field name="amount_due" attrs="{'invisible':[('parent.state', '=', 'paid')]}" readonly="1" sum="Total Amount Due" />
                                         <field name="bayar" sum="Total Bayar" />
                                     </tree>
                                 </field>

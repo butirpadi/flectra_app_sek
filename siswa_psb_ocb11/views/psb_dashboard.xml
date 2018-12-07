@@ -1,0 +1,139 @@
+<odoo>
+	<data>
+		<record id="psb_dashboard_kanban_view" model="ir.ui.view">
+			<field name="name">psb.dashboard.kanban.view</field>
+			<field name="model">psb_dashboard</field>
+			<field name="arch" type="xml">
+				<kanban
+					class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban"
+					create="0">
+					<field name="color" />
+					<templates>
+						<t t-name="kanban-box">
+							<div t-attf-class="#{kanban_color(record.color.raw_value)}">
+								<div>
+									<div t-attf-class="o_kanban_card_header">
+										<div class="o_kanban_card_header_title">
+											<div class="o_primary">
+												TA :
+												<field name="tahunajaran_id" />
+											</div>
+										</div>
+										<div class="o_kanban_manage_button_section">
+											<a class="o_kanban_manage_toggle_button" href="#">
+												<i class="fa fa-ellipsis-v" />
+											</a>
+										</div>
+									</div>
+									<div class="container o_kanban_card_content">
+										<div class="row">
+											<div class="col-xs-4 o_kanban_primary_left text-center">
+												<h3 style="font-size:32pt;margin-top:0;">
+													<a type="object" name="get_view_all" style="color:black;">
+														<field name="total" />
+													</a>
+												</h3>
+											</div>
+											<div class="col-xs-8 o_kanban_primary_left">
+												<div class="row">
+													<div class="col-xs-9">
+														<a name="get_view_laki" type="object">
+															Laki-laki
+														</a>
+													</div>
+													<div class="col-xs-3 text-right">
+														<field name="qty_laki" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-xs-9">
+														<a name="get_view_perempuan" type="object">
+															Perempuan
+														</a>
+													</div>
+													<div class="col-xs-3  text-right">
+														<field name="qty_perempuan" />
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-12">
+												<a type="object" name="get_reg"
+													class="btn btn-success btn-sm">
+													<i class="fa fa-check"></i>
+													<field name="jumlah_registered" />
+													Registered
+												</a>
+												<a type="object" name="get_draft"
+													class="btn btn-danger btn-sm">
+													<i class="fa fa-edit"></i>
+													<field name="jumlah_draft" />
+													Draft
+												</a>
+												<a class="btn pull-right" type="object"
+													name="create_register">
+													<i class="fa fa-file-o"></i>
+													add new
+												</a>
+
+											</div>
+										</div>
+									</div>
+									<div class="container o_kanban_card_manage_pane">
+										<div class="row">
+											<div
+												class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+												<div class="o_kanban_card_manage_title">
+													<label>Set Color</label>
+												</div>
+											</div>
+										</div>
+										<div t-if="widget.editable"
+											class="o_kanban_card_manage_settings row">
+											<div class="col-xs-12">
+												<ul class="oe_kanban_colorpicker" data-field="color" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</t>
+
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="psb_dashboard_action">
+			<field name="name">Dashboard</field>
+			<field name="res_model">psb_dashboard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban</field>
+			<field name="form_view_id" ref="psb_dashboard_kanban_view" />
+		</record>
+
+		<!-- only for system user -->
+
+		<record model="ir.ui.view" id="psb_dashboard_list_view">
+			<field name="name">psb.dashboard.list.view</field>
+			<field name="model">psb_dashboard</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="tahunajaran_id" string="Tahun Ajaran" />
+					<field name="jumlah_registered" />
+					<field name="jumlah_draft" />
+					<button name="regenerate_dashboard" string="Reset"
+						class="oe_highlight" type="object" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window"
+			id="config_psb_dashboard_action">
+			<field name="name">Dashboard Configuration</field>
+			<field name="res_model">psb_dashboard</field>
+			<field name="view_mode">tree</field>
+			<field name="tree_view_id" ref="psb_dashboard_list_view" />
+		</record>
+
+	</data>
+</odoo>

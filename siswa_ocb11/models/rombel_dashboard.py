@@ -18,8 +18,8 @@ class rombel_dashboard(models.Model):
     def get_view_rombel(self):
         return {
                 'name': 'Data Siswa ' + self.rombel_id.name + ' ' + self.tahunajaran_id.name,
-                'view_type': 'form',
-                'view_mode': 'tree',
+#                 'view_type': 'form',
+                'view_mode': 'tree,form',
                 'res_model': 'siswa_ocb11.rombel_siswa',
                 'target': 'current',
                 'domain' : [('tahunajaran_id', '=', self.tahunajaran_id.id), ('rombel_id', '=', self.rombel_id.id)],

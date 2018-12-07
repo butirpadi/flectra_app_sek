@@ -30,5 +30,19 @@ class tahunajaran(models.Model):
 				})
 				
 				new_biaya_registrasi.recompute_biaya_ta_jenjang()
+		
+		# generate psb_dashboard
+		psb_dash = self.env['psb_dashboard'].create({
+				'tahunajaran_id' : result.id
+			})
+		psb_dash.regenerate_dashboard()
 				
 		return result
+	
+	def regenerate_psb_dashboard(self):
+		get_dashboard = self.env['psb_dashboard'].search([('tahunajaran_id','=',self.id)])
+		if not get_dashboard:
+			new_dash = self.env['psb_dashboard'].create({
+					'tahunajaran_id' : self.id
+				})
+			new_dash.regenerate_dashboard()

@@ -211,7 +211,21 @@ class calon_siswa(models.Model):
                 vals['reg_number'] = self.env['ir.sequence'].next_by_code('reg.no.siswa.psb.ocb11') or _('New')
 
         result = super(calon_siswa, self).create(vals)
+        
+        # recompute psb_dashboard
+        result.recompute_psb_dashboard()
+        
         return result
+    
+    def recompute_psb_dashboard(self,tahun=False):
+        print('Recompute psb dashboard .... ')
+        
+        if tahun:
+            psb_dash = self.env['psb_dashboard'].search([('tahunajaran_id', '=', tahun)])
+        else:
+            psb_dash = self.env['psb_dashboard'].search([('tahunajaran_id', '=', self.tahunajaran_id.id)])
+        
+        psb_dash.regenerate_dashboard()
     
     def assign_pembayaran_to_siswa(self, siswa):
         # add pembayaran
@@ -219,6 +233,8 @@ class calon_siswa(models.Model):
             'tanggal' : self.tanggal_registrasi ,
             'tahunajaran_id' : self.tahunajaran_id.id,
             'siswa_id' : siswa.id,
+            'psb_reference_id' : self.id,
+            'psb_reg_number' : self.reg_number
         })
 
         # reset pembayaran_lines
@@ -496,6 +512,9 @@ class calon_siswa(models.Model):
                 self.assign_pembayaran_to_siswa(the_siswa)
     
                 # raise exceptions.except_orm(_('Warning'), _('You can not delete Done state data'))
+                
+                # Recompute psb dashboard
+                self.recompute_psb_dashboard()
         else:
             raise exceptions.except_orm(_('Warning'), _('Can not confirm this registration, complete payment first!'))
 
@@ -539,6 +558,9 @@ class calon_siswa(models.Model):
         if pembayaran:
             for pb in pembayaran:
                 if pb.state == 'paid':
+                    # remove link psb_reference on pembayaran
+                    print('Set none to psb_reference_id on pembayaran')
+                    pb.psb_reference_id = None
                     pb.action_cancel()
                 pb.unlink()
                 print('Pembayaran Deleted')
@@ -592,10 +614,10 @@ class calon_siswa(models.Model):
             
             if prev_tahun_ajaran_id:
                 prev_calon_siswa_id = self.env['siswa_psb_ocb11.calon_siswa'].search([
-                            '&','|',
+                            '&', '|',
                             ('tahunajaran_id', '=', prev_tahun_ajaran_id[0]),
                             ('siswa_id', '=', self.siswa_id.id),
-                            ('registered_siswa_id','=',self.siswa_id.id)
+                            ('registered_siswa_id', '=', self.siswa_id.id)
                             
                         ])
                 pprint(prev_calon_siswa_id)
@@ -767,3 +789,13 @@ class calon_siswa(models.Model):
         
         # update bayar_tunai
 #         self.bayar_tunai = sum(map(lambda x: x.harga, self.pembayaran_lines))
+    
+    @api.multi 
+    def unlink(self):
+        tahun_id = self.tahunajaran_id.id 
+        
+        res = super(calon_siswa, self).unlink()
+        
+        self.recompute_psb_dashboard(tahun_id)
+        
+        return res
