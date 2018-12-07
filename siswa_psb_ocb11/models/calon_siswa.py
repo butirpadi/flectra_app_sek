@@ -13,6 +13,7 @@ class calon_siswa(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('reg', 'Registered')], string='State', required=True, default='draft')
     is_siswa_lama = fields.Boolean('Siswa Lama', default=False)
     siswa_id = fields.Many2one('res.partner', string="Data Siswa Lama", ondelete="restrict")
+    prev_rombel_id = fields.Many2one('siswa_ocb11.rombel', related="siswa_id.active_rombel_id", string="Jenjang Asal")
     no_induk = fields.Char('No. Induk', related="siswa_id.induk")
     registered_siswa_id = fields.Many2one('res.partner', string="Registered Siswa")
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
@@ -44,7 +45,7 @@ class calon_siswa(models.Model):
     pekerjaan_ibu_id = fields.Many2one('siswa_ocb11.pekerjaan', string='Pekerjaan Ibu')
     telp_ibu = fields.Char(string='Telp. Ibu')
     rombels = fields.One2many('siswa_ocb11.rombel_siswa', inverse_name='siswa_id' , string='Detail Rombongan Belajar')
-    active_rombel_id = fields.Many2one('siswa_ocb11.rombel', string='Rombongan Belajar', compute='_compute_rombel', store=True)
+    # active_rombel_id = fields.Many2one('siswa_ocb11.rombel', string='Rombongan Belajar', compute='_compute_rombel', store=True)
     is_siswa = fields.Boolean(default=False)
     mutasi = fields.Boolean(string='Mutasi', default=False)
     lulus = fields.Boolean(string='Lulus', default=False)
@@ -166,38 +167,8 @@ class calon_siswa(models.Model):
         self.telp_ibu = self.siswa_id.telp_ibu
 
         # filter jenjang 
-        domain = {'jenjang_id':[('sort_order', '>', rombel_siswa.jenjang_id.sort_order)]}
-        return {'domain':domain, 'value':{'jenjang_id':[]}}
-
-        # set data siswa
-    # @api.onchange('siswa_id')
-    # def siswa_id_onchange(self):
-        self.name = self.siswa_id.name
-        self.panggilan = self.siswa_id.panggilan
-        self.nis = self.siswa_id.nis
-        self.jenis_kelamin = self.siswa_id.jenis_kelamin
-        self.tempat_lahir = self.siswa_id.tempat_lahir
-        self.tanggal_lahir = self.siswa_id.tanggal_lahir
-        self.anak_ke = self.siswa_id.dari_bersaudara
-        self.street = self.siswa_id.street
-        self.street2 = self.siswa_id.street2
-        self.city = self.siswa_id.city
-        self.state_id = self.siswa_id.state_id
-        self.zip = self.siswa_id.zip
-        self.country_id = self.siswa_id.country_id
-        self.phone = self.siswa_id.phone
-        self.mobile = self.siswa_id.mobile
-        self.ayah = self.siswa_id.ayah
-        self.pekerjaan_ayah_id = self.siswa_id.pekerjaan_ayah_id
-        self.telp_ayah = self.siswa_id.telp_ayah
-        self.ibu = self.siswa_id.ibu
-        self.pekerjaan_ibu_id = self.siswa_id.pekerjaan_ibu_id
-        self.telp_ibu = self.siswa_id.telp_ibu
-
-    # @api.onchange('jenjan_id')
-    # def onchange_jenjang_id(self): # set filter rombel_id
-    #     domain = {'rombel_id':[('jenjang_id','=',self.jenjang_id)]}
-    #     return {'domain':domain, 'value':{'rombel_id':[]}} 
+        # domain = {'jenjang_id':[('sort_order', '>', rombel_siswa.jenjang_id.sort_order)]}
+        # return {'domain':domain, 'value':{'jenjang_id':[]}}
 
     def get_current_jenjang_id(self):
         return self.jenjang_id
@@ -243,12 +214,6 @@ class calon_siswa(models.Model):
 
         total_bayar = 0.0
         for pay in self.pembayaran_lines:
-
-#             print('Payment Lines : ')
-#             print('harga : ' + str(pay.harga))
-#             print('dibayar : ' + str(pay.dibayar))
-#             print('biaya_id : ' + str(pay.biaya_id.id))
-
             # get siswa_biaya
             if pay.dibayar > 0:  # jangan dimasukkan ke pembayaran untuk yang nilai dibayarnya = 0
                 if pay.biaya_id:
@@ -274,9 +239,6 @@ class calon_siswa(models.Model):
                                             })]
                     total_bayar += pay.dibayar
 
-#             print('pay_biaya_id : ' + str(pay_biaya_id))
-#             print('-------------------')
-
         # raise exceptions.except_orm(_('Warning'), _('TEST ERROR'))
 
         # confirm pembayaran 
@@ -298,24 +260,12 @@ class calon_siswa(models.Model):
     def assign_biaya_line_to_siswa(self, siswa):
         # assign biaya to siswa
             total_biaya = 0.0
-#             if self.is_siswa_lama:
-#                 id_siswa = self.siswa_id.id
-#             else:
-#                 id_siswa = new_siswa.id
             
             for by_lin in self.biaya_lines:
-#                 if self.is_siswa_lama and by_lin.biaya_id.is_siswa_baru_only:
-#                     print('skip')
-#                     continue
-#                 else:
                 if by_lin.biaya_id.is_bulanan:
                     for bulan_index in range(1, 13):
                         harga = by_lin.harga
 
-#                         if by_lin.biaya_id.is_different_by_gender:
-#                             if self.jenis_kelamin == 'perempuan':
-#                                 harga = by_lin.harga_alt
-                        
                         # get local nama bulan
                         bulan_name = calendar.month_name[bulan_index]
                         with calendar.different_locale('id_ID.utf8'):
@@ -333,9 +283,6 @@ class calon_siswa(models.Model):
                         })
                         total_biaya += harga
                         
-                        # add potongan biaya jika tersedia
-#                         pbyr_lin = self.pembayaran_lines.search([('biaya_id', '=', by_lin.biaya_id.id)])
-#                         if pbyr_lin:
                         if by_lin.potongan_harga > 0:
                             new_siswa_biaya.potongan_ids = [(0, 0, {
                                                                 'siswa_id' : siswa.id,
@@ -346,10 +293,6 @@ class calon_siswa(models.Model):
                                 
                 else:
                     harga = by_lin.harga
-
-#                     if by_lin.biaya_id.is_different_by_gender:
-#                         if self.jenis_kelamin == 'perempuan':
-#                             harga = by_lin.harga_alt
 
                     new_siswa_biaya = self.env['siswa_keu_ocb11.siswa_biaya'].create({
                         'name' : by_lin.biaya_id.name,
@@ -370,58 +313,7 @@ class calon_siswa(models.Model):
                                                         })]
                         for pot in new_siswa_biaya.potongan_ids:
                             pot.action_confirm()
-                
-#             for by in ta_jenjang.biayas:
-#                 # cek biaya apakah is_optional dan apakah di pilih dalam biaya_lines
-#                 by_found = False
-#                 if by.biaya_id.is_optional:
-#                     for by_in_pay in self.biaya_lines:
-#                         if by.biaya_id.id == by_in_pay.biaya_id.id:
-#                             by_found = True
-#                     if not by_found:
-#                         continue
-# 
-#                 if self.is_siswa_lama and by.biaya_id.is_siswa_baru_only:
-#                     print('skip')
-#                     continue
-#                 else:
-#                     print('JENJANG ID : ' + str(self.jenjang_id.id))
-#                     if by.biaya_id.is_bulanan:
-#                         for bulan_index in range(1, 13):
-#                             harga = by.harga
-# 
-#                             if by.is_different_by_gender:
-#                                 if self.jenis_kelamin == 'perempuan':
-#                                     harga = by.harga_alt
-# 
-#                             self.env['siswa_keu_ocb11.siswa_biaya'].create({
-#                                 'name' : by.biaya_id.name + ' ' + calendar.month_name[bulan_index],
-#                                 'siswa_id' : id_siswa,
-#                                 'tahunajaran_id' : self.tahunajaran_id.id,
-#                                 'biaya_id' : by.biaya_id.id,
-#                                 'bulan' : bulan_index,
-#                                 'harga' : harga,
-#                                 'amount_due' : harga,
-#                                 'jenjang_id' : self.jenjang_id.id
-#                             })
-#                             total_biaya += harga
-#                     else:
-#                         harga = by.harga
-# 
-#                         if by.is_different_by_gender:
-#                             if self.jenis_kelamin == 'perempuan':
-#                                 harga = by.harga_alt
-# 
-#                         self.env['siswa_keu_ocb11.siswa_biaya'].create({
-#                             'name' : by.biaya_id.name,
-#                             'siswa_id' : id_siswa,
-#                             'tahunajaran_id' : self.tahunajaran_id.id,
-#                             'biaya_id' : by.biaya_id.id,
-#                             'harga' : harga,
-#                             'amount_due' : harga,
-#                             'jenjang_id' : self.jenjang_id.id
-#                         })
-#                         total_biaya += harga
+              
 
             # set total_biaya dan amount_due
             print('ID SISWA : ' + str(siswa.id))
@@ -598,12 +490,6 @@ class calon_siswa(models.Model):
         if not self.is_siswa_lama:
             self.env['res.partner'].search([('id', '=', id_siswa)]).unlink()
         else:
-#             # change siswa_id.calon_siswa_id to previouse
-#             print('Sort Order Tahun Ajaran : ' + str(self.tahunajaran_id.sort_order))
-#             prev_tahun_ajaran_id = self.env['siswa_ocb11.tahunajaran'].search([
-#                                             ('sort_order', '=', 1)
-#                                         ]).id
-#             print('Prev Tahun ajaran')
 #             pprint(prev_tahun_ajaran_id)
             print('Get Prev Tahun Ajaran')
             self.env.cr.execute('select id from siswa_ocb11_tahunajaran where sort_order = ' + str(self.tahunajaran_id.sort_order - 1))
@@ -622,8 +508,6 @@ class calon_siswa(models.Model):
                         ])
                 pprint(prev_calon_siswa_id)
                 if prev_calon_siswa_id:
-#                     self.siswa_id.calon_siswa_id = [(3, self.id)]
-#                     self.siswa_id.calon_siswa_id = [(4, prev_calon_siswa_id.id)]
                     self.siswa_id.calon_siswa_id = prev_calon_siswa_id.id
                 else:
 #                     self.siswa_id.calon_siswa_id = [(3, self.id)]
