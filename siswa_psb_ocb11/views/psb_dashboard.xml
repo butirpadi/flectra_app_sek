@@ -19,7 +19,7 @@
 										</div>
 										<div class="o_kanban_manage_button_section">
 											<a class="o_kanban_manage_toggle_button" href="#">
-												<i class="fa fa-ellipsis-v" />
+												<i aria-label="" class="fa fa-ellipsis-v" />
 											</a>
 										</div>
 									</div>
@@ -56,17 +56,17 @@
 											</div>
 											<div class="col-12">
 												<a type="object" name="get_reg" class="btn btn-success btn-sm">
-													<i class="fa fa-check"></i>
+													<i aria-label="" class="fa fa-check"></i>
 													<field name="jumlah_registered" />
 													Registered
 												</a>
 												<a type="object" name="get_draft" class="btn btn-danger btn-sm">
-													<i class="fa fa-edit"></i>
+													<i aria-label="" class="fa fa-edit"></i>
 													<field name="jumlah_draft" />
 													Draft
 												</a>
 												<a class="btn pull-right" type="object" name="create_register">
-													<i class="fa fa-file-o"></i>
+													<i aria-label="" class="fa fa-file-o"></i>
 													add new
 												</a>
 
