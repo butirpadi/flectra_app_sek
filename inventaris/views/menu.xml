@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<menuitem name="Inventaris" id="menu_inventaris_root" web_icon="inventaris,static/description/icon.png" />
@@ -40,4 +40,4 @@
 
 
 	</data>
-</flectra>
+</odoo>

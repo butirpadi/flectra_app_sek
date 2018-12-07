@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flectra import http
+from odoo import http
 
 # class DefaultSettingForIndonesianApp(http.Controller):
 #     @http.route('/default_setting_for_indonesian_app/default_setting_for_indonesian_app/', auth='public')
@@ -17,4 +17,4 @@ from flectra import http
 #     def object(self, obj, **kw):
 #         return http.request.render('default_setting_for_indonesian_app.object', {
 #             'object': obj
-#         }) 
+#         })  

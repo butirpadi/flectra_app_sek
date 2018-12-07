@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<menuitem name="Kesiswaan" id="siswa_ocb11.kesiswaan_menu"
@@ -76,4 +76,4 @@
 
 
 	</data>
-</flectra>
+</odoo>

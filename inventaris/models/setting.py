@@ -1,4 +1,4 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 
 
 class InventarisSetting(models.Model):
@@ -9,4 +9,4 @@ class InventarisSetting(models.Model):
     def execute(self):
         self.write({
                 'default_asset_code' : self.default_asset_code
-            }) 
+            })  

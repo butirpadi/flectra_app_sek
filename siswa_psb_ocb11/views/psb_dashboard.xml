@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 		<record id="psb_dashboard_kanban_view" model="ir.ui.view">
 			<field name="name">psb.dashboard.kanban.view</field>
@@ -136,4 +136,4 @@
 		</record>
 
 	</data>
-</flectra>
+</odoo>
