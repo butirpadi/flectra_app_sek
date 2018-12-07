@@ -19,5 +19,3 @@ access_psb_biaya_ta_jenjang_rel_admin,Administrator,model_siswa_biaya_ta_jenjang
 access_psb_biaya_ta_jenjang_rel_user,User,model_siswa_biaya_ta_jenjang_on_calon_siswa_rel,siswa_psb_group_user,1,1,1,1
 access_psb_dashboard_admin,Administrator,model_psb_dashboard,siswa_psb_group_admin,1,1,1,1
 access_psb_dashboard_user,User,model_psb_dashboard,siswa_psb_group_user,1,1,1,1
-access_psb_siswa_setting_admin,Administrator,model_siswa_setting,siswa_psb_group_admin,1,1,1,1
-access_psb_siswa_setting_user,User,model_siswa_setting,siswa_psb_group_user,1,1,1,1
