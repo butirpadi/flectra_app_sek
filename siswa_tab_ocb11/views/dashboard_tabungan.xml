@@ -4,9 +4,7 @@
             <field name="name">tabungan.dashboard.ocb11.kanban</field>
             <field name="model">siswa_tab_ocb11.dashboard_tabungan</field>
             <field name="arch" type="xml">
-                <kanban
-                    class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban"
-                    create="0">
+                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
                     <field name="color"/>
                     <templates>
                         <t t-name="kanban-box">
@@ -22,35 +20,29 @@
                                             </div>
                                         </div>
                                         <div class="o_kanban_manage_button_section">
-                                            <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v"/></a>
+                                            <a class="o_kanban_manage_toggle_button" href="#">
+                                                <i class="fa fa-ellipsis-v"/>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="container o_kanban_card_content">
                                         <div class="row">
-                                            <div class="col-12 text-right" >
-                                                <h3 style="font-size:24pt;" ><field name="saldo" /></h3>
+                                            <div class="col-12 text-right">
+                                                <h3 style="font-size:24pt;">
+                                                    <field name="saldo" />
+                                                </h3>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
-                                    <div
-										class="container o_kanban_card_manage_pane dropdown-menu"
-										role="menu">
-										<div class="row">
-                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
-                                                <div class="o_kanban_card_manage_title">
-                                                    <label>Set Color</label>
-                                                </div>
+                                    <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                            <div class="col-12" role="menuitem" aria-haspopup="true">
+                                                <strong>Set Color</strong>
+                                                <ul class="oe_kanban_colorpicker" data-field="color" role="menu" />
                                             </div>
                                         </div>
-										<div t-if="widget.editable"
-											class="o_kanban_card_manage_settings row">
-											<div class="col-12" role="menuitem" aria-haspopup="true">
-												<ul class="oe_kanban_colorpicker" data-field="color"
-													role="menu" />
-											</div>
-										</div>
-									</div>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -60,9 +52,7 @@
             </field>
         </record>
 
-        <record
-            model="ir.actions.act_window"
-            id="siswa_tab_ocb11.dashboard_tabungan_view_action">
+        <record model="ir.actions.act_window" id="siswa_tab_ocb11.dashboard_tabungan_view_action">
             <field name="name">Dashboard</field>
             <field name="res_model">siswa_tab_ocb11.dashboard_tabungan</field>
             <field name="view_type">form</field>
@@ -84,9 +74,7 @@
             </field>
         </record>
 
-        <record
-            model="ir.actions.act_window"
-            id="siswa_tab_ocb11.dashboard_tabungan_view_manager_action">
+        <record model="ir.actions.act_window" id="siswa_tab_ocb11.dashboard_tabungan_view_manager_action">
             <field name="name">Tabungan Dashboard Manager</field>
             <field name="res_model">siswa_tab_ocb11.dashboard_tabungan</field>
             <field name="view_type">form</field>
