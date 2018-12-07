@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 from pprint import pprint
 
 class guru(models.Model):
@@ -15,4 +15,4 @@ class guru(models.Model):
     tempat_lahir = fields.Char(string='Tempat Lahir', required=True)
     alamat = fields.Char(string='Alamat')
     telp = fields.Char(string='Telp')
-     
+      

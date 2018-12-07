@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 # class siswa_multi(models.Model):
 #     _name = 'siswa_multi.siswa_multi'
@@ -12,4 +12,4 @@ from flectra import models, fields, api
 #
 #     @api.depends('value')
 #     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+#         self.value2 = float(self.value) / 100 

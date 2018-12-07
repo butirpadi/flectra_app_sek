@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 class Kategori(models.Model):
     _name = 'inventaris.kategori'
@@ -14,4 +14,4 @@ class Kategori(models.Model):
 #
 #     @api.depends('value')
 #     def _value_pc(self):
-#         self.value2 = float(self.value) / 100 
+#         self.value2 = float(self.value) / 100  

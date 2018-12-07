@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flectra import http
+from odoo import http
 
 # class SiswaKeuOcb11(http.Controller):
 #     @http.route('/siswa_keu_ocb11/siswa_keu_ocb11/', auth='public')
@@ -17,4 +17,4 @@ from flectra import http
 #     def object(self, obj, **kw):
 #         return http.request.render('siswa_keu_ocb11.object', {
 #             'object': obj
-#         }) 
+#         })  

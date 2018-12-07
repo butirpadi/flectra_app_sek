@@ -1,4 +1,4 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 
 
 class SiswaSetting(models.Model):
@@ -9,4 +9,4 @@ class SiswaSetting(models.Model):
     def execute(self):
         self.write({
                 'default_siswa_number' : self.default_siswa_number
-            }) 
+            })  

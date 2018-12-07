@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flectra import http
+from odoo import http
 
 # class InventarisApp(http.Controller):
 #     @http.route('/inventaris_app/inventaris_app/', auth='public')
@@ -17,4 +17,4 @@ from flectra import http
 #     def object(self, obj, **kw):
 #         return http.request.render('inventaris_app.object', {
 #             'object': obj
-#         }) 
+#         })  

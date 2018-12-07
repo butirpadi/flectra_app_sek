@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<record model="ir.actions.act_window" id="lokasi_action_window">
@@ -40,4 +40,4 @@
 		</record>
 
 	</data>
-</flectra>
+</odoo>

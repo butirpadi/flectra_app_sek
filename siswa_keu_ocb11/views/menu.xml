@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 	
 		<menuitem name="Keuangan" id="siswa_ocb11.keuangan_menu"
@@ -78,4 +78,4 @@
 			action="siswa_keu_ocb11.keuangan_dashboard_view_manager_action" />
 
 	</data>
-</flectra>
+</odoo>
