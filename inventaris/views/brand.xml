@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record model="ir.actions.act_window" id="brand_action_window">
@@ -8,4 +8,4 @@
 		</record>
 
 	</data>
-</odoo>
+</flectra>

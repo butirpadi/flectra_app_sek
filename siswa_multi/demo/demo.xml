@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
         <!--  -->
         <!--   <record id="object0" model="siswa_multi.siswa_multi"> -->
@@ -27,4 +27,4 @@
         <!--   </record> -->
         <!--  -->
     </data>
-</odoo>
+</flectra>

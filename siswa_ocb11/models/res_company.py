@@ -12,12 +12,12 @@ class Company(models.Model):
     _inherit = "res.company"
 
     @api.model
-    def set_modoo_logo(self):
+    def set_mflectra_logo(self):
         print('--------------------------------')
-        print('Set Modoo Logo')
+        print('Set Mflectra Logo')
 
         module_path = os.path.dirname(__file__).replace('models','')
-        logo_path = os.path.join(module_path, 'static', 'src', 'img','logo_modoo.png')
+        logo_path = os.path.join(module_path, 'static', 'src', 'img','logo_mflectra.png')
         logo_os = open(logo_path, 'rb').read()
         logo_string = base64.b64encode(logo_os).decode('ascii')
         # self.env.cr.execute('UPDATE res_partner SET image=%s WHERE is_company=TRUE', (logo_string,))

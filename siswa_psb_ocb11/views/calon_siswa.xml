@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 		<record id="form_view_registrasi_filter" model="ir.ui.view">
 			<field name="name">registrasi.form.list.select</field>
@@ -291,4 +291,4 @@
 		</record>
 
 	</data>
-</odoo>
+</flectra>

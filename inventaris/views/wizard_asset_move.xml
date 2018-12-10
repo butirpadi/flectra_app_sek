@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
 
         <record id="wizard_asset_move_form" model="ir.ui.view">
@@ -38,4 +38,4 @@
             key2="client_action_multi"
             />
     </data>
-</odoo>
+</flectra>
