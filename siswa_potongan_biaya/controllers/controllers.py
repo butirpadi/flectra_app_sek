@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from flectra import http
 
 # class /media/eries/mywork/odoo-erp/customAddons/11/siswaPotonganBiaya(http.Controller):
 #     @http.route('//media/eries/mywork/odoo-erp/custom_addons/11/siswa_potongan_biaya//media/eries/mywork/odoo-erp/custom_addons/11/siswa_potongan_biaya/', auth='public')
