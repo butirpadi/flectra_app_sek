@@ -38,9 +38,11 @@
                     <field name="ayah" string="Ayah"/>
                     <field name="ibu" string="Ibu"/>
                     <group expand="0" string="Group By">
+                        <filter name="group_by_tahun_diterima" string="Tahun Diterima" domain="[]" context="{'group_by':'tahunajaran_id'}"/>
                         <filter name="active_rombel_id" string="Rombongan Belajar" domain="[]" context="{'group_by':'active_rombel_id'}"/>
-                        <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
-                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/>
+                        <filter name="group_by_jenis_kelamin" string="Jenis Kelamin" domain="[]" context="{'group_by':'jenis_kelamin'}"/>
+                        <!-- <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
+                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/> -->
                     </group>
                 </search>
             </field>

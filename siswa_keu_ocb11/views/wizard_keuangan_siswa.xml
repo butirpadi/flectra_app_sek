@@ -29,6 +29,7 @@
                                         <field name='tahunajaran_id'  />
                                         <field name='name'/>
                                         <field name='harga' />
+                                        <field name='jumlah_potongan' />
                                         <field name='amount_due' sum="Total Kewajiban" />
                                         <field name='biaya_id' invisible="1"/>
                                         <field name='siswa_id' invisible="1" />
