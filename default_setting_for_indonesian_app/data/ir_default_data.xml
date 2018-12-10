@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <function 
                 id="function_set_domain_res_user" 
@@ -13,11 +13,11 @@
                 name="set_active_rupiah_only"  
                 />
 
-        <!-- set default logo mflectra -->
+        <!-- set default logo modoo -->
         <!-- <function 
-                id="function_set_mflectra_logo" 
+                id="function_set_modoo_logo" 
                 model="res.company" 
-                name="set_mflectra_logo"  
+                name="set_modoo_logo"  
                 /> -->
         
         <!-- Set date format to indonesian format -->
@@ -27,4 +27,4 @@
                 name="update_date_format_to_id_format"  
                 />
     </data>
-</flectra>
+</odoo>

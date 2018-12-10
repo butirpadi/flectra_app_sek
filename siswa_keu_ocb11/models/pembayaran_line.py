@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, exceptions, _
-from flectra.addons import decimal_precision as dp
+from odoo import models, fields, api, exceptions, _
+from odoo.addons import decimal_precision as dp
 
 class pembayaran_line(models.Model):
     _name = 'siswa_keu_ocb11.pembayaran_line'
@@ -49,4 +49,4 @@ class pembayaran_line(models.Model):
             jml_pot = 0
             for pot in rec.biaya_id.potongan_ids:
                 jml_pot += pot.jumlah_potongan
-            rec.jumlah_potongan = jml_pot 
+            rec.jumlah_potongan = jml_pot  
