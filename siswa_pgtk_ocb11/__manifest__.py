@@ -23,7 +23,7 @@
 
     # always loaded
     'data': [
-        'data/ir_model_data.xml',
+        # 'data/ir_model_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
