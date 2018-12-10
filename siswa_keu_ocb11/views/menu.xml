@@ -46,26 +46,30 @@
 		<menuitem name="Reports"
 			id="siswa_keu_ocb11.submenu_keuangan_reports"
 			parent="siswa_ocb11.keuangan_menu" sequence="4" />
-		<menuitem name="Tagihan Per Siswa"
-			id="siswa_keu_ocb11.menu_keuangan_siswa"
-			parent="siswa_keu_ocb11.submenu_keuangan_reports"
-			action="siswa_keu_ocb11.wizard_keuangan_siswa" sequence="1" />
 		<menuitem name="Daftar Tagihan"
 			id="siswa_keu_ocb11.menu_data_keuangan_siswa"
 			parent="siswa_keu_ocb11.submenu_keuangan_reports"
-			action="siswa_keu_ocb11.data_keuangan_siswa_action" sequence="2" />
+			action="siswa_keu_ocb11.data_keuangan_siswa_action" sequence="1" />
+		<menuitem name="PDF Report"
+			id="siswa_keu_ocb11.menu_keuangan_pdf"
+			parent="siswa_keu_ocb11.submenu_keuangan_reports"
+			 sequence="2" />
+		<menuitem name="Tagihan Per Siswa"
+			id="siswa_keu_ocb11.menu_keuangan_siswa"
+			parent="siswa_keu_ocb11.menu_keuangan_pdf"
+			action="siswa_keu_ocb11.wizard_keuangan_siswa" sequence="1" />
 		<menuitem name="Pembayaran Siswa"
 			id="siswa_keu_ocb11.menu_report_pembayaran_siswa"
-			parent="siswa_keu_ocb11.submenu_keuangan_reports"
+			parent="siswa_keu_ocb11.menu_keuangan_pdf"
 			action="siswa_keu_ocb11.wizard_report_pembayaran_siswa_action"
 			sequence="3" />
 		<menuitem name="Pembayaran Harian"
 			id="siswa_keu_ocb11.menu_report_pembayaran_harian"
-			parent="siswa_keu_ocb11.submenu_keuangan_reports"
+			parent="siswa_keu_ocb11.menu_keuangan_pdf"
 			action="siswa_keu_ocb11.wizard_pembayaran_harian_action" sequence="4" />
 		<menuitem name="Kas"
 			id="siswa_keu_ocb11.menu_rekapitulasi_kas"
-			parent="siswa_keu_ocb11.submenu_keuangan_reports"
+			parent="siswa_keu_ocb11.menu_keuangan_pdf"
 			action="siswa_keu_ocb11.wizard_rekap_kas_action" sequence="5" />
 
 		<menuitem name="Configurations"
