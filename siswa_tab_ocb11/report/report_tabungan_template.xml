@@ -79,7 +79,7 @@
                                                 <tr>
                                                     <td class="col-xs-2 text-left">
                                                         <t t-if="o.siswa_id">
-                                                            <strong>No. Induk</strong>
+                                                            <strong>Siswa ID</strong>
                                                         </t>
                                                     </td>
                                                     <td style="width:10px;" >
@@ -130,7 +130,7 @@
                                                 <th class="text-left" >Ref#</th>
                                                 <t t-if="not o.siswa_id">
                                                     <th class="text-left" >Siswa</th>
-                                                    <th class="text-center" >No. Induk</th>
+                                                    <th class="text-center" >Siswa ID</th>
                                                     <th class="text-left" >Rombel</th>
                                                 </t>
                                                 <th class="text-right" >Debet</th>

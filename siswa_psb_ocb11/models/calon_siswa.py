@@ -14,7 +14,7 @@ class calon_siswa(models.Model):
     is_siswa_lama = fields.Boolean('Siswa Lama', default=False)
     siswa_id = fields.Many2one('res.partner', string="Data Siswa Lama", ondelete="restrict")
     prev_rombel_id = fields.Many2one('siswa_ocb11.rombel', related="siswa_id.active_rombel_id", string="Jenjang Asal")
-    no_induk = fields.Char('No. Induk', related="siswa_id.induk")
+    no_induk = fields.Char('Siswa ID', related="siswa_id.induk")
     registered_siswa_id = fields.Many2one('res.partner', string="Registered Siswa")
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
     name = fields.Char('Nama', required=True)

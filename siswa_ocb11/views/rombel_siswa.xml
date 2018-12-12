@@ -8,7 +8,7 @@
                 <tree create="false" delete="false" >
                     <field name="siswa_id"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk" />
+                    <field name="induk" string="Siswa ID" />
                     <field name="nis"/>
                     <field name="jenis_kelamin"/>
                     <field name="ayah"/>
@@ -32,7 +32,7 @@
                     <tree>
                     <field name="siswa_id"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk" />
+                    <field name="induk" string="Siswa ID" />
                     <field name="nis"/>
                     <field name="jenis_kelamin"/>
                     <field name="ayah"/>

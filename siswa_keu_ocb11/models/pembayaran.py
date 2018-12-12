@@ -13,7 +13,7 @@ class pembayaran(models.Model):
     name = fields.Char(string='Kode Pembayaran', requred=True, default='New')
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True, default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
     siswa_id = fields.Many2one('res.partner', string='Siswa', required=True)
-    induk = fields.Char(string='No. Induk', related='siswa_id.induk')
+    induk = fields.Char(string='Siswa ID', related='siswa_id.induk')
     nis = fields.Char(string='NIS', related='siswa_id.nis')
     default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related='siswa_id.active_rombel_id', string='Rombongan Belajar')
