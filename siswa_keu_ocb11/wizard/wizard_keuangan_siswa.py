@@ -5,8 +5,10 @@ class wizard_keuangan_siswa(models.TransientModel):
     _name = 'siswa_keu_ocb11.wizard_keuangan_siswa'
 
     name = fields.Char('Name', default='0')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     siswa_id = fields.Many2one('res.partner', string="Siswa", domain=[('is_siswa','=',True)], required=True, ondelete="cascade")
-    induk = fields.Char('Nomor Induk', related='siswa_id.induk')
+    induk = fields.Char('Siswa ID', related='siswa_id.induk')
+    nis = fields.Char('NIS', related='siswa_id.nis')
     rombel_id = fields.Many2one('siswa_ocb11.rombel', string='Rombongan Belajar', compute='_compute_rombel_siswa', ondelete="cascade")
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
     biayas = fields.One2many('siswa_keu_ocb11.siswa_biaya', related='siswa_id.biayas', string='Biaya-biaya', compute='_compute_biaya' ) 
