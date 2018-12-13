@@ -1,7 +1,7 @@
-<odoo>
+<flectra>
 	<data noupdate="1">
 		<record model="inventaris.setting" id="inventaris_default_setting">
 			<field name="default_asset_code">code</field>
 		</record>
 	</data>
-</odoo>
+</flectra>

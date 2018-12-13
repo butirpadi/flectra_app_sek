@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from flectra import http
 
 # class BasicInstallOcb11(http.Controller):
 #     @http.route('/basic_install_ocb11/basic_install_ocb11/', auth='public')

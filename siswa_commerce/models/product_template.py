@@ -4,11 +4,11 @@
 import itertools
 import psycopg2
 
-from odoo.addons import decimal_precision as dp
+from flectra.addons import decimal_precision as dp
 
-from odoo import api, fields, models, tools, _
-from odoo.exceptions import ValidationError, RedirectWarning, except_orm
-from odoo.tools import pycompat
+from flectra import api, fields, models, tools, _
+from flectra.exceptions import ValidationError, RedirectWarning, except_orm
+from flectra.tools import pycompat
 from pprint import pprint
 
 

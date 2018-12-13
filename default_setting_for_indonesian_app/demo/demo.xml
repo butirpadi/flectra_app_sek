@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
         <!--  -->
         <!--   <record id="object0" model="default_setting_for_indonesian_app.default_setting_for_indonesian_app"> -->
@@ -27,4 +27,4 @@
         <!--   </record> -->
         <!--  -->
     </data>
-</odoo>
+</flectra>

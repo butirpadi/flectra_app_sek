@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from flectra import models, fields, api
 
 # class basic_install_ocb11(models.Model):
 #     _name = 'basic_install_ocb11.basic_install_ocb11'
