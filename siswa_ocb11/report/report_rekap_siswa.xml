@@ -58,6 +58,7 @@
                                                 <td style="width:5px;">:</td>
                                                 <td>
                                                     <span t-esc="o.rombel_id.name" />                                                            
+                                                    
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -67,7 +68,12 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center" >No</th>
-                                                <th class="text-center" >No. Induk</th>
+                                                <t t-if="o.default_siswa_number=='nis'">
+                                                    <th class="text-center" >NIS</th>
+                                                </t>
+                                                <t t-if="o.default_siswa_number=='induk'">
+                                                    <th class="text-center" >No. Induk</th>
+                                                </t>
                                                 <th >Nama</th>
                                                 <th class="text-center" >Jenis Kelamin</th>
                                             </tr>
@@ -83,7 +89,12 @@
                                                         <t t-set="row_num" t-value="row_num+1" />
                                                     </td>
                                                     <td class="text-center" >
-                                                        <span t-field="cs.induk" />                                                        
+                                                        <t t-if="o.default_siswa_number=='nis'">
+                                                            <span t-field="cs.nis" />      
+                                                        </t>                                                  
+                                                        <t t-if="o.default_siswa_number=='induk'">
+                                                            <span t-field="cs.induk" />      
+                                                        </t>                                                  
                                                     </td>
                                                     <td>
                                                         <span t-field="cs.name" />
