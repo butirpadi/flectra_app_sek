@@ -1,4 +1,4 @@
-from flectra import models, fields, api
+from odoo import models, fields, api
 from pprint import pprint
 
 class wizard_report_distribusi_siswa(models.TransientModel):

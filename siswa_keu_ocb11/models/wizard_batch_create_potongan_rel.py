@@ -1,4 +1,4 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 
 class wizard_batch_create_potongan_rel(models.Model):
     _name = 'siswa_wizard_batch_create_potongan_rel'
