@@ -63,6 +63,10 @@
                                     border-bottom: thin solid black !important;
                                 } -->
 
+                                <!-- td.month-row{
+                                    padding:0;
+                                } -->
+
                             </style>
 
                             <div class="row" >
@@ -153,7 +157,7 @@
                                                     <t t-set="sum_amount_due_per_rombel" t-value="0"/>
                                                     <t t-foreach="o.pembayaran_siswa_ids" t-as="pay" >
                                                         <t t-if="pay.rombel_id.id == rb.id">
-                                                            <tr>
+                                                            <tr >
                                                                 <td class="text-center" >
                                                                     <t t-esc="row_num" />
                                                                     <t t-set="row_num" t-value="row_num+1" />
@@ -164,64 +168,64 @@
                                                                 <td class="text-left" >
                                                                     <span t-field="pay.siswa_id" />                                                            
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_jul">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_aug">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_sep">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_oct">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_nov">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_dec">
                                                                         v
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_jan">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_feb">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_mar">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_apr">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_mei">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
-                                                                <td class="text-center" >
+                                                                <td class="text-center month-row" >
                                                                     <t t-if="pay.is_jun">
-                                                                        v
+                                                                        <div style="width:20px;height:20px;background-color:green;color:transparent;padding:0;margin:0;border-radius:50%;top:50%;left:50%;" >.</div>
                                                                     </t>
                                                                 </td>
                                                                 <td class="text-right" >
