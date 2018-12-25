@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- <menuitem name="Surat Tagihan" id="surat_tagihan_menu" parent="siswa_keu_ocb11.menu_keuangan_pdf" action="surat_tagihan_action" sequence="1" /> -->
+        <menuitem name="Surat" id="surat_root_menu" sequence="99" web_icon="siswa_letter,static/description/icon.png" />
+
+        <menuitem name="Surat" id="surat_tagihan_menu_app_root" parent="surat_root_menu" sequence="1" />
+        <menuitem name="Surat Tagihan" id="surat_tagihan_menu_app" parent="surat_tagihan_menu_app_root" action="surat_tagihan_view_action" sequence="1" />
+
+        <menuitem name="Configurations" id="surat_config_menu" parent="surat_root_menu" sequence="99" groups="base.group_system" />
+
+        <menuitem name="Surat" id="surat_menu_app" parent="surat_config_menu" action="surat_view_action" sequence="1" />
+
+        <!-- Report Menu -->
+        <menuitem name="Surat Tagihan" id="wizard_surat_tagihan_menu" parent="siswa_keu_ocb11.menu_keuangan_pdf" action="wizard_surat_tagihan_action" sequence="99" />
+    </data>
+</odoo>
