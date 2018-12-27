@@ -1,5 +1,5 @@
 import calendar
-from odoo import models, fields, api
+from flectra import models, fields, api
 from pprint import pprint
 
 class wizard_naik_kelas(models.Model):

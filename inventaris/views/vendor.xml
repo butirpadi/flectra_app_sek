@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record id="inventaris_vendor_action"
@@ -95,4 +95,4 @@
 
 
 	</data>
-</odoo>
+</flectra>

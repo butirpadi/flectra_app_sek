@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
+from flectra import models, fields, api, _
 
 class tahunajaran(models.Model):
 	_inherit = 'siswa_ocb11.tahunajaran'

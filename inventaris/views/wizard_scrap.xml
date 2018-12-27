@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record id="wizard_scrap_form" model="ir.ui.view">
@@ -35,4 +35,4 @@
 			res_model="inventaris.wizard.scrap" view_mode="form" target="new"
 			key2="client_action_multi" />
 	</data>
-</odoo>
+</flectra>

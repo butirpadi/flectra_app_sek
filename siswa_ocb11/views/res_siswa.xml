@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
 
         <record id="siswa_view_res_partner_filter" model="ir.ui.view">
@@ -119,7 +119,6 @@
                         <page string="Biodata" >
                             <group>
                                 <group>
-                                    <field name="current_tahunajaran_position_id" groups="base.group_system" /> 
                                     <field name="panggilan" /> 
                                     <field name="tahunajaran_id" context="{'active_test':False}" /> 
                                     <field name="nis" /> 
@@ -331,4 +330,4 @@
         </record>
 
     </data>
-</odoo>
+</flectra>

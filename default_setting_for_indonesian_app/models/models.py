@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from flectra import models, fields, api
 
 # class default_setting_for_indonesian_app(models.Model):
 #     _name = 'default_setting_for_indonesian_app.default_setting_for_indonesian_app'
