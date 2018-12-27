@@ -4,8 +4,8 @@ import base64
 import os
 import re
 
-from flectra import api, fields, models, tools, _
-from flectra.exceptions import ValidationError, UserError
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import ValidationError, UserError
 from pprint import pprint
 
 class Company(models.Model):

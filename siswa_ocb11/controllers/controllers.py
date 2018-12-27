@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flectra import http
+from odoo import http
 
 # class SiswaOcb11(http.Controller):
 #     @http.route('/siswa_ocb11/siswa_ocb11/', auth='public')

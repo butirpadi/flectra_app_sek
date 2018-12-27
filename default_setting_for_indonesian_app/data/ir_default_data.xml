@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <function 
                 id="function_set_domain_res_user" 
@@ -27,4 +27,4 @@
                 name="update_date_format_to_id_format"  
                 />
     </data>
-</flectra>
+</odoo>

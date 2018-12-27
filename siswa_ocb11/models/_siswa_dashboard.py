@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 class SiswaDashboard(models.Model):
     _name = 'siswa_ocb11.siswa_dashboard'

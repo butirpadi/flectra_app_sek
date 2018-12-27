@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
 
         <record id="wizard_surat_tagihan" model="ir.ui.view">
@@ -77,4 +77,4 @@
             />
 
     </data>
-</flectra>
+</odoo>

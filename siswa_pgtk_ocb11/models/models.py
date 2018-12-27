@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 # class siswa_pgtk_ocb11(models.Model):
 #     _name = 'siswa_pgtk_ocb11.siswa_pgtk_ocb11'
