@@ -1,5 +1,18 @@
 <odoo>
     <data>
+
+        <record id="siswa_view_res_partner_filter" model="ir.ui.view">
+            <field name="name">siswa.res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <filter name="salesperson" position="before">
+                    <filter name="rombel" string="Rombongan Belajar" domain="[]" context="{'group_by' : 'active_rombel_id'}" />
+                </filter>
+            </field>
+        </record>
+
         <record id="siswa_ocb11.siswa_list" model="ir.ui.view" >
             <field name="name">siswa_ocb11_siswa_list</field>
             <field name="model">res.partner</field>
@@ -106,6 +119,7 @@
                         <page string="Biodata" >
                             <group>
                                 <group>
+                                    <field name="current_tahunajaran_position_id" groups="base.group_system" /> 
                                     <field name="panggilan" /> 
                                     <field name="tahunajaran_id" context="{'active_test':False}" /> 
                                     <field name="nis" /> 

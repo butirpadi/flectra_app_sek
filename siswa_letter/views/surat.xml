@@ -4,8 +4,12 @@
             <field name="name">surat.tagihan.view.form</field>
             <field name="model">siswa.surat</field>
             <field name="arch" type="xml">
-                <form duplicate="0" string="Surat Tagihan" class="o_sale_order">
-                    <sheet>
+                <form duplicate="0" string="Surat Tagihan" class="oe_form_configuration">
+					<header>
+						<button string="Save" type="object" name="write"
+							class="oe_highlight" />
+					</header>
+                    
                         <h1>
                             <field name="name" readonly="1" />
                         </h1>
@@ -28,6 +32,7 @@
                             </group>
                             <group>
                                 <field name="author_job" />
+                                <field name="surat_tagihan_prefix" />
                             </group>
                         </group>
                         <group>
@@ -38,7 +43,6 @@
                                 </tree>
                             </field>
                         </group>
-                    </sheet>
                 </form>
             </field>
         </record>
