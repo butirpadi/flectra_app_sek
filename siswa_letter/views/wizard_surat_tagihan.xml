@@ -1,17 +1,52 @@
 <odoo>
     <data>
 
+        <record id="surat_tagihan_siswa_rel_form" model="ir.ui.view">
+            <field name="name">surat.tagihan.siswa.rel.form</field>
+            <field name="model">surat.tagihan.siswa.rel</field>
+            <field name="arch" type="xml">
+                <form string="Siswa Biaya">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="siswa_id"/>
+                                <field name="default_siswa_number" invisible="1"/>
+                                <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}"/>
+                                <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}"/>
+                            </group>
+                            <group>
+                                <field name="wizard_id"/>
+                                <field name="active_rombel_id"/>
+                                <field name="total_tagihan"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Biaya">
+                                <field name="tagihan_siswa_biaya_ids">
+                                    <tree>
+                                        <field name="biaya_id" />
+                                        <field name="amount_due" sum="Total Amount Due"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="wizard_surat_tagihan" model="ir.ui.view">
             <field name="name">wizard.surat.tagihan</field>
             <field name="model">siswa.wizard.surat.tagihan</field>
             <field name="arch" type="xml">
                 <form duplicate="0" string="Surat Tagihan" class="o_sale_order" create="false">
-                    <header attrs="{'invisible':[('state', '=', 'draft')]}" >
-                        <button type="action" name="print_report" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print" ></button>
+                    <header attrs="{'invisible':[('state', '=', 'draft')]}">
+                        <button type="action" name="print_report" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print"></button>
                         <field attrs="{'invisible':[('state', '=', 'draft')]}" name="state" widget="statusbar" statusbar_visible="draft,post"/>
                     </header>
                     <sheet>
-                        <div class="oe_title" attrs="{'invisible':[('state', '=', 'draft')]}" >
+                        <div class="oe_title" attrs="{'invisible':[('state', '=', 'draft')]}">
                             <h1>
                                 <field name="name" readonly="1"/>
                             </h1>
@@ -24,18 +59,18 @@
                                 <field attrs="{'readonly':[('state', '=', 'post')]}" name="rombel_ids" widget="many2many_tags" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
                             </group>
                         </group>
-                        <notebook attrs="{'invisible':[('state', '=', 'post')]}" >
-                            <page string="Siswa" >
-                                <field name="siswa_ids" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True}" >
-                                    <tree editable="bottom" >
+                        <notebook attrs="{'invisible':[('state', '=', 'post')]}">
+                            <page string="Siswa">
+                                <field name="siswa_ids" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True}">
+                                    <tree editable="bottom">
                                         <field name="name" />
                                         <field name="active_rombel_id" />
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Biaya" >
+                            <page string="Biaya">
                                 <field name="tagihan_biaya_ids">
-                                    <tree editable="bottom" >
+                                    <tree editable="bottom">
                                         <field name="biaya_id" />
                                         <field name="is_bulanan" invisible="1" />
                                         <field name="bulan" attrs="{'readonly':[('is_bulanan', '=', False)]}" />
@@ -43,20 +78,21 @@
                                 </field>
                             </page>
                         </notebook>
-                        <notebook attrs="{'invisible':[('state', '=', 'draft')]}" >
-                                <page string="Surat" >
-                                    <field name="surat_siswa_ids">
-                                        <tree>
-                                            <field name="default_siswa_number" invisible="1" />
-                                            <field name="name"  />
-                                            <field name="siswa_id" />
-                                            <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" />
-                                            <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" />
-                                            
-                                        </tree>
-                                    </field>
-                                </page>
-                            </notebook>
+                        <notebook attrs="{'invisible':[('state', '=', 'draft')]}">
+                            <page string="Surat">
+                                <field name="surat_siswa_ids">
+                                    <tree>
+                                        <field name="default_siswa_number" invisible="1" />
+                                        <field name="name" />
+                                        <field name="siswa_id" />
+                                        <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" />
+                                        <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" />
+                                        <field name="total_tagihan" sum="Total Tagihan" />
+
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                         <footer class="oe_edit_only">
                             <button name="submit_wizard" type="object" string="Submit" class="oe_highlight"/>
                             <button special="cancel" string="Cancel"/>
@@ -66,15 +102,7 @@
             </field>
         </record>
 
-        <act_window
-            id="wizard_surat_tagihan_action"
-            name="Surat Tagihan"
-            src_model="siswa_keu_ocb11.siswa_biaya"
-            res_model="siswa.wizard.surat.tagihan"
-            view_mode="form"
-            target="new"
-            key2="client_action_multi"
-            />
+        <act_window id="wizard_surat_tagihan_action" name="Surat Tagihan" src_model="siswa_keu_ocb11.siswa_biaya" res_model="siswa.wizard.surat.tagihan" view_mode="form" target="new" key2="client_action_multi" />
 
     </data>
 </odoo>

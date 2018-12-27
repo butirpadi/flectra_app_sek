@@ -42,29 +42,50 @@ class WizardSuratTagihan(models.Model):
             nomor_surat = surat_prefix + "/" + "/000" + str(surat_seq)
             surat_seq += 1
 
-            # get biaya
-            total_tagihan = 0.0
-            siswa_biaya_temp = []
-            for tag_by in self.tagihan_biaya_ids:
-                if tag_by.is_bulanan:
-                    siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
-                        ['&', '&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', siswa.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id), ('bulan', '=', tag_by.bulan)])
-                else:
-                    siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
-                        ['&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', siswa.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id)])
+            # # get biaya
+            # total_tagihan = 0.0
+            # siswa_biaya_temp = []
+            # for tag_by in self.tagihan_biaya_ids:
+            #     if tag_by.is_bulanan:
+            #         siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
+            #             ['&', '&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', siswa.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id), ('bulan', '=', tag_by.bulan)])
+            #     else:
+            #         siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
+            #             ['&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', siswa.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id)])
 
-                siswa_biaya_temp.append([4, siswa_biaya_id.id])
-                total_tagihan += siswa_biaya_id.amount_due
+            #     siswa_biaya_temp.append((4, siswa_biaya_id.id))
+            #     total_tagihan += siswa_biaya_id.amount_due
 
             surat_data_temp.append([0, 0, {
                 'siswa_id': siswa.id,
                 'name': nomor_surat,
-                'tagihan_siswa_biaya_ids': siswa_biaya_temp,
-                'total_tagihan': total_tagihan
+                # 'tagihan_siswa_biaya_ids': siswa_biaya_temp,
+                # 'total_tagihan': total_tagihan
             }])
 
         self.surat_siswa_ids = surat_data_temp
         self.state = 'post'
+
+        for srt in self.surat_siswa_ids:
+            # get biaya
+            total_tagihan = 0.0
+            # siswa_biaya_temp = []
+            for tag_by in self.tagihan_biaya_ids:
+                if tag_by.is_bulanan:
+                    siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
+                        ['&', '&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', srt.siswa_id.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id), ('bulan', '=', tag_by.bulan)])
+                else:
+                    siswa_biaya_id = self.env['siswa_keu_ocb11.siswa_biaya'].search(
+                        ['&', '&', '&', ('state', '=', 'open'), ('siswa_id', '=', srt.siswa_id.id), ('biaya_id', '=', tag_by.biaya_id.id), ('tahunajaran_id', '=', self.tahunajaran_id.id)])
+
+                # siswa_biaya_temp.append((4, siswa_biaya_id.id))
+                if siswa_biaya_id:
+                    total_tagihan += siswa_biaya_id.amount_due
+                    self.env.cr.execute('insert into surat_tagihan_siswa_biaya_rel (surat_tagihan_siswa_rel_id, siswa_biaya_id) values (' + str(
+                        srt.id) + ',' + str(siswa_biaya_id.id) + ')')
+
+            # Update total tagihan
+            srt.total_tagihan = total_tagihan
 
         # update surat_seq
         surat_id.write({
@@ -89,9 +110,9 @@ class WizardSuratTagihan(models.Model):
     def rombel_id_onchange(self):
         if self.rombel_ids:
             domain = {'siswa_ids': [
-                ('active_rombel_id', 'in', self.rombel_ids.ids)]}
+                ('active_rombel_id', 'in', self.rombel_ids.ids), ('is_siswa', '=', True)]}
         else:
-            domain = {'siswa_ids': []}
+            domain = {'siswa_ids': [('is_siswa', '=', True)]}
 
         return {'domain': domain, 'value': {'siswa_ids': []}}
 
@@ -100,10 +121,14 @@ class WizardSuratTagihan(models.Model):
     #     return {'domain': domain, 'value': {'rombel_ids': []}}
 
     def set_domain_siswa_ids(self):
-        if self.rombel_ids:
-            domain = {'siswa_ids': [
-                ('active_rombel_id', 'in', self.rombel_ids.ids)]}
-        else:
-            domain = {'siswa_ids': []}
+        # if self.rombel_ids:
+        #     domain = {'siswa_ids': [
+        #         ('active_rombel_id', 'in', self.rombel_ids.ids)]}
+        # else:
+        #     domain = {'siswa_ids': []}
+
+        # tampilkan sesuai filter
+        domain = {'siswa_ids': [
+            ('active_rombel_id', 'in', self.rombel_ids.ids), ('is_siswa', '=', True)]}
 
         return {'domain': domain, 'value': {'siswa_ids': []}}

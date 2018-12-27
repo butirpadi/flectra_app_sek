@@ -8,7 +8,7 @@ class SuratTagihanSiswaRel(models.Model):
 
     name = fields.Char('Nomor Surat')
     wizard_id = fields.Many2one(
-        'siswa.wizard.surat.tagihan', string='Surat', required=True)
+        'siswa.wizard.surat.tagihan', string='Surat', required=True, ondelete="cascade")
     siswa_id = fields.Many2one('res.partner', string="Siswa", required=True)
     active_rombel_id = fields.Many2one('siswa_ocb11.rombel', related="siswa_id.active_rombel_id", string="Rombongan Belajar")
     nis = fields.Char(related="siswa_id.nis", string="NIS")
