@@ -177,6 +177,7 @@
                                 <tree editable="bottom"  >
                                     <field name="tahunajaran_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" context="{'active_test': False}" />
                                     <field name="rombel_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                                    <button type="object" name="set_active_rombel" class="btn btn-primary" string="activate" groups="base.group_system" ></button>
                                 </tree>
                             </field>
                         </page>
