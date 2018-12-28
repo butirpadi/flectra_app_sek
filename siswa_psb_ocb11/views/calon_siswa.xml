@@ -93,6 +93,7 @@
 										<field name="siswa_id"
 											attrs="{'invisible':[('is_siswa_lama', '=', False)], 'required':[('is_siswa_lama','=',True)], 'readonly':[('state', '=', 'reg')] }"
 											options="{'no_create':True,'no_edit':True,'no_create_edit': True,'no_open':True}" />
+										<field name="prev_rombel_id" />
 										<field name="name"
 											attrs="{'invisible':[('is_siswa_lama', '=', True)], 'readonly':[('state', '=', 'reg')] }"
 											class="oe_edit_only" />

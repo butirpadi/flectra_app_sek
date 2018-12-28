@@ -52,7 +52,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center" >No</th>
-                                                <th class="text-center" >No. Induk</th>
+                                                <th class="text-center" >Siswa ID</th>
                                                 <th >Nama Siswa</th>
                                                 <th class="text-right" >Saldo</th>
                                             </tr>

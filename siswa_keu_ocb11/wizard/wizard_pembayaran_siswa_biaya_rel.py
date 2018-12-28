@@ -5,7 +5,7 @@ class wizard_pembayaran_siswa_biaya_rel(models.TransientModel):
     _name = 'siswa_keu_ocb11.wizard_pembayaran_siswa_biaya_rel'
 
     siswa_id = fields.Many2one('res.partner', string='Siswa')
-    induk = fields.Char('No. Induk', related='siswa_id.induk')
+    induk = fields.Char('Siswa ID', related='siswa_id.induk')
     biaya_id = fields.Many2one('siswa_keu_ocb11.biaya', string='Biaya')
     is_bulanan = fields.Boolean('Is Bulanan', related='biaya_id.is_bulanan')
     wizard_id = fields.Many2one('siswa_keu_ocb11.wizard_report_pembayaran_siswa', string='Wizard')

@@ -9,7 +9,7 @@ class siswa(models.Model):
     _inherit = 'res.partner'
 
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Diterima', required=False, ondelete="restrict")
-    induk = fields.Char(string='No. Induk', required=False, copy=False, readonly=True, default="New")
+    induk = fields.Char(string='Siswa ID', required=False, copy=False, readonly=True, default="New")
     nis = fields.Char(string="NIS", required=False)
     panggilan = fields.Char(string="Panggilan")
     jenis_kelamin = fields.Selection([('laki', 'Laki-laki'), ('perempuan', 'Perempuan')], string='Jenis Kelamin', required=False)
@@ -107,20 +107,12 @@ class siswa(models.Model):
     
     @api.multi
     def toggle_active(self):
+        self.ensure_one()
         res = super(siswa, self).toggle_active()
         if self.active:
             print('Active kan rombel siswa')
-            # active kan di rombel siswa
-            # self.env['siswa_ocb11.rombel_siswa'].search([
-            #     ('siswa_id', '=', self.id),
-            #     ('rombel_id', '=', self.active_rombel_id.id),
-            # ]).write({
-            #     'active' : True
-            # })
-
             self.env.cr.execute("update siswa_ocb11_rombel_siswa set active = 'True' where siswa_id = '" + str(self.id) + "' and rombel_id = " + str(self.active_rombel_id.id) )
-            # self.env.cr.fetchall()
-
+            
         return res
     
     @api.multi

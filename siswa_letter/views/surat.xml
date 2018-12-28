@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <record id="surat_tagihan_view_form" model="ir.ui.view">
+            <field name="name">surat.tagihan.view.form</field>
+            <field name="model">siswa.surat</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Surat Tagihan" class="oe_form_configuration">
+					<header>
+						<button string="Save" type="object" name="write"
+							class="oe_highlight" />
+					</header>
+                    
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="title" />
+                            </group>
+                            <group>
+                                <field name="perihal" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="content_1" />
+                            <field name="content_2" />
+                        </group>
+                        <group>
+                            <group>
+                                <field name="author" />
+                                <field name="table_position" />
+                            </group>
+                            <group>
+                                <field name="author_job" />
+                                <field name="surat_tagihan_prefix" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="biaya_ids">
+                                <tree editable="bottom">
+                                    <field name="biaya_id" />
+                                    <field name="bulan" />
+                                </tree>
+                            </field>
+                        </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="surat_view_action">
+            <field name="name">Surat</field>
+            <field name="res_model">siswa.surat</field>
+            <field name="view_mode">tree,form</field>
+            <field name="form_view_id" ref="surat_tagihan_view_form"/>
+        </record>
+
+        <record id="surat_tagihan_view_action" model="ir.actions.act_window">
+            <field name="name">Surat Tagihan</field>
+            <field name="res_model">siswa.surat</field>
+            <field name="form_view_id" ref="surat_tagihan_view_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="res_id" ref="__siswa_letter_surat_tagihan_" />
+        </record>
+
+
+    </data>
+</odoo>

@@ -8,7 +8,7 @@
                 <tree create="false" delete="false" >
                     <field name="siswa_id"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk" />
+                    <field name="induk" string="Siswa ID" />
                     <field name="nis"/>
                     <field name="jenis_kelamin"/>
                     <field name="ayah"/>
@@ -29,10 +29,10 @@
             <field name="priority" eval="18"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="replace">
-                    <tree create="false" >
+                    <tree>
                     <field name="siswa_id"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk" />
+                    <field name="induk" string="Siswa ID" />
                     <field name="nis"/>
                     <field name="jenis_kelamin"/>
                     <field name="ayah"/>
@@ -72,6 +72,16 @@
             <field name="domain">[('tahunajaran_id.active','=',True)]</field>
             <field name="context">{'search_default_group_rombel_id':1}</field>
             <field name="search_view_id" ref="siswa_ocb11.view_rombel_siswa_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="siswa_ocb11.rombel_siswa_action_window_root">
+            <field name="name">Siswa Aktif (Root)</field>
+            <field name="res_model">siswa_ocb11.rombel_siswa</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('tahunajaran_id.active','=',True)]</field>
+            <field name="context">{'search_default_group_rombel_id':1}</field>
+            <field name="search_view_id" ref="siswa_ocb11.view_rombel_siswa_filter"/>
+            <field name="tree_view_id" ref="siswa_ocb11.rombel_siswa_list_root"/>
         </record>
 
         <record id="view_rombel_siswa_form" model="ir.ui.view">

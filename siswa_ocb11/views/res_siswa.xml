@@ -1,5 +1,18 @@
 <odoo>
     <data>
+
+        <record id="siswa_view_res_partner_filter" model="ir.ui.view">
+            <field name="name">siswa.res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <filter name="salesperson" position="before">
+                    <filter name="rombel" string="Rombongan Belajar" domain="[]" context="{'group_by' : 'active_rombel_id'}" />
+                </filter>
+            </field>
+        </record>
+
         <record id="siswa_ocb11.siswa_list" model="ir.ui.view" >
             <field name="name">siswa_ocb11_siswa_list</field>
             <field name="model">res.partner</field>
@@ -8,7 +21,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk"/>
+                    <field name="induk" string="Siswa ID"/>
                     <field name="nis"/>
                     <field name="active_rombel_id" string="Rombel" />
                     <field name="street" string="Alamat" invisible="1"/>
@@ -38,9 +51,11 @@
                     <field name="ayah" string="Ayah"/>
                     <field name="ibu" string="Ibu"/>
                     <group expand="0" string="Group By">
+                        <filter name="group_by_tahun_diterima" string="Tahun Diterima" domain="[]" context="{'group_by':'tahunajaran_id'}"/>
                         <filter name="active_rombel_id" string="Rombongan Belajar" domain="[]" context="{'group_by':'active_rombel_id'}"/>
-                        <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
-                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/>
+                        <filter name="group_by_jenis_kelamin" string="Jenis Kelamin" domain="[]" context="{'group_by':'jenis_kelamin'}"/>
+                        <!-- <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
+                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/> -->
                     </group>
                 </search>
             </field>
