@@ -22,6 +22,14 @@ class rombel_siswa(models.Model):
     ibu = fields.Char(related='siswa_id.ibu', string='Nama Ibu')
     telp_ibu = fields.Char(related='siswa_id.telp_ibu', string='Telp Ibu')    
 
+    @api.multi 
+    def set_active_rombel(self):
+        self.ensure_one()
+        # get siswa
+        print('Set active rombel')
+        self.siswa_id.set_active_rombel = self.rombel_id.id
+        print('Set active rombel done')
+
     @api.model
     def create(self, vals):
         result = super(rombel_siswa, self).create(vals)
