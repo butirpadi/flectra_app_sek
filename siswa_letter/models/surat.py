@@ -7,7 +7,7 @@ class SiswaSurat(models.Model):
     _name = 'siswa.surat'
 
     name = fields.Char('Name', required=True,
-                       default="SURAT TAGIHAN CONFIGURATION")
+                       default="SURAT CONFIGURATION")
     title = fields.Char('Title', required=True)
     perihal = fields.Char('Perihal', required=True, default="")
     content_1 = fields.Html('Content 1')

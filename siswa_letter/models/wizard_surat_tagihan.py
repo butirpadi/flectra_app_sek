@@ -6,6 +6,7 @@ from datetime import datetime
 class WizardSuratTagihan(models.Model):
     _name = 'siswa.wizard.surat.tagihan'
 
+    tanggal = fields.Date('Tanggal', required=True, default=datetime.today().date())
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')],
                              string='State', required=True, default='draft')
     name = fields.Char('name', default="Surat Tagihan")
@@ -27,6 +28,10 @@ class WizardSuratTagihan(models.Model):
         inverse_name='wizard_id'
     )
 
+    def print_action(self):
+        print('Print Report')
+        return self.env.ref('siswa_letter.report_surat_tagihan_action').report_action(self)
+
     @api.multi
     def submit_wizard(self):
         surat_res_id = self.env['ir.model.data'].search(
@@ -39,7 +44,7 @@ class WizardSuratTagihan(models.Model):
 
         for siswa in self.siswa_ids:
             # generate surat nomor
-            nomor_surat = surat_prefix + "/" + "/000" + str(surat_seq)
+            nomor_surat = surat_prefix + "/" + str(datetime.today().date().year) + "/000" + str(surat_seq)
             surat_seq += 1
 
             # # get biaya
@@ -59,6 +64,7 @@ class WizardSuratTagihan(models.Model):
             surat_data_temp.append([0, 0, {
                 'siswa_id': siswa.id,
                 'name': nomor_surat,
+                'surat_id' : surat_id.id
                 # 'tagihan_siswa_biaya_ids': siswa_biaya_temp,
                 # 'total_tagihan': total_tagihan
             }])

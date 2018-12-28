@@ -22,4 +22,5 @@ class SuratTagihanSiswaRel(models.Model):
         column1='surat_tagihan_siswa_rel_id',
         column2='siswa_biaya_id',
     )
+    surat_id = fields.Many2one('siswa.surat', string="Surat")
     

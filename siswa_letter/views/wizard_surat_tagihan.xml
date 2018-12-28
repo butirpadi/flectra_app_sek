@@ -42,7 +42,7 @@
             <field name="arch" type="xml">
                 <form duplicate="0" string="Surat Tagihan" class="o_sale_order" create="false">
                     <header attrs="{'invisible':[('state', '=', 'draft')]}">
-                        <button type="action" name="print_report" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print"></button>
+                        <button type="object" name="print_action" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print"></button>
                         <field attrs="{'invisible':[('state', '=', 'draft')]}" name="state" widget="statusbar" statusbar_visible="draft,post"/>
                     </header>
                     <sheet>
@@ -54,6 +54,7 @@
                         <group>
                             <group>
                                 <field attrs="{'readonly':[('state', '=', 'post')]}" name="tahunajaran_id" context="{'active_test': False}" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                                <field attrs="{'readonly':[('state', '=', 'post')]}" name="tanggal" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
                             </group>
                             <group>
                                 <field attrs="{'readonly':[('state', '=', 'post')]}" name="rombel_ids" widget="many2many_tags" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />

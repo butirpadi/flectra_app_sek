@@ -27,6 +27,7 @@
         'data/ir_default_data.xml',
         'views/wizard_surat_tagihan.xml',
         'views/surat.xml',
+        'reports/report_surat_tagihan.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
