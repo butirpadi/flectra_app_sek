@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id="wizard_label_identitas_form" model="ir.ui.view">
+            <field name="name">wizard.label.identitas.form</field>
+            <field name="model">wizard.label.identitas</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Label Identitas" class="o_sale_order" create="false">
+                    <header attrs="{'invisible':[('state', '=', 'draft')]}">
+                        <button type="object" name="print_action" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print"></button>
+                        <field attrs="{'invisible':[('state', '=', 'draft')]}" name="state" widget="statusbar" statusbar_visible="draft,post"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tahunajaran_id" context="{'active_test': False}" attrs="{'readonly':[('state', '=', 'post')]}" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                            </group>
+                            <group>
+                                <field name="rombel_ids" attrs="{'readonly':[('state', '=', 'post')]}" widget="many2many_tags" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}"/>
+                            </group>
+                        </group>
+
+                        <notebook attrs="{'invisible':[('state', '=', 'draft')]}">
+                            <page string="Siswa">
+                                <field name="rombel_siswa_ids" attrs="{'readonly':[('state', '=', 'post')]}" >
+                                    <tree>
+                                        <field name="siswa_id"/>
+                                        <field name="rombel_id"/>
+                                        <field name="tahunajaran_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <footer class="oe_edit_only">
+                        <button name="action_save" type="object" string="Submit" class="oe_highlight"/>
+
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="wizard_label_identitas_form_action" name="Label Identitas" src_model="res.partner" res_model="wizard.label.identitas" view_mode="form" target="new" key2="client_action_multi" />
+    </data>
+</odoo>

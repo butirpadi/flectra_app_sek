@@ -62,6 +62,10 @@
 			id="siswa_ocb11.menu_form_presensi"
 			parent="siswa_ocb11.menu_siswa_pdf_report"
 			action="siswa_ocb11.wizard_form_presensi_action" sequence="2" />
+		<menuitem name="Label Identitas"
+			id="siswa_ocb11.menu_label_identitas"
+			parent="siswa_ocb11.menu_siswa_pdf_report"
+			action="wizard_label_identitas_form_action" sequence="3" />
 
 		<menuitem name="Configuration"
 			id="siswa_ocb11.menu_configuration"
