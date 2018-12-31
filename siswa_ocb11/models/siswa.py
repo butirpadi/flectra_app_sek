@@ -40,7 +40,7 @@ class siswa(models.Model):
     tanggal_non_aktif = fields.Date('Tanggal Non Aktif')
     anak_ke = fields.Integer('Anak ke')
     dari_bersaudara = fields.Integer('Dari Bersaudara')
-    usia = fields.Float('Usia', compute="_compute_usia")
+    # usia = fields.Float('Usia', compute="_compute_usia")
     is_siswa_lama = fields.Boolean('Siswa Lama', default=False)
     tahunajaran_non_aktif_id = fields.Many2one(
         'siswa_ocb11.tahunajaran', string="Tahun Ajaran Non Aktif")
@@ -49,45 +49,54 @@ class siswa(models.Model):
         print(self.name)
         return self.env.ref('siswa_ocb11.report_biodata_siswa_action').report_action(self)
 
-    @api.depends('tanggal_lahir')
-    def _compute_usia(self):
-        for rec in self:
-            print(type(rec.tanggal_lahir))
-            # if rec.tanggal_lahir:
-            #     print(rec.tanggal_lahir.strftime('%Y/%m/%d'))
-        # for rec in self:
-        #     if rec.tanggal_lahir:
-        #         born = date(rec.tanggal_lahir)
-        #         today = date.today()
-        #         usia = today.year - born.year - int((today.month, today.day) < (born.month, born.day))
-        #         # print('Usia : ' + str(usia))
+    # @api.depends('tanggal_lahir')
+    # def _compute_usia(self):
+    #     for rec in self:
+    #         print(type(rec.tanggal_lahir))
+    #         # if rec.tanggal_lahir:
+    #         #     print(rec.tanggal_lahir.strftime('%Y/%m/%d'))
+    #     # for rec in self:
+    #     #     if rec.tanggal_lahir:
+    #     #         born = date(rec.tanggal_lahir)
+    #     #         today = date.today()
+    #     #         usia = today.year - born.year - int((today.month, today.day) < (born.month, born.day))
+    #     #         # print('Usia : ' + str(usia))
 
-    @api.multi
-    def set_active_rombel(self):
-        self.ensure_one()
-        # for rec in self:
-        #     print('inside loop compute')
-        #     ta_aktif = self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)])
-        #     rombel_aktif = rec.rombels.search([('siswa_id','=',rec.id),('tahunajaran_id','=',ta_aktif.id)])
-        #     # pprint(rec.rombels)
-        #     rec.active_rombel_id = rombel_aktif.rombel_id
-        #     print(rec.name)
-        print('inside loop compute rombel aktif')
-        ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
-            [('active', '=', True)])
-        rombel_aktif = self.rombels.search(
-            [('siswa_id', '=', self.id), ('tahunajaran_id', '=', ta_aktif.id)])
-        # pprint(rec.rombels)
-        self.active_rombel_id = rombel_aktif.rombel_id
-        print(self.name)
+    # @api.multi
+    # def set_active_rombel(self):
+    #     # self.ensure_one()
+    #     # for rec in self:
+    #     #     print('inside loop compute')
+    #     #     ta_aktif = self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)])
+    #     #     rombel_aktif = rec.rombels.search([('siswa_id','=',rec.id),('tahunajaran_id','=',ta_aktif.id)])
+    #     #     # pprint(rec.rombels)
+    #     #     rec.active_rombel_id = rombel_aktif.rombel_id
+    #     #     print(rec.name)
+    #     print('inside loop compute rombel aktif')
+    #     ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
+    #         [('active', '=', True)])
+    #     rombel_aktif = self.rombels.search(
+    #         [('siswa_id', '=', self.id), ('tahunajaran_id', '=', ta_aktif.id)])
+    #     # pprint(rec.rombels)
+    #     self.active_rombel_id = rombel_aktif.rombel_id
+    #     print(self.name)
 
-    @api.onchange('rombels')
-    def rombels_onchange(self):
-        self.set_active_rombel()
+    # @api.onchange('rombels')
+    # def rombels_onchange(self):
+    #     self.set_active_rombel()
 
     @api.depends('rombels')
     def _compute_rombel(self):
-        self.set_active_rombel()
+        # self.set_active_rombel()
+        for rec in self:
+            ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
+                [('active', '=', True)])
+            if ta_aktif:
+                rombel_aktif = self.rombels.search(
+                    [('siswa_id', '=', self.id), ('tahunajaran_id', '=', ta_aktif.id)])
+                # pprint(rec.rombels)
+                rec.active_rombel_id = rombel_aktif.rombel_id
+                # print(self.name)
 
     @api.model
     def create(self, vals):

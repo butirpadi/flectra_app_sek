@@ -125,7 +125,7 @@
                                     <field name="jenis_kelamin" /> 
                                     <field name="tempat_lahir" /> 
                                     <field name="tanggal_lahir" /> 
-                                    <field name="usia" invisible="1" /> 
+                                    <!-- <field name="usia" invisible="1" />  -->
                                 </group>
                                 <group>
                                     <field name="anak_ke" /> 
