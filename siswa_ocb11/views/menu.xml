@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<menuitem name="Kesiswaan" id="siswa_ocb11.kesiswaan_menu"
@@ -50,14 +50,22 @@
 			id="siswa_ocb11.menu_siswa_non_aktif"
 			parent="siswa_ocb11.submenu_report"
 			action="siswa_ocb11.siswa_non_aktif_action_window" sequence="2" />
+		
+		<menuitem name="PDF Report"
+			id="siswa_ocb11.menu_siswa_pdf_report"
+			parent="siswa_ocb11.submenu_report" sequence="3" />
 		<menuitem name="Siswa Per Rombel"
 			id="siswa_ocb11.menu_rekapitulasi_siswa"
-			parent="siswa_ocb11.submenu_report"
-			action="siswa_ocb11.wizard_rekap_siswa_action" sequence="3" />
+			parent="siswa_ocb11.menu_siswa_pdf_report"
+			action="siswa_ocb11.wizard_rekap_siswa_action" sequence="1" />
 		<menuitem name="Form Presensi"
 			id="siswa_ocb11.menu_form_presensi"
-			parent="siswa_ocb11.submenu_report"
-			action="siswa_ocb11.wizard_form_presensi_action" sequence="4" />
+			parent="siswa_ocb11.menu_siswa_pdf_report"
+			action="siswa_ocb11.wizard_form_presensi_action" sequence="2" />
+		<menuitem name="Label Identitas"
+			id="siswa_ocb11.menu_label_identitas"
+			parent="siswa_ocb11.menu_siswa_pdf_report"
+			action="wizard_label_identitas_form_action" sequence="3" />
 
 		<menuitem name="Configuration"
 			id="siswa_ocb11.menu_configuration"
@@ -76,4 +84,4 @@
 
 
 	</data>
-</flectra>
+</odoo>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, exceptions, _
-from flectra.addons import decimal_precision as dp
+from odoo import models, fields, api, exceptions, _
+from odoo.addons import decimal_precision as dp
 from datetime import datetime
 from pprint import pprint
 
@@ -26,4 +26,4 @@ class pembayaran(models.Model):
         if self.psb_reference_id:
             raise exceptions.ValidationError(_('Cancel not allowed at this state.'))
         else:
-            return super(pembayaran,self).action_cancel()
+            return super(pembayaran,self).action_cancel() 

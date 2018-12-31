@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 
 class tahunajaran_biaya(models.Model):
     _name = 'siswa_keu_ocb11.tahunajaran_biaya'

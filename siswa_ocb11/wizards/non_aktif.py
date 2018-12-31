@@ -1,4 +1,4 @@
-from flectra import models, fields, api
+from odoo import models, fields, api
 from pprint import pprint
 from datetime import datetime
 
@@ -7,9 +7,10 @@ class non_aktif(models.TransientModel):
 
     siswa_id = fields.Many2one('res.partner', string="Siswa", domain=[('is_siswa','=',True)], required=True)
     induk = fields.Char('Induk',related='siswa_id.induk')
+    nis = fields.Char('NIS',related='siswa_id.nis')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True)
     rombel_asal_id = fields.Many2one('siswa_ocb11.rombel', string="Rombel" , compute='_compute_rombel_asal')
-    # non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('lulus', 'Lulus'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     keterangan = fields.Char('Keterangan')
     tanggal  = fields.Date('Tanggal', required=True, default=datetime.today().date())
@@ -62,4 +63,4 @@ class non_aktif(models.TransientModel):
             'target': 'current',
             'domain' : [('active','=',False),('is_siswa','=',True)],
             'context' : {'group_by': ['non_aktif_selection']},
-        } 
+        }  

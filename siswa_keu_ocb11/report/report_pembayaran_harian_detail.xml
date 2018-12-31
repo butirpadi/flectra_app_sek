@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
 
         <report
@@ -99,7 +99,7 @@
                                                     <strong>TAHUN AJARAN</strong>
                                                 </th>
                                                 <th class="text-center" >
-                                                    <strong>NO. INDUK</strong>
+                                                    <strong>Siswa ID</strong>
                                                 </th>
                                                 <th class="text-left" >
                                                     <strong>SISWA</strong>
@@ -197,4 +197,4 @@
         </template>
     
     </data>
-</flectra>
+</odoo>

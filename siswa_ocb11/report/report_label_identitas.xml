@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <report id="report_label_identitas_action" model="wizard.label.identitas" string="Label Identitas" report_type="qweb-pdf" name="siswa_ocb11.report_label_identitas" file="siswa_ocb11.report_label_identitas" attachment_use="False" print_report_name="'LabelIdentitas'" menu="False" paperformat="siswa_ocb11.format_report_free_layout" />
+    </data>
+    <template id="report_label_identitas">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style>
+                            table.table{
+                                border-left:none!important;
+                                border-right:none!important;
+                                background-color:transparent!important;
+                            }
+
+                            table.table tbody tr td {
+                                border-right:none!important;
+                                padding-top:0;
+                                padding-bottom:0;
+                                background-color:transparent!important;
+                            }
+
+                            p.slimline{
+                                margin-top:0;
+                                margin-bottom:0;
+                            }
+
+                            table.noborder, table.noborder tbody tr, table.noborder tbody tr td{
+                                border:none;
+                            } 
+                        </style>
+
+                        <div class="row">
+                            <t t-foreach="o.rombel_siswa_ids" t-as="siswa">
+                                <div class="col-xs-4 " style="padding:5px;">
+                                    <div class="row" style="border:thin solid black;height:5cm;display:block;" >
+                                        <div class="col-xs-4"  >
+                                            <img src='/web/binary/company_logo' style="width:100%;vertical-align:middle;text-align:center;" />
+                                        </div>
+                                        <div class="col-xs-8 text-center">
+                                            <h4 t-field="siswa.rombel_id.name" />
+                                            <p t-field="siswa.siswa_id.name" />
+                                            <p t-field="siswa.siswa_id.nis" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <p style="page-break-after:always;"></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

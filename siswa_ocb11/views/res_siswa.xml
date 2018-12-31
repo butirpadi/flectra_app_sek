@@ -1,5 +1,18 @@
-<flectra>
+<odoo>
     <data>
+
+        <record id="siswa_view_res_partner_filter" model="ir.ui.view">
+            <field name="name">siswa.res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <filter name="salesperson" position="before">
+                    <filter name="rombel" string="Rombongan Belajar" domain="[]" context="{'group_by' : 'active_rombel_id'}" />
+                </filter>
+            </field>
+        </record>
+
         <record id="siswa_ocb11.siswa_list" model="ir.ui.view" >
             <field name="name">siswa_ocb11_siswa_list</field>
             <field name="model">res.partner</field>
@@ -8,7 +21,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="panggilan"/>
-                    <field name="induk" string="No. Induk"/>
+                    <field name="induk" string="Siswa ID"/>
                     <field name="nis"/>
                     <field name="active_rombel_id" string="Rombel" />
                     <field name="street" string="Alamat" invisible="1"/>
@@ -38,9 +51,11 @@
                     <field name="ayah" string="Ayah"/>
                     <field name="ibu" string="Ibu"/>
                     <group expand="0" string="Group By">
+                        <filter name="group_by_tahun_diterima" string="Tahun Diterima" domain="[]" context="{'group_by':'tahunajaran_id'}"/>
                         <filter name="active_rombel_id" string="Rombongan Belajar" domain="[]" context="{'group_by':'active_rombel_id'}"/>
-                        <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
-                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/>
+                        <filter name="group_by_jenis_kelamin" string="Jenis Kelamin" domain="[]" context="{'group_by':'jenis_kelamin'}"/>
+                        <!-- <filter name="ayah" string="Ayah" domain="[]" context="{'group_by':'ayah'}"/>
+                        <filter name="pekerjaan_ayah_id" string="Pekerjaan Ayah" domain="[]" context="{'group_by':'pekerjaan_ayah_id'}"/> -->
                     </group>
                 </search>
             </field>
@@ -96,7 +111,7 @@
                 <field name="mobile" position="replace"></field> 
                 <xpath expr="//form/sheet" position="before">
                     <header>
-                        <button style="margin-top:5px;margin-bottom:5px;" name="print_biodata" type="object" string="Cetak Biodata" class="btn btn-default" attrs="{'invisible':[('induk', '=', 'New')]}" />
+                        <button style="margin-top:5px;margin-bottom:5px;" name="print_biodata" type="object" string="Cetak Biodata" class="btn btn-default" attrs="{'invisible':[('induk', '=', 'New')]}" invisible="1" />
                     </header>
                 </xpath>
                 <xpath expr="//form/sheet/notebook" position="after">
@@ -162,6 +177,7 @@
                                 <tree editable="bottom"  >
                                     <field name="tahunajaran_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" context="{'active_test': False}" />
                                     <field name="rombel_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                                    <button type="object" name="set_active_rombel" class="btn btn-primary" string="activate" groups="base.group_system" ></button>
                                 </tree>
                             </field>
                         </page>
@@ -315,4 +331,4 @@
         </record>
 
     </data>
-</flectra>
+</odoo>

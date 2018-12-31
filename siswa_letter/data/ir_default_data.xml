@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="__siswa_letter_surat_tagihan_" model="siswa.surat">
+            <field name="name">SURAT TAGIHAN</field>
+            <field name="title">Surat Tagihan</field>
+            <field name="author_job">Bagian Administrasi</field>
+            <field name="author">Siti Aminah</field>
+            <field name="perihal">Pemberitahuan</field>
+            <field name="table_position">middle</field>
+        </record>
+
+    </data>
+</odoo>

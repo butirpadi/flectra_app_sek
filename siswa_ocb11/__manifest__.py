@@ -14,7 +14,7 @@
     'website': "http://www.tepatguna.id",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/flectra/flectra/blob/master/flectra/addons/base/module/module_data.xml
+    # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
     'category': 'Education',
     'version': '1.0',
@@ -46,12 +46,14 @@
         'views/wizard_non_aktif.xml',
         'views/wizard_report_rekap_siswa.xml',
         'views/wizard_report_form_presensi.xml',
+        'views/wizard_label_identitas.xml',
         'views/setting.xml',
         # 'views/wizard_naik_kelas.xml',
         'report/report_master.xml',
         'report/report_siswa.xml',
         'report/report_rekap_siswa.xml',
         'report/report_form_presensi.xml',
+        'report/report_label_identitas.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
@@ -60,4 +62,4 @@
     ],
     'installable': True,
     'application': True,
-} 
+}  

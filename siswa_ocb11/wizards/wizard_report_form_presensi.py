@@ -1,4 +1,4 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 from pprint import pprint
 from datetime import datetime
 
@@ -10,6 +10,7 @@ class wizard_report_form_presensi(models.TransientModel):
     siswa_ids = fields.Many2many('res.partner',relation='siswa_ocb11_report_form_presensi_siswa_rel', column1='report_id',column2='siswa_id', string="Data Siswa", ondelete="cascade")
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
     tanggal = fields.Date('Tanggal')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     
     def action_save(self):
         self.ensure_one()

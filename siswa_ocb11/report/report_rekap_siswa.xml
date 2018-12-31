@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
 
         <report
@@ -34,18 +34,46 @@
                                 }
                             </style>
                             <div class="row" >
+                                <div class="col-xs-2">
+									<img src='/web/binary/company_logo' style="max-height:60px" />
+								</div>
+								<div class="col-xs-8 text-center">
+									<h3><strong>DATA SISWA</strong></h3>
+								</div>
+                                <div class="col-xs-2"></div>
                                 
                                 <div class="col-xs-12">
-                                    <div class="text-center">
-                                        <h3><strong>DATA SISWA</strong></h3>
-                                        <span t-esc="o.tahunajaran_id.name" /> / <span t-esc="o.rombel_id.name" />
-                                    </div>
-                                    <br/><![CDATA[&nbsp;]]>
+
+                                    <hr style="border-top: 4px double black;" />
+
+                                    <table class="table noborder table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-xs-2">Tahun Ajaran</td>
+                                                <td style="width:5px;">:</td>
+                                                <td >
+                                                    <span t-esc="o.tahunajaran_id.name" />
+                                                </td>
+                                                <td class="col-xs-2">Rombogan Belajar</td>
+                                                <td style="width:5px;">:</td>
+                                                <td>
+                                                    <span t-esc="o.rombel_id.name" />                                                            
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
                                     <table class="table table-condensed table-data" >
                                         <thead>
                                             <tr>
                                                 <th class="text-center" >No</th>
-                                                <th class="text-center" >No. Induk</th>
+                                                <t t-if="o.default_siswa_number=='nis'">
+                                                    <th class="text-center" >NIS</th>
+                                                </t>
+                                                <t t-if="o.default_siswa_number=='induk'">
+                                                    <th class="text-center" >No. Induk</th>
+                                                </t>
                                                 <th >Nama</th>
                                                 <th class="text-center" >Jenis Kelamin</th>
                                             </tr>
@@ -61,7 +89,12 @@
                                                         <t t-set="row_num" t-value="row_num+1" />
                                                     </td>
                                                     <td class="text-center" >
-                                                        <span t-field="cs.induk" />                                                        
+                                                        <t t-if="o.default_siswa_number=='nis'">
+                                                            <span t-field="cs.nis" />      
+                                                        </t>                                                  
+                                                        <t t-if="o.default_siswa_number=='induk'">
+                                                            <span t-field="cs.induk" />      
+                                                        </t>                                                  
                                                     </td>
                                                     <td>
                                                         <span t-field="cs.name" />
@@ -83,7 +116,7 @@
                                 </div>
 
                                 <div class="col-xs-3" >
-                                    <table class="table table-bordered" >
+                                    <table class="table table-bordered table-condensed" >
                                         <tbody>
                                             <tr>
                                                 <td  >
@@ -123,4 +156,4 @@
         </template>
 
     </data>
-</flectra>
+</odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 from pprint import pprint
 from datetime import datetime, date
 import calendar
@@ -113,8 +113,12 @@ class biaya_ta_jenjang(models.Model):
 
     @api.model
     def create(self, vals):
-        if not vals['is_different_by_gender']:
-            vals['harga_alt'] = vals['harga']        
+        if 'is_different_by_gender' in vals:
+            if not vals['is_different_by_gender']:
+                vals['harga_alt'] = vals['harga']
+        else:
+            vals['harga_alt'] = vals['harga']
+
         result = super(biaya_ta_jenjang, self).create(vals)
         return result
 

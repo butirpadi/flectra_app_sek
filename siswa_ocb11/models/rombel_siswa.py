@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 class rombel_siswa(models.Model):
     _name = 'siswa_ocb11.rombel_siswa'
@@ -22,6 +22,14 @@ class rombel_siswa(models.Model):
     ibu = fields.Char(related='siswa_id.ibu', string='Nama Ibu')
     telp_ibu = fields.Char(related='siswa_id.telp_ibu', string='Telp Ibu')
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)    
+
+    @api.multi 
+    def set_active_rombel(self):
+        self.ensure_one()
+        # get siswa
+        print('Set active rombel')
+        self.siswa_id.set_active_rombel = self.rombel_id.id
+        print('Set active rombel done')
 
     @api.model
     def create(self, vals):
@@ -81,4 +89,4 @@ class rombel_siswa(models.Model):
     #     print('adding/deleting rombel_siswa')
             
     #     result = super(rombel_siswa, self).write(vals)
-    #     return result 
+    #     return result  

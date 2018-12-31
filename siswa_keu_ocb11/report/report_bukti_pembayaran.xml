@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<record id="format_bukti_pembayaran" model="report.paperformat">
@@ -111,7 +111,7 @@
 														<strong>NIS</strong>
 													</t>
 													<t t-if="o.default_siswa_number=='induk'">
-														<strong>No. Induk</strong>
+														<strong>Siswa ID</strong>
 
 													</t>
 												</td>
@@ -246,4 +246,4 @@
 		</template>
 
 	</data>
-</flectra>
+</odoo>

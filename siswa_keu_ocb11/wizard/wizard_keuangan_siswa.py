@@ -1,12 +1,14 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 from pprint import pprint
 
 class wizard_keuangan_siswa(models.TransientModel):
     _name = 'siswa_keu_ocb11.wizard_keuangan_siswa'
 
     name = fields.Char('Name', default='0')
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     siswa_id = fields.Many2one('res.partner', string="Siswa", domain=[('is_siswa','=',True)], required=True, ondelete="cascade")
-    induk = fields.Char('Nomor Induk', related='siswa_id.induk')
+    induk = fields.Char('Siswa ID', related='siswa_id.induk')
+    nis = fields.Char('NIS', related='siswa_id.nis')
     rombel_id = fields.Many2one('siswa_ocb11.rombel', string='Rombongan Belajar', compute='_compute_rombel_siswa', ondelete="cascade")
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
     biayas = fields.One2many('siswa_keu_ocb11.siswa_biaya', related='siswa_id.biayas', string='Biaya-biaya', compute='_compute_biaya' ) 
@@ -24,17 +26,20 @@ class wizard_keuangan_siswa(models.TransientModel):
     @api.depends('siswa_id','tahunajaran_id')
     def _compute_biaya(self):
         self.ensure_one()
-        # self.biayas = self.siswa_id.biayas.search([('tahunajaran_id','=',self.tahunajaran_id.id)])
+        
         self.biayas_open = self.env['siswa_keu_ocb11.siswa_biaya'].search([('siswa_id','=',self.siswa_id.id),('state','=','open')])
+        self.biayas_paid = self.env['siswa_keu_ocb11.siswa_biaya'].search([('siswa_id','=',self.siswa_id.id),('dibayar','>',0)])
+        # self.biayas = self.siswa_id.biayas.search([('tahunajaran_id','=',self.tahunajaran_id.id)])
         # self.biayas_paid = self.env['siswa_keu_ocb11.siswa_biaya'].search([('siswa_id','=',self.siswa_id.id),('state','=','paid')])
         # self.biayas_paid = self.env['siswa_keu_ocb11.siswa_biaya'].search([('siswa_id','=',self.siswa_id.id),('amount_due','<',harga)])
-        self._get_paid_siswa_biaya()
+        # self._get_paid_siswa_biaya()
     
     def _get_paid_siswa_biaya(self):
         print('inside _get_paid_siswa_biaya')
         # query = "select * from siswa_keu_ocb11_siswa_biaya where siswa_id=%d and amount_due < harga " % self.siswa_id.id
         if self.siswa_id.id:
-            query = "select * from siswa_keu_ocb11_siswa_biaya where siswa_id=" + str(self.siswa_id.id) + " and amount_due < harga"
+            # query = "select * from siswa_keu_ocb11_siswa_biaya where siswa_id = " + str(self.siswa_id.id) + " and amount_due < harga"
+            query = "select * from siswa_keu_ocb11_siswa_biaya where siswa_id = " + str(self.siswa_id.id) + " and dibayar > 0"
             self.env.cr.execute(query)
             siswa_biaya = self.env.cr.fetchall()
             biaya_ids = []
