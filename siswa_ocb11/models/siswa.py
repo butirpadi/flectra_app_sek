@@ -89,11 +89,20 @@ class siswa(models.Model):
     def _compute_rombel(self):
         # self.set_active_rombel()
         for rec in self:
+            comp_id = self.env.user.company_id.id
+            print('user company id' + str(comp_id))
+            is_super_user = self.env.user.has_group(
+                'base.group_system')
+            if is_super_user:
+                comp_id = rec.company_id.id
+                print('Rec Company Id' + str(comp_id))
+
             ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
-                [('active', '=', True)])
+                [('active', '=', True), ('company_id', '=', comp_id)])
+
             if ta_aktif:
-                rombel_aktif = self.rombels.search(
-                    [('siswa_id', '=', self.id), ('tahunajaran_id', '=', ta_aktif.id)])
+                rombel_aktif = rec.rombels.search(
+                    ['&', '&', ('company_id', '=', comp_id), ('siswa_id', '=', rec.id), ('tahunajaran_id', '=', ta_aktif.id)])
                 # pprint(rec.rombels)
                 rec.active_rombel_id = rombel_aktif.rombel_id
                 # print(self.name)
@@ -165,3 +174,12 @@ class siswa(models.Model):
 
         result = super(siswa, self).write(vals)
         return result
+
+    @api.multi
+    def unlink(self):
+        for rec in self:
+            print('Deleting Siswa')
+
+            res = super(siswa, rec).unlink()
+
+        return res

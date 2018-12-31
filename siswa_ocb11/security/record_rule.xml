@@ -8,7 +8,7 @@
 			</field>
 		</record>
 
-		<record model="ir.rule" id="rule_pekerjaan">
+		<record model="ir.rule" id="multi_company_rule_pekerjaan">
 			<field name="name">Rule Pekerjaan</field>
 			<field name="model_id" ref="model_siswa_ocb11_pekerjaan" />
 			<field name="global" eval="True" />
@@ -16,7 +16,7 @@
 			</field>
 		</record>
 		
-		<record model="ir.rule" id="rule_rombel_dashboard">
+		<record model="ir.rule" id="multi_company_rule_rombel_dashboard">
 			<field name="name">Rule Rombel Dashboard</field>
 			<field name="model_id" ref="model_siswa_ocb11_rombel_dashboard" />
 			<field name="global" eval="True" />
@@ -24,7 +24,7 @@
 			</field>
 		</record>
 		
-		<record model="ir.rule" id="rule_rombel_siswa">
+		<record model="ir.rule" id="multi_company_rule_rombel_siswa">
 			<field name="name">Rule Rombel Siswa</field>
 			<field name="model_id" ref="model_siswa_ocb11_rombel_siswa" />
 			<field name="global" eval="True" />
@@ -32,7 +32,7 @@
 			</field>
 		</record>
 		
-		<record model="ir.rule" id="rule_rombel">
+		<record model="ir.rule" id="multi_company_rule_rombel">
 			<field name="name">Rule Rombel</field>
 			<field name="model_id" ref="model_siswa_ocb11_rombel" />
 			<field name="global" eval="True" />
@@ -40,7 +40,7 @@
 			</field>
 		</record>
 		
-		<record model="ir.rule" id="rule_tahunajaran">
+		<record model="ir.rule" id="multi_company_rule_tahunajaran">
 			<field name="name">Rule Tahun Ajaran</field>
 			<field name="model_id" ref="model_siswa_ocb11_tahunajaran" />
 			<field name="global" eval="True" />
@@ -48,9 +48,17 @@
 			</field>
 		</record>
 		
-		<record model="ir.rule" id="rule_tahunajaran_jenjang">
+		<record model="ir.rule" id="multi_company_rule_tahunajaran_jenjang">
 			<field name="name">Rule Tahun Ajaran Jenjang</field>
 			<field name="model_id" ref="model_siswa_ocb11_tahunajaran_jenjang" />
+			<field name="global" eval="True" />
+			<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+			</field>
+		</record>
+
+		<record model="ir.rule" id="multi_company_rule_res_partner">
+			<field name="name">Rule Res Partner</field>
+			<field name="model_id" ref="model_res_partner" />
 			<field name="global" eval="True" />
 			<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
 			</field>

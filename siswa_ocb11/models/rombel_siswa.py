@@ -57,14 +57,14 @@ class rombel_siswa(models.Model):
     
     @api.multi
     def unlink(self):
-        tahunajaran_id  = 0
-        rombel_id = 0
+        # tahunajaran_id  = 0
+        # rombel_id = 0
         
         # Update Rombel Dashboard
         for rec in self:
             print('Compute Rombel Siswa on Delete')
-            tahunajaran_id = rec.tahunajaran_id.id
-            rombel_id = rec.rombel_id.id
+            # tahunajaran_id = rec.tahunajaran_id.id
+            # rombel_id = rec.rombel_id.id
             # rb_dash = self.env['siswa_ocb11.rombel_dashboard'].search([
             #             ('rombel_id','=',rec.rombel_id.id),
             #             ('tahunajaran_id','=',rec.tahunajaran_id.id)
@@ -73,16 +73,16 @@ class rombel_siswa(models.Model):
             #     print('Loop for compute rombel siswa on delete')
             #     dash.lets_compute_jumlah_siswa()
 
-        res =  super(rombel_siswa, self).unlink()
+            res =  super(rombel_siswa, self).unlink()
 
-        # Update Rombel Dashboard
-        rb_dash = self.env['siswa_ocb11.rombel_dashboard'].search([
-                        ('rombel_id','=',rombel_id),
-                        ('tahunajaran_id','=',tahunajaran_id)
-                    ])
-        for dash in rb_dash:
-            print('Loop for compute rombel siswa on delete')
-            dash.lets_compute_jumlah_siswa()
+        # # Update Rombel Dashboard
+        # rb_dash = self.env['siswa_ocb11.rombel_dashboard'].search([
+        #                 ('rombel_id','=',rombel_id),
+        #                 ('tahunajaran_id','=',tahunajaran_id)
+        #             ])
+        # for dash in rb_dash:
+        #     print('Loop for compute rombel siswa on delete')
+        #     dash.lets_compute_jumlah_siswa()
 
         return res
 
