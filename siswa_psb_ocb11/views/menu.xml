@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 		<menuitem name="PSB" id="siswa_psb_ocb11.root_menu"
 			sequence="4" web_icon="siswa_psb_ocb11,static/description/icon.png" />
@@ -53,4 +53,4 @@
 			parent="siswa_psb_ocb11.menu_configuration" sequence="2"
 			action="config_psb_dashboard_action" />
 	</data>
-</odoo>
+</flectra>

@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
 
         <record id="siswa_view_res_partner_filter" model="ir.ui.view">
@@ -331,4 +331,4 @@
         </record>
 
     </data>
-</odoo>
+</flectra>

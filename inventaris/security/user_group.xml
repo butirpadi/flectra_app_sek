@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
     <data>
         <record model="ir.module.category" id="inventaris_module_management">
             <field name="name">Inventaris User Role</field>
@@ -20,6 +20,6 @@
             <field name="category_id" ref="inventaris.inventaris_module_management"/>
         </record>
     </data>
-</odoo>
+</flectra>
 
 

@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<report id="report_bukti_pembayaran_registrasi_action"
@@ -212,4 +212,4 @@
 
 
 	</data>
-</odoo>
+</flectra>

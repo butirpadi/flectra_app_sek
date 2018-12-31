@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from flectra import http
 
 # class DefaultSettingForIndonesianApp(http.Controller):
 #     @http.route('/default_setting_for_indonesian_app/default_setting_for_indonesian_app/', auth='public')
