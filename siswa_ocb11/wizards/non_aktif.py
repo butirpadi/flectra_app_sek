@@ -9,7 +9,7 @@ class non_aktif(models.TransientModel):
     induk = fields.Char('Induk',related='siswa_id.induk')
     nis = fields.Char('NIS',related='siswa_id.nis')
     default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
-    tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True)
+    tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('company_id','=',self.env.user.company_id.id),('active','=',True)]), required=True)
     rombel_asal_id = fields.Many2one('siswa_ocb11.rombel', string="Rombel" , compute='_compute_rombel_asal')
     non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     keterangan = fields.Char('Keterangan')
@@ -38,6 +38,8 @@ class non_aktif(models.TransientModel):
     
     @api.multi
     def action_save(self):
+        self.ensure_one()
+        
         self.env['res.partner'].search([('id','=',self.siswa_id.id)]).write({
             'active' : False,
             'non_aktif_selection' : self.non_aktif_selection,
