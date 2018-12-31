@@ -31,6 +31,14 @@ class rombel_siswa(models.Model):
         self.siswa_id.set_active_rombel = self.rombel_id.id
         print('Set active rombel done')
 
+    @api.multi 
+    def set_active_rombel(self):
+        self.ensure_one()
+        # get siswa
+        print('Set active rombel')
+        self.siswa_id.set_active_rombel = self.rombel_id.id
+        print('Set active rombel done')
+
     @api.model
     def create(self, vals):
         result = super(rombel_siswa, self).create(vals)
