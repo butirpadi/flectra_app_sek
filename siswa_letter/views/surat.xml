@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <record id="surat_tagihan_view_form" model="ir.ui.view">
             <field name="name">surat.tagihan.view.form</field>
@@ -65,4 +65,4 @@
 
 
     </data>
-</flectra>
+</odoo>

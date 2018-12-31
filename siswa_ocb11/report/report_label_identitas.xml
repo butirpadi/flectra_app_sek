@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <report id="report_label_identitas_action" model="wizard.label.identitas" string="Label Identitas" report_type="qweb-pdf" name="siswa_ocb11.report_label_identitas" file="siswa_ocb11.report_label_identitas" attachment_use="False" print_report_name="'LabelIdentitas'" menu="False" paperformat="siswa_ocb11.format_report_free_layout" />
     </data>
@@ -53,4 +53,4 @@
             </t>
         </t>
     </template>
-</flectra>
+</odoo>

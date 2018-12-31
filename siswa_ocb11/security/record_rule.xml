@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data noupdate="1">
 		<record model="ir.rule" id="jenjang_siswa_rule">
 			<field name="name">Jenjang Rule</field>
@@ -57,4 +57,4 @@
 		</record>
 		
 	</data>
-</flectra>
+</odoo>

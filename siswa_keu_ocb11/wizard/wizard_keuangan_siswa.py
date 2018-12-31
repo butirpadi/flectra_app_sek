@@ -1,4 +1,4 @@
-from flectra import models, fields, api, _
+from odoo import models, fields, api, _
 from pprint import pprint
 
 class wizard_keuangan_siswa(models.TransientModel):

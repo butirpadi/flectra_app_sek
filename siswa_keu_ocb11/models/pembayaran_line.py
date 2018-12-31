@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, exceptions, _
-from flectra.addons import decimal_precision as dp
+from odoo import models, fields, api, exceptions, _
+from odoo.addons import decimal_precision as dp
 
 class pembayaran_line(models.Model):
     _name = 'siswa_keu_ocb11.pembayaran_line'

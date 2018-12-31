@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, exceptions 
+from odoo import models, fields, api, exceptions 
 from pprint import pprint
 
 class rombel(models.Model):

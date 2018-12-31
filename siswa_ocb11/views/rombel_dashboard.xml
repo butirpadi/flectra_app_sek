@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 		<record id="view_rombel_dashboard_kanban_form"
 			model="ir.ui.view">
@@ -138,4 +138,4 @@
 		</record>
 
 	</data>
-</flectra>
+</odoo>

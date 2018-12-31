@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
 	<data>
 
 		<report id="report_biodata_siswa_action" model="res.partner"
@@ -233,4 +233,4 @@
 		</template>
 
 	</data>
-</flectra>
+</odoo>
