@@ -24,6 +24,7 @@
 
     # always loaded
     'data': [
+        # 'views/webclient_templates.xml',
         'security/user_groups.xml',
         'security/ir.model.access.csv',
         'security/record_rule.xml',
