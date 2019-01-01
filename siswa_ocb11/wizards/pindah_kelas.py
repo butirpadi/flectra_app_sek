@@ -4,13 +4,13 @@ from pprint import pprint
 class pindah_kelas(models.TransientModel):
     _name = 'siswa_ocb11.pindah_kelas'
 
-    tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True)
+    tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('company_id','=',self.env.user.company_id.id),('active','=',True)]), required=True)
     siswa_id = fields.Many2one('res.partner', string="Siswa", domain=[('is_siswa','=',True)], required=True)
     induk = fields.Char('Siswa ID',related='siswa_id.induk')
     nis = fields.Char('NIS',related='siswa_id.nis')
     rombel_asal_id = fields.Many2one('siswa_ocb11.rombel', string="Rombel" , compute='_compute_rombel_asal', store=True)
     rombel_tujuan_id = fields.Many2one('siswa_ocb11.rombel', string="Pindah ke", required=True, )
-    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([('company_id','=',self.env.user.company_id.id)],limit=1).default_siswa_number )
 
     @api.depends('siswa_id')
     def _compute_rombel_asal(self):
