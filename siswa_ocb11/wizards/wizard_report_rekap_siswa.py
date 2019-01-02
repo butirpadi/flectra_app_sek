@@ -10,6 +10,8 @@ class wizard_report_rekap_siswa(models.TransientModel):
     siswa_ids = fields.Many2many('res.partner',relation='siswa_ocb11_report_siswa_rel', column1='report_id',column2='siswa_id', string="Data Siswa", ondelete="cascade")
     default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     def action_save(self):
         self.ensure_one()

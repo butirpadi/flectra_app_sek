@@ -24,6 +24,8 @@ class WizardLabelIdentitas(models.TransientModel):
         column1='wizard_id',
         column2='rombel_siswa_id',
     )
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     @api.multi
     def action_save(self):

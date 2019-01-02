@@ -14,6 +14,8 @@ class non_aktif(models.TransientModel):
     non_aktif_selection = fields.Selection([('mutasi', 'Mutasi'), ('meninggal', 'Meninggal Dunia')], string='Sebab', required=True)
     keterangan = fields.Char('Keterangan')
     tanggal  = fields.Date('Tanggal', required=True, default=datetime.today().date())
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     @api.depends('siswa_id')
     def _compute_rombel_asal(self):
