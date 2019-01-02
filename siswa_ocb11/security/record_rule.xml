@@ -64,5 +64,13 @@
 			</field>
 		</record>
 		
+		<record model="ir.rule" id="multi_company_rule_siswa_setting">
+			<field name="name">Siswa Setting Rule</field>
+			<field name="model_id" ref="model_siswa_setting" />
+			<field name="global" eval="True" />
+			<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+			</field>
+		</record>
+		
 	</data>
 </odoo>
