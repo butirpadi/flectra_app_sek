@@ -8,7 +8,7 @@ class SiswaSetting(models.Model):
     default_siswa_number = fields.Selection(
         [('nis', 'NIS'), ('induk', 'Nomor System')], string="Default Siswa ID", default="induk")
     company_id = fields.Many2one(
-        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id, ondelete="cascade")
 
     def execute(self):
         # get setting on current company

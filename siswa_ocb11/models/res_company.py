@@ -12,6 +12,19 @@ class Company(models.Model):
     _inherit = "res.company"
 
     @api.model
+    def create(self, vals):
+        result = super(Company, self).create(vals)
+        # generate setting for new company
+        
+        self.env['siswa.setting'].create({
+            'name' : result.name,
+            'company_id' : result.id,
+        })
+
+        return result
+
+
+    @api.model
     def set_modoo_logo(self):
         print('--------------------------------')
         print('Set Modoo Logo')
