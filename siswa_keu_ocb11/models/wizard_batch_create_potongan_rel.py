@@ -31,4 +31,6 @@ class wizard_batch_create_potongan_rel(models.Model):
         ('open', 'Open'),
         ('paid', 'Paid'),
         ], string='Status', default='draft')
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
                       

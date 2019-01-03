@@ -72,5 +72,13 @@
 			</field>
 		</record>
 		
+		<record model="ir.rule" id="multi_company_rule_siswa_company">
+			<field name="name">Siswa Company Rule</field>
+			<field name="model_id" ref="model_res_company" />
+			<field name="global" eval="True" />
+			<field name="domain_force">[('id','child_of',[user.company_id.id])]
+			</field>
+		</record>
+		
 	</data>
 </odoo>

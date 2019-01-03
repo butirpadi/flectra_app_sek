@@ -25,6 +25,7 @@
     'data': [
         'security/user_groups.xml',
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
         'data/ir_default_data.xml',
         'data/ir_sequence_data.xml',
         'views/biaya.xml',

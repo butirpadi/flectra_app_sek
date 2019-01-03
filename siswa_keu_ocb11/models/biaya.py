@@ -12,6 +12,8 @@ class biaya(models.Model):
 #     is_siswa_lama_only = fields.Boolean('Hanya untuk siswa lama ?', default=False)
     is_optional = fields.Boolean('Biaya Opsional?', default=False)
     assign_to = fields.Selection([('baru','Siswa Baru'),('lama', 'Siswa Lama'),('all','All')], string="Assign to", default="all", required=True) 
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
 
     @api.model
@@ -23,7 +25,8 @@ class biaya(models.Model):
             'name' : res.name,
             'tipe' : 'in',
             'is_biaya_account' : True,
-            'biaya_id' : res.id
+            'biaya_id' : res.id,
+            'company_id' : res.company_id.id
         })
 
         return res
@@ -39,5 +42,6 @@ class biaya(models.Model):
                 'name' : self.name,
                 'tipe' : 'in',
                 'is_biaya_account' : True,
-                'biaya_id' : self.id
+                'biaya_id' : self.id,
+                'company_id' : self.company_id.id
             })

@@ -16,6 +16,8 @@ class pembayaran_line(models.Model):
     bayar = fields.Float('Bayar')
     biaya_id = fields.Many2one('siswa_keu_ocb11.siswa_biaya', string='Biaya', required=True )
     jumlah_potongan = fields.Float('Potongan', compute="_compute_potongan")
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     @api.constrains('bayar')
     def bayar_check(self):

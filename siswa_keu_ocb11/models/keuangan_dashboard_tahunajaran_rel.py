@@ -11,3 +11,5 @@ class keuangan_dashboard_tahunajaran_rel(models.Model):
     dashboard_id = fields.Many2one('siswa_keu_ocb11.keuangan_dashboard')
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran')
     amount_due = fields.Float('Amount Due')  
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)

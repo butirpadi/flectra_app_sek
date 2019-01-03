@@ -11,3 +11,5 @@ class kas_kategori(models.Model):
     tipe = fields.Selection([('in', 'Pendapatan'), ('out', 'Pengeluaran')], string='Tipe', required=True, default='in')
     is_biaya_account = fields.Boolean('Is Account Biaya ?', default=False)
     biaya_id = fields.Many2one('siswa_keu_ocb11.biaya', string="Biaya", ondelete="cascade")  
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)

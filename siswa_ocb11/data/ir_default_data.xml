@@ -8,8 +8,8 @@
 			model="res.currency" name="set_active_rupiah_only" />
 
 		<!-- set default logo modoo -->
-		<function id="function_set_modoo_logo" model="res.company"
-			name="set_modoo_logo" />
+		<!-- <function id="function_set_modoo_logo" model="res.company"
+			name="set_modoo_logo" /> -->
 
 		<!-- Set date format to indonesian format -->
 		<function id="function_update_date_format_to_id_format"

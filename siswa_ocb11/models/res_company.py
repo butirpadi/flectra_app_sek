@@ -14,10 +14,18 @@ class Company(models.Model):
     @api.model
     def create(self, vals):
         result = super(Company, self).create(vals)
-        # generate setting for new company
-        
+        # generate setting for new company        
         self.env['siswa.setting'].create({
             'name' : result.name,
+            'company_id' : result.id,
+        })
+
+        # generate siswa_sequence
+        self.env['ir.sequence'].create({
+            'name' : 'Siswa Sequence ' + result.name,
+            'code' : 'siswa.ocb11',
+            'prefix' : '%(range_year)s',
+            'padding' : '6',
             'company_id' : result.id,
         })
 

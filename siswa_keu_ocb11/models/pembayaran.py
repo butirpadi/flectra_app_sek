@@ -29,6 +29,8 @@ class pembayaran(models.Model):
     tabungan_id = fields.Many2one('siswa_tab_ocb11.tabungan', string="Transaksi Tabungan")
     saldo_tabungan_siswa = fields.Float(related='siswa_id.saldo_tabungan', store=True)
     total_temp = fields.Float('Total Bayar', default=0, readonly=True, store=True)
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     @api.constrains('pembayaran_lines')
     def pembayaran_lines_check(self):
