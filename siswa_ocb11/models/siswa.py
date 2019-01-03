@@ -90,12 +90,12 @@ class siswa(models.Model):
         # self.set_active_rombel()
         for rec in self:
             comp_id = self.env.user.company_id.id
-            print('user company id' + str(comp_id))
+            print('user company id : ' + str(comp_id))
             is_super_user = self.env.user.has_group(
                 'base.group_system')
             if is_super_user:
                 comp_id = rec.company_id.id
-                print('Rec Company Id' + str(comp_id))
+                print('Rec Company Id : ' + str(comp_id))
 
             ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
                 [('active', '=', True), ('company_id', '=', comp_id)])

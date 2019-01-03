@@ -16,11 +16,12 @@ class SiswaSetting(models.Model):
             [('company_id', '=', self.env.user.company_id.id)])
         if aSetting:
             aSetting.default_siswa_number = self.default_siswa_number
-        else:
-            # create new setting for new company
-            newSetting = self.env['siswa.setting'].create({
-                'default_siswa_number': self.default_siswa_number
-            })
+        # else:
+        #     # create new setting for new company
+        #     newSetting = self.env['siswa.setting'].create({
+        #         'default_siswa_number': self.default_siswa_number
+        #     })
+        
         # self.write({
         #         'default_siswa_number' : self.default_siswa_number
         #     })
