@@ -15,6 +15,8 @@ class biaya_ta_jenjang(models.Model):
     is_different_by_gender = fields.Boolean('Different by Gender', related='biaya_id.is_different_by_gender')
     harga = fields.Float('Harga', required=True, default=0)
     harga_alt = fields.Float('Harga (Alt)', required=True, default=0)
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     def recompute_biaya_ta_jenjang(self):
         print('recompute biaya ta jenjang')

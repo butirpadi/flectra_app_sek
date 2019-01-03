@@ -17,6 +17,9 @@
         <!-- <function model="siswa_keu_ocb11.keuangan_dashboard" name="compute_keuangan"/>
         <function model="siswa_keu_ocb11.keuangan_dashboard" name="compute_kas"/> -->
 
+        <!-- generate dashboard on multi company -->
+        <function model="siswa_keu_ocb11.keuangan_dashboard" name="generate_dashboard_for_multi_company"/>
+
 
     </data>
 </odoo>

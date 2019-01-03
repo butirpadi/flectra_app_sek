@@ -9,6 +9,8 @@ class wizard_batch_create_potongan(models.Model):
     potongan_ids = fields.One2many('siswa_wizard_batch_create_potongan_rel', string="Data Potongan", inverse_name="wizard_id")
     # potongan_ids = fields.Many2many('siswa.potongan_biaya',relation='siswa_wizard_batch_create_potongan_biaya_rel', 
     #                                 column1='wizard_id',column2='potongan_id', string="Data Potongan")
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
                 
     @api.multi 
     def action_save(self):

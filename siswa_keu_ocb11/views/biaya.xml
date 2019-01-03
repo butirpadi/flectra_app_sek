@@ -7,7 +7,11 @@
       <field name="arch" type="xml">
         <tree  >
           <field name="name"/>
-          <!-- <field name="harga" /> -->
+          <field name="is_bulanan"/>
+          <field name="is_different_by_gender"/>
+          <field name="is_optional"/>
+          <field name="assign_to"/>
+          <field name="company_id" groups="base.group_multi_company"/>
         </tree>
       </field>
     </record>

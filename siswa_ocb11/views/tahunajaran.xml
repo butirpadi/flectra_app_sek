@@ -14,6 +14,7 @@
 						type="object" />
 					<button name="shift_down" string="Down" class="oe_highlight"
 						type="object" />
+					<field name="company_id" groups="base.group_multi_company" />
 				</tree>
 			</field>
 		</record>
@@ -35,6 +36,9 @@
 					<sheet>
 						<group>
 							<field name="name" />
+						</group>
+						<group>
+							<field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
 						</group>
 					</sheet>
 				</form>

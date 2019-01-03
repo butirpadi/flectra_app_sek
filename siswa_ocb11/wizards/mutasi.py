@@ -9,6 +9,8 @@ class mutasi(models.TransientModel):
     mutasi_ke = fields.Char(string='Mutasi ke')
     keterangan = fields.Char(string='Keterangan')
     rombel_asal_id = fields.Many2one('siswa_ocb11.rombel', string="Rombel" , compute='_compute_rombel_asal', required=True)
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     @api.depends('siswa_id')
     def _compute_rombel_asal(self):

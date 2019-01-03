@@ -15,7 +15,8 @@ class wizard_report_kas(models.TransientModel):
     saldo_ending = fields.Float('Saldo Ending', default=0)
     saldo_current = fields.Float('Saldo Current', default=0)
     tipe = fields.Selection([('sum', 'Summary'), ('det', 'Detail')], required=True, default='sum')
-
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     def action_save(self):
         self.ensure_one()

@@ -11,6 +11,8 @@ class wizard_report_form_presensi(models.TransientModel):
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
     tanggal = fields.Date('Tanggal')
     default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     def action_save(self):
         self.ensure_one()

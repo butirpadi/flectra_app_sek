@@ -24,8 +24,10 @@
 
     # always loaded
     'data': [
+        # 'views/webclient_templates.xml',
         'security/user_groups.xml',
         'security/ir.model.access.csv',
+        'security/record_rule.xml',
         'data/ir_sequence_data.xml',
         'data/ir_model_data.xml',
         'data/ir_default_data.xml',
@@ -45,12 +47,14 @@
         'views/wizard_non_aktif.xml',
         'views/wizard_report_rekap_siswa.xml',
         'views/wizard_report_form_presensi.xml',
+        'views/wizard_label_identitas.xml',
         'views/setting.xml',
         # 'views/wizard_naik_kelas.xml',
         'report/report_master.xml',
         'report/report_siswa.xml',
         'report/report_rekap_siswa.xml',
         'report/report_form_presensi.xml',
+        'report/report_label_identitas.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

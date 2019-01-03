@@ -12,7 +12,9 @@ class wizard_report_pembayaran_siswa(models.TransientModel):
     siswa_ids = fields.Many2many('res.partner',relation='wizard_pembayaran_siswa_siswa_rel', column1='report_id',column2='siswa_id', string="Siswa", domain=[('is_siswa','=',True)])
     pembayaran_ids = fields.Many2many('siswa_keu_ocb11.pembayaran',relation='wizard_pembayaran_siswa_pembayaran_rel', column1='report_id',column2='pembayaran_id', string="Data Pembayaran")
     pembayaran_siswa_ids = fields.One2many('siswa_keu_ocb11.wizard_pembayaran_siswa_biaya_rel', inverse_name='wizard_id')
-
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
+        
     def action_save(self):
         self.ensure_one()
         # update name

@@ -10,6 +10,8 @@ class wizard_pembayaran_harian(models.TransientModel):
     akhir = fields.Date('Periode Akhir', default=datetime.today().date(), required=True)
     pembayaran_ids = fields.Many2many('siswa_keu_ocb11.pembayaran',relation='wizard_pembayaran_harian_rel', column1='report_id',column2='pembayaran_id', string="Data Pembayaran")
     tipe = fields.Selection([('sum', 'Summary'), ('det', 'Detail')], required=True, default='sum')
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     def action_save(self):
         self.name = "Report Pembayaran Harian"

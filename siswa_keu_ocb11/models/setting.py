@@ -9,7 +9,7 @@ class SiswaSetting(models.Model):
         
         if 'default_siswa_number' in vals:
             # update all about default siswa_id 
-            self.env.cr.execute("update siswa_keu_ocb11_pembayaran set default_siswa_number = '" + vals['default_siswa_number'] + "'" )
+            self.env.cr.execute("update siswa_keu_ocb11_pembayaran set default_siswa_number = '" + vals['default_siswa_number'] + "' where company_id = " + self.env.user.company_id.id )
         
         res = super(SiswaSetting, self).write(vals)
         

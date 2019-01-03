@@ -14,6 +14,8 @@ class wizard_keuangan_siswa(models.TransientModel):
     biayas = fields.One2many('siswa_keu_ocb11.siswa_biaya', related='siswa_id.biayas', string='Biaya-biaya', compute='_compute_biaya' ) 
     biayas_paid = fields.One2many('siswa_keu_ocb11.siswa_biaya',  string='Biaya Paid', compute='_compute_biaya') 
     biayas_open = fields.One2many('siswa_keu_ocb11.siswa_biaya',  string='Biaya Open', compute='_compute_biaya' ) 
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     # # @api.depends('siswa_id','tahunajaran_id')
     # def _compute_siswa_biaya(self):

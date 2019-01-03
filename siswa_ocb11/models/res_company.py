@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Part of OpenErp. See LICENSE file for full copyright and licensing details.
+# Part of odoo. See LICENSE file for full copyright and licensing details.
 import base64
 import os
 import re
@@ -10,6 +10,27 @@ from pprint import pprint
 
 class Company(models.Model):
     _inherit = "res.company"
+
+    @api.model
+    def create(self, vals):
+        result = super(Company, self).create(vals)
+        # generate setting for new company        
+        self.env['siswa.setting'].create({
+            'name' : result.name,
+            'company_id' : result.id,
+        })
+
+        # generate siswa_sequence
+        self.env['ir.sequence'].create({
+            'name' : 'Siswa Sequence ' + result.name,
+            'code' : 'siswa.ocb11',
+            'prefix' : '%(range_year)s',
+            'padding' : '6',
+            'company_id' : result.id,
+        })
+
+        return result
+
 
     @api.model
     def set_modoo_logo(self):

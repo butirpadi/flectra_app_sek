@@ -1,6 +1,28 @@
 <odoo>
     <data>
 
+        <record id="res_siswa_default_tree" model="ir.ui.view">
+            <field name="name">res.siswa.default.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="email" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="display_name" position="after">
+                    <field name="induk" string="Induk"/>
+                    <field name="nis" string="NIS"/>
+                    <field name="panggilan" string="Panggilan"/>
+                    <field name="active_rombel_id" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </field>
+            </field>
+        </record>
+
         <record id="siswa_view_res_partner_filter" model="ir.ui.view">
             <field name="name">siswa.res.partner.select</field>
             <field name="model">res.partner</field>
@@ -31,6 +53,7 @@
                     <field name="telp_ayah"/>
                     <field name="ibu"/>
                     <field name="telp_ibu"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                 </tree>
             </field>
         </record>
@@ -125,7 +148,7 @@
                                     <field name="jenis_kelamin" /> 
                                     <field name="tempat_lahir" /> 
                                     <field name="tanggal_lahir" /> 
-                                    <field name="usia" invisible="1" /> 
+                                    <!-- <field name="usia" invisible="1" />  -->
                                 </group>
                                 <group>
                                     <field name="anak_ke" /> 

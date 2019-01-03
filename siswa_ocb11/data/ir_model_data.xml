@@ -6,21 +6,21 @@
             <field name="value">/siswa_ocb11/static/src/img/default_login.jpg</field>
         </record> -->
 
-        <function name="write" model="ir.config_parameter">
+        <!-- <function name="write" model="ir.config_parameter">
             <function name="search" model="ir.config_parameter">
                 <value eval="[('key', '=', 'login_form_background_default')]"/>
             </function>
             
             <value eval="{'value': '/siswa_ocb11/static/src/img/default_login.jpg'}"/>
-        </function>
+        </function> -->
         
-        <function name="write" model="ir.config_parameter">
+        <!-- <function name="write" model="ir.config_parameter">
             <function name="search" model="ir.config_parameter">
                 <value eval="[('key', '=', 'login_form_change_background_by_hour')]"/>
             </function>
             
             <value eval="{'value': 'False'}"/>
-        </function>
+        </function> -->
 
         <!-- Set default currency ke rupiah -->
         <!-- <function name="write" model="res.currency">

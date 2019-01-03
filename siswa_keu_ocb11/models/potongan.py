@@ -34,6 +34,8 @@ class PotonganBiaya(models.Model):
         ('paid', 'Paid'),
         ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
     wizard_id = fields.Many2one('siswa_wizard_batch_create_potongan', string="Wizard", ondelete="cascade")
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
 
     def _recalculate_keuangan_dashboard(self):
         # recalculate keuangan dashboard

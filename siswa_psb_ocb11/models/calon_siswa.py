@@ -727,11 +727,17 @@ class calon_siswa(models.Model):
 
     @api.multi
     def unlink(self):
-        tahun_id = self.tahunajaran_id.id
+        for rec in self:
+            # tahun_id = rec.tahunajaran_id.id
 
-        res = super(calon_siswa, self).unlink()
+            res = super(calon_siswa, self).unlink()
 
-        self.recompute_psb_dashboard(tahun_id)
+
+        # res.recompute_psb_dashboard(tahun_id)
+        # recompute dashboard
+        psb_dash = self.env['psb_dashboard'].search([])
+        for dash in psb_dash:
+            dash.regenerate_dashboard()
 
         return res
 

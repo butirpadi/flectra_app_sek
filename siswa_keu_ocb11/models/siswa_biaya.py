@@ -32,6 +32,8 @@ class siswa_biaya(models.Model):
     jenjang_id = fields.Many2one('siswa_ocb11.jenjang')
     potongan_ids = fields.One2many('siswa.potongan_biaya',inverse_name='siswa_biaya_id')
     jumlah_potongan = fields.Float('Jumlah Potongan', compute="_compute_jumlah_potongan", store=True)
+    company_id = fields.Many2one(
+        'res.company', 'Company', default=lambda self: self.env.user.company_id.id)
     
     @api.depends('potongan_ids')
     def _compute_jumlah_potongan(self):
