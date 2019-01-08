@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 class rombel_siswa(models.Model):
     _name = 'siswa_ocb11.rombel_siswa'
@@ -21,6 +21,8 @@ class rombel_siswa(models.Model):
     telp_ayah = fields.Char(related='siswa_id.telp_ayah', string='Telp Ayah')
     ibu = fields.Char(related='siswa_id.ibu', string='Nama Ibu')
     telp_ibu = fields.Char(related='siswa_id.telp_ibu', string='Telp Ibu')    
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)    
+
 
     @api.multi 
     def set_active_rombel(self):
@@ -64,16 +66,16 @@ class rombel_siswa(models.Model):
             #     print('Loop for compute rombel siswa on delete')
             #     dash.lets_compute_jumlah_siswa()
 
-        res =  super(rombel_siswa, self).unlink()
+            res =  super(rombel_siswa, rec).unlink()
 
-        # Update Rombel Dashboard
-        rb_dash = self.env['siswa_ocb11.rombel_dashboard'].search([
-                        ('rombel_id','=',rombel_id),
-                        ('tahunajaran_id','=',tahunajaran_id)
-                    ])
-        for dash in rb_dash:
-            print('Loop for compute rombel siswa on delete')
-            dash.lets_compute_jumlah_siswa()
+            # Update Rombel Dashboard
+            rb_dash = self.env['siswa_ocb11.rombel_dashboard'].search([
+                            ('rombel_id','=',rombel_id),
+                            ('tahunajaran_id','=',tahunajaran_id)
+                        ])
+            for dash in rb_dash:
+                print('Loop for compute rombel siswa on delete')
+                dash.lets_compute_jumlah_siswa()
 
         return res
 
