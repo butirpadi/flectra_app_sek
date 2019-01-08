@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
+from flectra import models, fields, api, _
 
 class action_confirm(models.Model):
     _name = 'siswa_keu_ocb11.action_confirm'

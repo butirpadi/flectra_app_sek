@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record id="siswa_ocb11_view_company_tree" model="ir.ui.view">
@@ -27,4 +27,4 @@
 		</record>
 
 	</data>
-</odoo>
+</flectra>

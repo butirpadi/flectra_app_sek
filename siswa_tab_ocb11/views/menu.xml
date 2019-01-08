@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 		<!-- Menu -->
 		<!-- Top menu item -->
@@ -51,4 +51,4 @@
 			sequence="2" />
 
 	</data>
-</odoo>
+</flectra>

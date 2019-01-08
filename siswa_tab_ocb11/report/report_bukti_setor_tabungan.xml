@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record id="format_bukti_setor_tabungan"
@@ -212,4 +212,4 @@
 		</template>
 
 	</data>
-</odoo>
+</flectra>

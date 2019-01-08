@@ -1,4 +1,4 @@
-<odoo>
+<flectra>
 	<data>
 
 		<record id="inventaris_setting_form" model="ir.ui.view">
@@ -36,4 +36,4 @@
 		</record>
 
 	</data>
-</odoo>
+</flectra>

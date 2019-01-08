@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from flectra import http
 
 # class TkSakha(http.Controller):
 #     @http.route('/tk_sakha/tk_sakha/', auth='public')
