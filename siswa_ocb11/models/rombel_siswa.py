@@ -21,6 +21,7 @@ class rombel_siswa(models.Model):
     telp_ayah = fields.Char(related='siswa_id.telp_ayah', string='Telp Ayah')
     ibu = fields.Char(related='siswa_id.ibu', string='Nama Ibu')
     telp_ibu = fields.Char(related='siswa_id.telp_ibu', string='Telp Ibu')    
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id.id)    
 
     @api.multi 
     def set_active_rombel(self):
