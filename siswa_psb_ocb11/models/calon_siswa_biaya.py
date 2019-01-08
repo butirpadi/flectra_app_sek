@@ -27,7 +27,8 @@ class calon_siswa_biaya(models.Model):
                             (11, 'November'),
                             (12, 'Desember'),
                             ], string='Bulan')
-    harga = fields.Float('Harga', compute="_compute_harga", store=True)
+    # harga = fields.Float('Harga', compute="_compute_harga", store=True)
+    harga = fields.Float('Harga', default=0.0)
     dibayar = fields.Float('Dibayar', required=True, default=0.0)
     qty = fields.Integer('Qty', default=1)
     potongan_harga = fields.Float('Potongan', default=0.0)
