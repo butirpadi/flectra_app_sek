@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data noupdate="1">
 
         <record id="__siswa_letter_surat_tagihan_" model="siswa.surat">
@@ -11,4 +11,4 @@
         </record>
 
     </data>
-</flectra>
+</odoo>

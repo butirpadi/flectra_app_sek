@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
 
         <record id="surat_tagihan_siswa_rel_form" model="ir.ui.view">
@@ -106,4 +106,4 @@
         <act_window id="wizard_surat_tagihan_action" name="Surat Tagihan" src_model="siswa_keu_ocb11.siswa_biaya" res_model="siswa.wizard.surat.tagihan" view_mode="form" target="new" key2="client_action_multi" />
 
     </data>
-</flectra>
+</odoo>

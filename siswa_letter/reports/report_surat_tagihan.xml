@@ -1,4 +1,4 @@
-<flectra>
+<odoo>
     <data>
         <report id="report_surat_tagihan_action" model="siswa.wizard.surat.tagihan" string="Surat Tagihan" report_type="qweb-pdf" name="siswa_letter.report_surat_tagihan" file="siswa_letter.report_surat_tagihan" attachment_use="False" print_report_name="'SuratTagihan'" menu="False" paperformat="siswa_ocb11.format_surat_layout" />
     </data>
@@ -221,4 +221,4 @@
             </t>
         </t>
     </template>
-</flectra>
+</odoo>

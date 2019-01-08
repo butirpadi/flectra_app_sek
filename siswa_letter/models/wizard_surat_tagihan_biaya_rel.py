@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 class WizardSuratTagihanBiayaRel(models.Model):
     _name = 'wizard.surat.tagihan.biaya.rel'

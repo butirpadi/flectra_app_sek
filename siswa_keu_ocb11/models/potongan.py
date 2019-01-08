@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions, _
 
 class PotonganBiaya(models.Model):
     _name = 'siswa.potongan_biaya'

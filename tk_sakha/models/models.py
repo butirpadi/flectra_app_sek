@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 # class tk_sakha(models.Model):
 #     _name = 'tk_sakha.tk_sakha'

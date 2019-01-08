@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api
+from odoo import models, fields, api
 
 # class siswa_commerce(models.Model):
 #     _name = 'siswa_commerce.siswa_commerce'

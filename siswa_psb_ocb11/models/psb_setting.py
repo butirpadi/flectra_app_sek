@@ -1,6 +1,6 @@
 from ast import literal_eval
 
-from flectra import api, fields, models
+from odoo import api, fields, models
 from pprint import pprint 
 
 
