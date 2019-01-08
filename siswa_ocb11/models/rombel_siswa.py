@@ -54,6 +54,8 @@ class rombel_siswa(models.Model):
         rombel_id = 0
         
         # Update Rombel Dashboard
+        # res = super(rombel_siswa, self).unlink()
+        res = None
         for rec in self:
             print('Compute Rombel Siswa on Delete')
             tahunajaran_id = rec.tahunajaran_id.id
