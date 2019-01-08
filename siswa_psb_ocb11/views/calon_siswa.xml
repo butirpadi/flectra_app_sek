@@ -56,14 +56,14 @@
 						<button name="action_confirm" type="object"
 							string="Confirm"
 							attrs="{'invisible':['|',('state', '=', 'reg'),('reg_number', '=', 'New')]}"
-							class="btn btn-primary" />
+							class="btn btn-flat btn-primary" />
 						<button name="action_print_kwitansi" type="object"
 							string="Print"
 							attrs="{'invisible':['|',('state', '=', 'draft'),('reg_number', '=', 'New')]}"
 							class="btn" />
 						<button name="action_reset" type="object" string="Reset"
 							attrs="{'invisible':[('state', '!=', 'reg')]}"
-							class="btn btn-danger" confirm="Are you sure to do this action?"
+							class="btn btn-flat btn-danger" confirm="Are you sure to do this action?"
 							groups="siswa_psb_ocb11.siswa_psb_group_admin" />
 						<field name="state" widget="statusbar"
 							statusbar_visible="draft,reg" />
@@ -175,7 +175,7 @@
 									<group>
 										<button name="generate_biaya_default"
 											string="Generate Biaya" type="object"
-											class="oe_edit_only btn btn-primary" />
+											class="oe_edit_only btn btn-flat btn-primary" />
 									</group>
 									<group>
 										<field name="biaya_optional_ids" widget="many2many_tags"
@@ -205,7 +205,7 @@
 								<group>
 									<button name="generate_pembayaran_lines" type="object"
 										string="Generate Pembayaran"
-										class="btn btn-primary oe_edit_only" />
+										class="btn btn-flat btn-primary oe_edit_only" />
 								</group>
 								<field name="pembayaran_lines"
 									options='{"no_create": True}'
@@ -238,7 +238,7 @@
 										invisible="1" />
 									<button name="calculate_bayar_tunai"
 										string="Calculate Bayar Tunai" type="object"
-										class="btn btn-success oe_edit_only"
+										class="btn btn-flat btn-success oe_edit_only"
 										attrs="{'invisible':[('state', '=', 
 									'reg')] }" />
 								</group>

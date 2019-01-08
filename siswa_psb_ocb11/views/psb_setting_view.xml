@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <header>
-                            <button string="Save" type="object" name="execute" class="btn btn-primary" />
+                            <button string="Save" type="object" name="execute" class="btn btn-flat btn-primary" />
                             <!-- <button string="Discard" type="object" name="cancel" /> -->
                         </header>
                     </div>

@@ -36,7 +36,7 @@
 									<div class="container o_kanban_card_content">
 										<div class="row">
 											<div class="col-xs-6 o_kanban_primary_left">
-												<button class="btn btn-primary"
+												<button class="btn btn-flat btn-primary"
 													name="get_view_rombel" type="object">
 													<span>
 														<field name="jumlah_siswa" />

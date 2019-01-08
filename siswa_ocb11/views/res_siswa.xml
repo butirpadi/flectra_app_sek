@@ -134,7 +134,7 @@
                 <field name="mobile" position="replace"></field> 
                 <xpath expr="//form/sheet" position="before">
                     <header>
-                        <button style="margin-top:5px;margin-bottom:5px;" name="print_biodata" type="object" string="Cetak Biodata" class="btn btn-default" attrs="{'invisible':[('induk', '=', 'New')]}" invisible="1" />
+                        <button style="margin-top:5px;margin-bottom:5px;" name="print_biodata" type="object" string="Cetak Biodata" class="btn btn-flat btn-default" attrs="{'invisible':[('induk', '=', 'New')]}" invisible="1" />
                     </header>
                 </xpath>
                 <xpath expr="//form/sheet/notebook" position="after">
@@ -200,7 +200,7 @@
                                 <tree editable="bottom"  >
                                     <field name="tahunajaran_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" context="{'active_test': False}" />
                                     <field name="rombel_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
-                                    <button type="object" name="set_active_rombel" class="btn btn-primary" string="activate" groups="base.group_system" ></button>
+                                    <button type="object" name="set_active_rombel" class="btn btn-flat btn-primary" string="activate" groups="base.group_system" ></button>
                                 </tree>
                             </field>
                         </page>

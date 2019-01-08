@@ -121,7 +121,7 @@
         <field name="arch" type="xml">
             <form duplicate="0" string="siswa_biaya" class="o_sale_order">
                 <header>
-                    <button type="object" name="generate_default" class="btn btn-default" string="Generate Default" />
+                    <button type="object" name="generate_default" class="btn btn-flat btn-default" string="Generate Default" />
                 </header>
                 <sheet>
                     <group>

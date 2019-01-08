@@ -58,18 +58,18 @@
 											</div>
 											<div class="col-xs-12">
 												<a type="object" name="get_reg"
-													class="btn btn-success btn-sm">
+													class="btn btn-flat btn-success btn-sm">
 													<i class="fa fa-check"></i>
 													<field name="jumlah_registered" />
 													Registered
 												</a>
 												<a type="object" name="get_draft"
-													class="btn btn-danger btn-sm">
+													class="btn btn-flat btn-danger btn-sm">
 													<i class="fa fa-edit"></i>
 													<field name="jumlah_draft" />
 													Draft
 												</a>
-												<a class="btn pull-right" type="object"
+												<a class="btn btn-flat pull-right" type="object"
 													name="create_register">
 													<i class="fa fa-file-o"></i>
 													add new

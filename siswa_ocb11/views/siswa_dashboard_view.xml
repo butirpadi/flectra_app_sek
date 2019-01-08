@@ -30,12 +30,12 @@
                                         <div>
                                             <center>
                                                 <button
-                                                    class="btn btn-primary"
+                                                    class="btn btn-flat btn-primary"
                                                     type="action"
                                                     name="dashboard_sales_action_id"
                                                     string="Quotations">Quotations</button>
                                                 <button
-                                                    class="btn btn-primary"
+                                                    class="btn btn-flat btn-primary"
                                                     type="action"
                                                     name="dashboard_sales_order_action_id">Sales order</button>
                                                 <h3>Custom Dashboard for Sales</h3>

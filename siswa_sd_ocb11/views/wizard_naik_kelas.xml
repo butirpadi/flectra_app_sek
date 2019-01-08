@@ -37,7 +37,7 @@
                     <header>
                         <button attrs="{'invisible':[('is_collected', '=', True)]}" type="object" name="compute_get_siswa" 
                             string="Compute Data Siswa" class="oe_edit_only" />
-                        <button type="object" name="action_confirm" string="Confirm" class="btn btn-primary"
+                        <button type="object" name="action_confirm" string="Confirm" class="btn btn-flat btn-primary"
                             attrs="{'invisible':[('state', '=', 'done')]}" />
                         <button attrs="{'invisible':[('is_collected', '=', False)]}" type="object" confirm="Are you sure?" 
                             name="reset_compute_siswa" string="Reset Siswa" class="oe_edit_only" groups="siswa_ocb11.group_admin" />

@@ -72,7 +72,7 @@
 			<field name="arch" type="xml">
 				<form duplicate="0" string="Barang" class="o_sale_order">
 					<header>
-						<button class="btn btn-danger" type="object"
+						<button class="btn btn-flat btn-danger" type="object"
 							name="action_scrap" string="Scrap"
 							attrs="{'invisible': [ ('kondisi', '=', 'rusak')]}"
 							confirm="Are you sure ?" />
