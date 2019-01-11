@@ -8,9 +8,15 @@
             <field name="sequence">16</field>
             <field name="arch" type="xml">
                 <search string="Search Tabungan">
+                    <field name="name" string="Nama" filter_domain="['|','|','|','|',('name','ilike',self),
+                                        ('siswa_id','ilike',self),
+                                        ('state','ilike',self),
+                                        ('induk','ilike',self),
+                                        ('nis','ilike',self)
+                                        ]"/>
                     <filter string="Draft" name="state" domain="[('state','=','draft')]"/>
                     <filter string="Posted" name="state" domain="[('state','=','post')]"/>
-                    
+
                     <group expand="0" string="Group By">
                         <filter name="group_by_siswa" string="Siswa" domain="[]" context="{'group_by':'siswa_id'}"/>
                         <filter name="group_by_state" string="Status" domain="[]" context="{'group_by':'state'}"/>
@@ -20,13 +26,13 @@
             </field>
         </record>
 
-        <!-- explicit list view definition -->    
+        <!-- explicit list view definition -->
         <record model="ir.ui.view" id="siswa_tab_ocb11.tabungan_list">
             <field name="name">siswa_tab_ocb11_tabungan_list</field>
             <field name="model">siswa_tab_ocb11.tabungan</field>
             <field eval="16" name="priority"/>
             <field name="arch" type="xml">
-                <tree default_order="tanggal desc" >
+                <tree default_order="tanggal desc">
                     <field name="name"/>
                     <field name="tanggal" />
                     <field name="siswa_id" />
@@ -44,7 +50,7 @@
             <field name="model">siswa_tab_ocb11.tabungan</field>
             <field eval="18" name="priority"/>
             <field name="arch" type="xml">
-                <tree create="false" edit="false" delete="false" >
+                <tree create="false" edit="false" delete="false">
                     <field name="name"/>
                     <field name="tanggal" />
                     <field name="siswa_id" invisible="1" />
@@ -53,7 +59,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="siswa_tab_ocb11.tabungan_action_window">
             <field name="name">Tabungan Siswa</field>
@@ -69,7 +75,7 @@
                     <header>
                         <button name="action_confirm" string="Confirm" type="object" class="btn btn-primary" attrs="{'invisible':['|',('state', '=', 'post'),('name', '=', 'New')]}" />
                         <button confirm="Are you sure you want to do this?" name="action_cancel" string="Reset" type="object" class="btn oe_edit_only" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" groups="siswa_tab_ocb11.siswa_tab_group_admin" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,post"  />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,post" />
                         <button string="Print" name="action_print" type="object" icon="fa-print" attrs="{'invisible':[('state', '!=', 'post')]}" />
                     </header>
                     <sheet>
@@ -83,14 +89,14 @@
                                 <field name="tanggal" attrs="{'readonly':[('name', '!=', 'New')]}" />
                                 <field name="siswa_id" domain="[('is_siswa','=',True)]" options="{'no_create':True, 'no_edit':True,'no_create_edit': True,'no_open':True}" attrs="{'readonly':[('name', '!=', 'New')]}" />
                                 <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" readonly="1" />
-                                <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" readonly="1" />                        
+                                <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" readonly="1" />
                                 <field name="active_rombel_id" />
-                            	<field name="tahunajaran_id" attrs="{'readonly':[('name', '!=', 'New')]}" />
-                            	<field name="default_siswa_number" invisible="1" />
+                                <field name="tahunajaran_id" attrs="{'readonly':[('name', '!=', 'New')]}" />
+                                <field name="default_siswa_number" invisible="1" />
                             </group>
                             <group>
                                 <field name="saldo_tabungan" attrs="{'invisible':[('name', '!=', 'New')]}" />
-                                <field name="jenis" attrs="{'readonly':['|',('name', '!=', 'New'),('saldo_tabungan', '=', 0)]}" /> 
+                                <field name="jenis" attrs="{'readonly':['|',('name', '!=', 'New'),('saldo_tabungan', '=', 0)]}" />
                                 <field name="jumlah_temp" attrs="{'readonly':[('state', '=', 'post')]}" />
                             </group>
                         </group>
@@ -111,8 +117,8 @@
             <field name="form_view_id" ref="siswa_tab_ocb11.view_tabungan_form"/>
         </record>
 
-        
-        
+
+
 
     </data>
 </odoo>
