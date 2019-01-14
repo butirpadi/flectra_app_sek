@@ -11,12 +11,18 @@ class wizard_report_form_presensi(models.TransientModel):
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string="Tahun Ajaran", default=lambda self: self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)]), required=True, ondelete="cascade")
     tanggal = fields.Date('Tanggal')
     default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number', default=lambda self: self.env['siswa.setting'].search([],limit=1).default_siswa_number )
+    report_logo = fields.Binary("Report Logo", attachment=True)
     
     def action_save(self):
         self.ensure_one()
         # set kas_ids
         # siswas = self.env['res.partner'].search([('active_rombel_id','=',self.rombel_id.id)])
         siswas = self.env['siswa_ocb11.rombel_siswa'].search([('tahunajaran_id','=',self.tahunajaran_id.id),('rombel_id','=',self.rombel_id.id)])
+        # get report logo
+        setting_id = self.env.ref('siswa_ocb11.siswa_number_default_setting')
+        self.report_logo = setting_id.report_logo
+
+
         # reg_sis = []
         for sis in siswas:
             self.write({

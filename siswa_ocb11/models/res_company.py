@@ -11,6 +11,8 @@ from pprint import pprint
 class Company(models.Model):
     _inherit = "res.company"
 
+    report_logo = fields.Binary("Report Logo", attachment=True)
+
     @api.model
     def set_modoo_logo(self):
         print('--------------------------------')

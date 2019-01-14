@@ -18,7 +18,7 @@
 							<field name="default_siswa_number" />
 						</group>
 						<group>
-
+							<field name="report_logo" widget='image'  />
 						</group>
 					</group>
 				</form>
