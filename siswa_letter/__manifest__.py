@@ -23,7 +23,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'data/ir_default_data.xml',
         'views/wizard_surat_tagihan.xml',
         'views/surat.xml',
