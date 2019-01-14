@@ -165,3 +165,11 @@ class siswa(models.Model):
 
         result = super(siswa, self).write(vals)
         return result
+    
+    @api.multi
+    def unlink(self):        
+        for rec in self:
+            print('Delete Siswa/Res.Partner')
+            res =  super(siswa, rec).unlink()
+
+        return res
