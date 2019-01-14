@@ -42,7 +42,7 @@
             <field name="arch" type="xml">
                 <form duplicate="0" string="Surat Tagihan" class="o_sale_order" create="false">
                     <header attrs="{'invisible':[('state', '=', 'draft')]}">
-                        <button type="object" name="print_action" attrs="{'invisible':[('state', '=', 'draft')]}" class="btn btn-primary" string="Print"></button>
+                        <button type="object" name="print_action" attrs="{'invisible':[('state', '=', 'draft')]}" string="Print"></button>
                         <field attrs="{'invisible':[('state', '=', 'draft')]}" name="state" widget="statusbar" statusbar_visible="draft,post"/>
                     </header>
                     <sheet>
