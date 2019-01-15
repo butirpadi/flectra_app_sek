@@ -10,10 +10,11 @@
                         <group>
                             <group>
                                 <field name="tahunajaran_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
-                                <field name="tanggal" />
+                                <field name="report_type" />
                             </group>
                             <group>
                                 <field name="rombel_id" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" />
+                                <field name="tanggal" />
                             </group>
                         </group>
                     </sheet>

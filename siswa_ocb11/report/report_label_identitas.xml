@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <report id="report_label_identitas_action" model="wizard.label.identitas" string="Label Identitas" report_type="qweb-pdf" name="siswa_ocb11.report_label_identitas" file="siswa_ocb11.report_label_identitas" attachment_use="False" print_report_name="'LabelIdentitas'" menu="False" paperformat="siswa_ocb11.format_report_free_layout" />
+        <report id="report_label_identitas_action" model="wizard.label.identitas" string="Label Identitas" report_type="qweb-html" name="siswa_ocb11.report_label_identitas" file="siswa_ocb11.report_label_identitas" attachment_use="False" print_report_name="'LabelIdentitas'" menu="False" paperformat="siswa_ocb11.format_report_free_layout" />
     </data>
     <template id="report_label_identitas">
         <t t-call="web.html_container">
@@ -8,40 +8,58 @@
                 <t t-call="web.basic_layout">
                     <div class="page">
                         <style>
-                            table.table{
-                                border-left:none!important;
-                                border-right:none!important;
+                            table.table, table.table tbody tr td{
                                 background-color:transparent!important;
                             }
 
-                            table.table tbody tr td {
-                                border-right:none!important;
-                                padding-top:0;
-                                padding-bottom:0;
-                                background-color:transparent!important;
+                            table.table.noborder, table.table.noborder tbody tr td{
+                                border:none!important;
+                                padding:0;
+                                margin:0;
                             }
 
-                            p.slimline{
-                                margin-top:0;
-                                margin-bottom:0;
+                            table.datasiswa {
+                                margin:5px;
                             }
-
-                            table.noborder, table.noborder tbody tr, table.noborder tbody tr td{
-                                border:none;
-                            } 
                         </style>
 
-                        <div class="row">
+                        <div class="row" >
                             <t t-foreach="o.rombel_siswa_ids" t-as="siswa">
-                                <div class="col-xs-4 " style="padding:5px;">
-                                    <div class="row" style="border:thin solid black;height:5cm;display:block;" >
-                                        <div class="col-xs-4"  >
-                                            <img src='/web/binary/company_logo' style="width:100%;vertical-align:middle;text-align:center;" />
+                                <div class="col-xs-4 " style="border:solid thin darkgrey;padding:5px;">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <t t-if="user.company_id.report_logo">
+                                                <span t-field="user.company_id.report_logo" t-field-options='{"widget": "image"}' style="max-width:150px;" />
+                                            </t>
+                                            <t t-if="not user.company_id.report_logo">
+                                                <img src='/web/binary/company_logo' style="max-width:150px;vertical-align:middle;text-align:center;" />
+                                            </t>
                                         </div>
-                                        <div class="col-xs-8 text-center">
-                                            <h4 t-field="siswa.rombel_id.name" />
-                                            <p t-field="siswa.siswa_id.name" />
-                                            <p t-field="siswa.siswa_id.nis" />
+                                        <div class="col-xs-12">
+                                            <table class="table noborder datasiswa">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <strong t-esc="siswa.siswa_id.name" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <t t-if="o.default_siswa_number=='nis'">
+                                                                <t t-esc="siswa.siswa_id.nis" />
+                                                            </t>
+                                                            <t t-if="o.default_siswa_number=='induk'">
+                                                                <t t-esc="siswa.siswa_id.induk" />
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <t t-esc="siswa.rombel_id.name" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

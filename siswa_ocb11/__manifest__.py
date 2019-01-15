@@ -52,6 +52,7 @@
         'report/report_siswa.xml',
         'report/report_rekap_siswa.xml',
         'report/report_form_presensi.xml',
+        'report/report_form_presensi_monthly.xml',
         'report/report_label_identitas.xml',
         'views/menu.xml',
     ],

@@ -6,6 +6,7 @@ from datetime import datetime
 class WizardLabelIdentitas(models.TransientModel):
     _name = 'wizard.label.identitas'
 
+    name = fields.Char('Label Identitas', default="Label Identitas")
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')],
                              string='State', required=True, default='draft')
     tahunajaran_id = fields.Many2one(
@@ -24,6 +25,8 @@ class WizardLabelIdentitas(models.TransientModel):
         column1='wizard_id',
         column2='rombel_siswa_id',
     )
+    default_siswa_number = fields.Selection([('nis', 'NIS'), ('induk', 'System Number')], string='Default Siswa Number',
+                                            default=lambda self: self.env['siswa.setting'].search([], limit=1).default_siswa_number)
 
     @api.multi
     def action_save(self):
@@ -39,15 +42,17 @@ class WizardLabelIdentitas(models.TransientModel):
         self.rombel_siswa_ids = [(6, None, rbs_temp)]
         # self.rombel_siswa_ids = [(6, None, rbs_ids.ids)
 
-        return {
-            'name': 'Label Identitas',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'wizard.label.identitas',
-            'target': 'current',
-            'res_id': self.id,
-            'type': 'ir.actions.act_window',
-        }
+        # return {
+        #     'name': 'Label Identitas',
+        #     'view_type': 'form',
+        #     'view_mode': 'form',
+        #     'res_model': 'wizard.label.identitas',
+        #     'target': 'current',
+        #     'res_id': self.id,
+        #     'type': 'ir.actions.act_window',
+        # }
+
+        return self.env.ref('siswa_ocb11.report_label_identitas_action').report_action(self)
 
     @api.multi
     def print_action(self):
