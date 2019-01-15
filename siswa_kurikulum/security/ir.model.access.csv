@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_siswa_kurikulum_siswa_kurikulum,siswa_kurikulum.siswa_kurikulum,model_siswa_kurikulum_siswa_kurikulum,,1,0,0,0
