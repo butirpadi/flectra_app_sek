@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        
+        <menuitem id="siswa_menu_master" name="Master" 
+            parent="hr.menu_hr_root" sequence="1"/>
+        
+        <menuitem
+            action="hr.open_module_tree_department"
+            id="hr.menu_hr_department_tree"
+            parent="siswa_menu_master"
+            sequence="1"
+            groups="hr.group_hr_user"/>
+        <menuitem id="siswa_job_position_menu" 
+            action="siswa_job_action_window" 
+            parent="siswa_menu_master" sequence="2"/>
+        <menuitem
+            id="hr.menu_open_view_employee_list_my"
+            action="siswa_employee.siswa_employee_action_window"
+            parent="siswa_menu_master"
+            sequence="3"/>
+    </data>
+</odoo>

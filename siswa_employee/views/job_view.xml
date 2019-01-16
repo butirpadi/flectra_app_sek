@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="siswa_job_list_view">
+            <field name="name">siswa.job.list.view</field>
+            <field name="model">hr.job</field>
+            <field name="arch" type="xml">
+                <tree string="Job" decoration-bf="message_needaction==True">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="no_of_employee" />
+                    <field name="no_of_recruitment" invisible="1" />
+                    <field name="expected_employees" invisible="1" />
+                    <field name="no_of_hired_employee" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="siswa_job_form_view" model="ir.ui.view">
+            <field name="name">root_siswa_ocb11.siswa_form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='no_of_recruitment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='recruitment']" position="attributes">
+                    <attribute name="string">Details</attribute>
+                </xpath>
+                <xpath expr="//header" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="siswa_job_action_window">
+            <field name="name">Job Positions</field>
+            <field name="res_model">hr.job</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_job_list_view')}), 
+                (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_job_form_view')})
+                ]"/>
+            <!-- <field name="tree_view_id" ref="siswa_job.siswa_job_list_view"/>
+            <field name="form_view_id" ref="siswa_job.siswa_job_form_view"/> -->
+            <!-- <field name="view_id" ref="siswa_job_list_view"/>
+            <field name="form_view_id" ref="siswa_job_form_view"/> -->
+        </record>
+
+    </data>
+</odoo>
