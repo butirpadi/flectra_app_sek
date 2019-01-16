@@ -2,7 +2,7 @@
 	<data>
 
 		<menuitem name="Kesiswaan" id="siswa_ocb11.kesiswaan_menu"
-			sequence="1" web_icon="siswa_ocb11,static/description/icon.png" />
+			sequence="99" web_icon="siswa_ocb11,static/description/icon.png" />
 
 		<menuitem name="Dashboard"
 			id="siswa_ocb11.menu_rombel_dashboard_kanban"

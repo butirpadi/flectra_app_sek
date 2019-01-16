@@ -1,7 +1,7 @@
 <odoo>
 	<data>
 		<menuitem name="PSB" id="siswa_psb_ocb11.root_menu"
-			sequence="4" web_icon="siswa_psb_ocb11,static/description/icon.png" />
+			sequence="105" web_icon="siswa_psb_ocb11,static/description/icon.png" />
 		
 		<menuitem name="Dashboard"
 			id="siswa_psb_ocb11.action_menu_dashboard"

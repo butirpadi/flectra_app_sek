@@ -2,7 +2,7 @@
 	<data>
 	
 		<menuitem name="Keuangan" id="siswa_ocb11.keuangan_menu"
-			sequence="2" web_icon="siswa_keu_ocb11,static/description/icon.png" />
+			sequence="101" web_icon="siswa_keu_ocb11,static/description/icon.png" />
 
 		<menuitem name="Dashboard"
 			id="siswa_keu_ocb11.menu_dashboard_keuangan"
@@ -50,14 +50,15 @@
 			id="siswa_keu_ocb11.menu_data_keuangan_siswa"
 			parent="siswa_keu_ocb11.submenu_keuangan_reports"
 			action="siswa_keu_ocb11.data_keuangan_siswa_action" sequence="1" />
+		<menuitem name="Tagihan Per Siswa"
+			id="siswa_keu_ocb11.menu_keuangan_siswa"
+			parent="siswa_keu_ocb11.submenu_keuangan_reports"
+			action="siswa_keu_ocb11.wizard_keuangan_siswa" sequence="2" />
 		<menuitem name="PDF Report"
 			id="siswa_keu_ocb11.menu_keuangan_pdf"
 			parent="siswa_keu_ocb11.submenu_keuangan_reports"
-			 sequence="2" />
-		<menuitem name="Tagihan Per Siswa"
-			id="siswa_keu_ocb11.menu_keuangan_siswa"
-			parent="siswa_keu_ocb11.menu_keuangan_pdf"
-			action="siswa_keu_ocb11.wizard_keuangan_siswa" sequence="1" />
+			 sequence="3" />
+			 
 		<menuitem name="Pembayaran Siswa"
 			id="siswa_keu_ocb11.menu_report_pembayaran_siswa"
 			parent="siswa_keu_ocb11.menu_keuangan_pdf"

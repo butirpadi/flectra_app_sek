@@ -3,7 +3,7 @@
 		<!-- Menu -->
 		<!-- Top menu item -->
 		<menuitem name="Tabungan"
-			id="siswa_tab_ocb11.tabungan_master_menu" sequence="3"
+			id="siswa_tab_ocb11.tabungan_master_menu" sequence="103"
 			web_icon="siswa_tab_ocb11,static/description/icon.png" />
 
 		<!-- menu categories -->

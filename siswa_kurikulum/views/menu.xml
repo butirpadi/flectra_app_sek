@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <menuitem name="Kurikulum" id="menu_kurikulum_root"
+			sequence="107" web_icon="siswa_kurikulum,static/description/icon.png" />
+
+        <menuitem name="Dashboard"
+			id="menu_kurikulum_dashboard"
+			parent="menu_kurikulum_root"
+			 sequence="1" />
+
+        <menuitem name="Operations" id="menu_kurikulum_operation"
+			parent="menu_kurikulum_root" sequence="2" />
+        
+        <menuitem name="Master" id="menu_kurikulum_master"
+			parent="menu_kurikulum_root" sequence="3" />
+        
+        <menuitem name="Configuration" id="menu_kurikulum_configuration"
+			parent="menu_kurikulum_root" sequence="4" />
+
+        <menuitem name="Kompetensi Inti" id="menu_kompetensi_inti"
+			parent="menu_kurikulum_master"
+			action="kompetensi_inti_action_window" sequence="1" />
+        <menuitem name="Kompetensi Dasar" id="menu_kompetensi_dasar"
+			parent="menu_kurikulum_master"
+			action="kompetensi_dasar_action_window" sequence="2" />
+        <menuitem name="Kategori Muatan" id="menu_kategori_muatan"
+			parent="menu_kurikulum_master"
+			action="kategori_muatan_action_window" sequence="3" />
+        <menuitem name="Muatan Materi" id="menu_muatan_materi"
+			parent="menu_kurikulum_master"
+			action="muatan_materi_action_window" sequence="4" /> 
+        
+		<menuitem name="RPPM Setting" id="menu_rppm_setting"
+			parent="menu_kurikulum_configuration"
+			action="rppm_setting_action" sequence="1" /> 
+
+    </data>
+</odoo>
