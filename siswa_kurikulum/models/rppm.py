@@ -41,6 +41,11 @@ class Rppm(models.Model):
     )
 
     @api.multi 
+    def action_print_view(self):
+        self.ensure_one()
+        print('Action Print View')
+
+    @api.multi 
     def action_first_confirm(self):
         for rec in self:
             print('first confirm')

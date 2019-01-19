@@ -1,0 +1,147 @@
+<odoo>
+    <data>
+
+        <record id="format_rppm_report" model="report.paperformat">
+            <field name="name">RPPM Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">8</field>
+            <field name="margin_bottom">8</field>
+            <field name="margin_left">8</field>
+            <field name="margin_right">8</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+        </record>
+
+        <report id="rppm_report_action" 
+            model="siswa.rppm" 
+            string="RPPM" 
+            report_type="qweb-html" 
+            name="rppm_report" 
+            file="rppm_report" 
+            attachment_use="False" 
+            print_report_name="'RPPM-%s' % (object.name )" 
+            menu="False" 
+            paperformat="format_rppm_report" 
+        />
+
+        <template id="rppm_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <style>
+                                table.table, table.table tbody tr td{
+                                    background-color:transparent!important;
+                                }
+
+                                table.table.noborder, table.table.noborder tbody tr td{
+                                    border:none!important;
+                                    padding:0;
+                                    margin:0;
+                                }
+                            </style>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <t t-if="user.company_id.report_logo">
+                                        <span t-field="user.company_id.report_logo" t-field-options='{"widget": "image"}' />
+                                    </t>
+                                    <t t-if="not user.company_id.report_logo">
+                                        <img src='/web/binary/company_logo' style="max-height:60px" />
+                                    </t>
+                                </div>
+                                <div class="col-xs-9">
+                                    <h3 style="margin:0;padding:0;">
+                                        <strong>RENCANA PELAKSANAAN PEMBELAJARAN MINGGUAN</strong>
+                                    </h3>
+                                    <!-- <div class="row">
+                                        <div class="col-xs-4">
+                                            <table class="table noborder">
+                                                <tbody>
+                                                    <tr>
+                                                        <td >Tahun Ajaran</td>
+                                                        <td style="width:10px;">:</td>
+                                                        <td class="col-xs-4">
+                                                            <t t-esc="o.tahunajaran_id.name" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rombongan Belajar</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <t t-esc="o.rombel_id.name" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <span t-field="o.tanggal" t-esc-options='{"format": "dd MMMM y"}'/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="col-xs-12">
+                                    <hr style="border-top: 4px double black;" />
+                                    <table class="table noborder table-condensed" >
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-xs-2" >
+                                                    <label>Tahun Ajaran</label>
+                                                </td>
+                                                <td style="width:5px;" >:</td>
+                                                <td></td>
+                                                <td class="col-xs-2" >
+                                                    <label>Kelompok</label>
+                                                </td>
+                                                <td style="width:5px;" >:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>Semester</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td></td>
+                                                <td>
+                                                    <label>Tema</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>Periode</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td></td>
+                                                <td>
+                                                    <label>Subtema</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>KD</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td colspan="4" ></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

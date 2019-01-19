@@ -49,6 +49,7 @@
                         <!-- <button name="action_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '=', 'paid'),('name', '=', 'New')]}" class="btn btn-primary" />
                         <button name="reset_pembayaran_lines" type="object" string="Reset" invisible="1" class="oe_edit_only btn btn-default" />
                         <button name="action_print" type="object" string="Print" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" class="btn btn-default" /> -->
+                        <button name="action_print_view" type="object" string="Print View" attrs="{'invisible':['|',('state', '=', 'draft')]}" class="oe_edit_only" /> 
                         <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
                         <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
                         <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 

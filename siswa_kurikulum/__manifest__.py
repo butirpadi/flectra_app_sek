@@ -32,6 +32,7 @@
         'views/rppm_setting_view.xml',
         'views/rppm_view.xml',
         'views/menu.xml',
+        'reports/rppm_report_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
