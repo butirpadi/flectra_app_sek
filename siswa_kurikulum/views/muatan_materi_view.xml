@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="muatan_materi_list_view">
+            <field name="name">muatan.materi.list.view</field>
+            <field name="model">muatan.materi</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="desc"/>
+                    <field name="kategori_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="muatan_materi_action_window">
+            <field name="name">Muatan Materi</field>
+            <field name="res_model">muatan.materi</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="muatan_materi_form_view" model="ir.ui.view">
+            <field name="name">muatan.materi.form</field>
+            <field name="model">muatan.materi</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Muatan Materi" class="o_sale_order">
+                    <sheet>
+                        <!-- <group>
+                            <group>
+                            </group>
+                            <group>
+                                <field name="kategori_code" readonly="1"/>
+                            </group>
+                        </group> -->
+                        <group>
+                            <field name="kategori_id" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' />
+                            <field name="name"/>
+                            <field name="desc"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

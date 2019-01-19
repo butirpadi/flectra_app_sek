@@ -17,7 +17,11 @@
         <menuitem name="Configuration" id="menu_kurikulum_configuration"
 			parent="menu_kurikulum_root" sequence="4" />
 
-        <menuitem name="Kompetensi Inti" id="menu_kompetensi_inti"
+        <menuitem name="RPPM" id="menu_siswa_rppm"
+			parent="menu_kurikulum_operation"
+			action="siswa_rppm_action_window" sequence="1" />
+        
+		<menuitem name="Kompetensi Inti" id="menu_kompetensi_inti"
 			parent="menu_kurikulum_master"
 			action="kompetensi_inti_action_window" sequence="1" />
         <menuitem name="Kompetensi Dasar" id="menu_kompetensi_dasar"

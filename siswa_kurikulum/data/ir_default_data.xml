@@ -1,0 +1,9 @@
+<odoo>
+	<data noupdate="1">
+
+		<record model="rppm.setting" id="rppm_default_setting">
+			<field name="name">RPPM Setting</field>
+		</record>
+
+	</data>
+</odoo>

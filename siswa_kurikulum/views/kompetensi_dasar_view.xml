@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="kompetensi_dasar_list_view">
+            <field name="name">kompetensi.dasar.list.view</field>
+            <field name="model">kompetensi.dasar</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="kompetensi_inti_id"/>
+                    <field name="desc"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="kompetensi_dasar_action_window">
+            <field name="name">Kompetensi Dasar</field>
+            <field name="res_model">kompetensi.dasar</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="kompetensi_dasar_form_view" model="ir.ui.view">
+            <field name="name">kompetensi.dasar.form</field>
+            <field name="model">kompetensi.dasar</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Kompetensi Dasar" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="kompetensi_inti_id"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="desc"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

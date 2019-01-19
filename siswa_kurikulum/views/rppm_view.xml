@@ -1,0 +1,142 @@
+<odoo>
+    <data>
+        <record id="rppm_search_view" model="ir.ui.view" >
+	        <field name="name">rppm.search.view</field>
+	        <field name="model">siswa.rppm</field>
+	        <field name="arch" type="xml">
+                <search string="Search Name">
+                    <field name="name" string="Nama" filter_domain="['|','|','|',('name','ilike',self),('employee_id','ilike',self),('tema','ilike',self),('subtema','ilike',self)]"/>
+                    <filter string="Draft" domain="[('state','=','draft')]"/>
+                    <filter string="Posted" domain="[('state','=','post')]"/>
+                    <filter string="First Confirmed" domain="[('state','=','first')]"/>
+                    <filter string="Second Confirmed" domain="[('state','=','second')]"/>
+                    <filter string="Done" domain="[('state','=','done')]"/>
+                    <group string="Group By Name">
+                        <filter name="group_by_state" string="State" domain="[]" context="{'group_by':'state'}"/>
+                        <filter name="group_by_employee_id" string="Person" domain="[]" context="{'group_by':'employee_id'}"/>
+                        <filter name="group_by_tahunajaran_id" string="Tahun Ajaran" domain="[]" context="{'group_by':'tahunajaran_id'}"/>
+                        <filter name="group_by_jenjang_id" string="Jenjang" domain="[]" context="{'group_by':'jenjang_id'}"/>
+                        <filter name="group_by_semester" string="Semester" domain="[]" context="{'group_by':'semester'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="siswa_rppm_list_view">
+            <field name="name">rppm.list.view</field>
+            <field name="model">siswa.rppm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="tanggal"/>
+                    <field name="tahunajaran_id"/>
+                    <field name="periode_str"/>
+                    <field name="semester"/>
+                    <field name="tema"/>
+                    <field name="subtema"/>
+                    <field name="employee_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="siswa_rppm_form_view" model="ir.ui.view">
+            <field name="name">siswa.rppm.form</field>
+            <field name="model">siswa.rppm</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Muatan Materi" class="o_sale_order">
+                    <header>
+                        <!-- <button name="action_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '=', 'paid'),('name', '=', 'New')]}" class="btn btn-primary" />
+                        <button name="reset_pembayaran_lines" type="object" string="Reset" invisible="1" class="oe_edit_only btn btn-default" />
+                        <button name="action_print" type="object" string="Print" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" class="btn btn-default" /> -->
+                        <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
+                        <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
+                        <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
+                        <field name="state" widget="statusbar" statusbar_visible="draft,post,first,second,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="tahunajaran_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="tanggal" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="semester" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <label for="periode_awal" string="Periode"/>
+                                <div class="o_address_format">
+                                    <field name="periode_awal" class="o_address_city" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                    <field name="periode_akhir" class="o_address_state" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                </div>
+                            </group>
+                            <group>
+                                <field name="jenjang_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="tema" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="subtema" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="employee_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="job_id" attrs="{'invisible':[('employee_id', '=', False)]}" readonly="1" />
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Materi">
+                                <div class="o_horizontal_separator">Materi</div>
+                                <field name="materi" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                            </page>
+                            <page string="Kompetensi Dasar">
+                                <div class="o_horizontal_separator">Kompetensi Dasar</div>
+                                <field name="kompetensi_dasar_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                            </page>
+                            <page string="Muatan Materi">
+                                <div class="o_horizontal_separator">Muatan Materi</div>
+                                <button type="object" name="generate_muatan_materi" string="Generate Muatan Materi" attrs="{'invisible':[('state', '!=', 'draft')]}" />
+                                <div style="height:5px;" ></div>
+                                <field name="muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}" > 
+                                    <tree>
+                                        <field name="tanggal" />
+                                        <field name="base_muatan_materi_ids" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="siswa_rppm_action_window" model="ir.actions.act_window">
+            <field name="name">RPPM</field>
+            <field name="res_model">siswa.rppm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_rppm_list_view')}), 
+                (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_rppm_form_view')})
+                ]"/>
+        </record>
+
+        <!-- Muatan materi rel view -->
+        <record id="rppm_muatan_materi_base_rel_form_view" model="ir.ui.view">
+            <field name="name">rppm.muatan.materi.base.rel.form.view</field>
+            <field name="model">rppm.muatan.materi.base.rel</field>
+            <field name="arch" type="xml">
+                <form duplicate="0" string="Muatan Materi" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tanggal" readonly="1" />
+                            </group>
+                            <group></group>
+                        </group>
+                        <div class="o_horizontal_separator">Muatan Materi</div>
+                        <field name="base_muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
