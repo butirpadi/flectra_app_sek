@@ -25,6 +25,7 @@
     'data': [
         'security/user_groups.xml',
         'security/ir.model.access.csv',
+        'security/ir.rule.xml',
         'data/ir_sequence_data.xml',
         'views/kompetensi_inti_view.xml',
         'views/kompetensi_dasar_view.xml',

@@ -22,7 +22,7 @@ class Rppm(models.Model):
     job_id = fields.Many2one(string=u'Job Position', comodel_name='hr.job',
                              ondelete='restrict', related="employee_id.job_id")
     tanggal = fields.Date('Tanggal', required=True)
-    state = fields.Selection([('reject', 'Reject'),('draft', 'Draft'), ('post', 'Posted'), ('first', 'First Confirmed'), (
+    state = fields.Selection([('reject', 'Reject'), ('draft', 'Draft'), ('post', 'Posted'), ('first', 'First Confirmed'), (
         'second', 'Second Confirmed'), ('done', 'Done')], string='State', required=True, default='draft')
     semester = fields.Selection([('ganjil', 'Semester 1'), ('genap', 'Semester 2')],
                                 string='Semester', required=True, default='ganjil')
@@ -48,7 +48,24 @@ class Rppm(models.Model):
         default=lambda self: self.get_rppm_setting()
     )
 
-    @api.multi 
+    @api.model
+    def get_rppm_action(self):
+        # self.ensure_one()
+        if self.env.user.has_group('siswa_kurikulum.kurikulum_manager'):
+            print('Manager')
+            action = self.env.ref('siswa_kurikulum.siswa_rppm_manager_action_window').read()[0]
+            # return self.env.ref('siswa_rppm_manager_action_window').window_action(self)
+        elif self.env.user.has_group('siswa_kurikulum.kurikulum_guru'):
+            print('Guru')
+            action = self.env.ref('siswa_kurikulum.siswa_rppm_action_window').read()[0]
+            # return self.env.ref('siswa_rppm_action_window').window_action(self)
+
+        # action =  self.env.ref('siswa_rppm_manager_action_window').window_action(self)
+        # action = self.env.ref('siswa_kurikulum.siswa_rppm_manager_action_window').read()[0]
+        return action
+        # print('Inside get rppm action')
+
+    @api.multi
     def action_reject(self):
         self.ensure_one()
         self.state = 'reject'

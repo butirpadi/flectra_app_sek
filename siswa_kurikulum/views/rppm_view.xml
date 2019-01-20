@@ -1,16 +1,16 @@
 <odoo>
     <data>
-        <record id="rppm_search_view" model="ir.ui.view" >
-	        <field name="name">rppm.search.view</field>
-	        <field name="model">siswa.rppm</field>
-	        <field name="arch" type="xml">
+        <record id="rppm_search_view" model="ir.ui.view">
+            <field name="name">rppm.search.view</field>
+            <field name="model">siswa.rppm</field>
+            <field name="arch" type="xml">
                 <search string="Search Name">
                     <field name="name" string="Nama" filter_domain="['|','|','|',('name','ilike',self),('employee_id','ilike',self),('tema','ilike',self),('subtema','ilike',self)]"/>
-                    <filter string="Draft" domain="[('state','=','draft')]"/>
-                    <filter string="Posted" domain="[('state','=','post')]"/>
-                    <filter string="First Confirmed" domain="[('state','=','first')]"/>
-                    <filter string="Second Confirmed" domain="[('state','=','second')]"/>
-                    <filter string="Done" domain="[('state','=','done')]"/>
+                    <filter string="Draft" name="filter_draft" domain="[('state','=','draft')]"/>
+                    <filter string="Posted" name="filter_post" domain="[('state','=','post')]"/>
+                    <filter string="First Confirmed" name="filter_first" domain="[('state','=','first')]"/>
+                    <filter string="Second Confirmed" name="filter_second" domain="[('state','=','second')]"/>
+                    <filter string="Done" name="filter_done" domain="[('state','=','done')]"/>
                     <group string="Group By Name">
                         <filter name="group_by_state" string="State" domain="[]" context="{'group_by':'state'}"/>
                         <filter name="group_by_employee_id" string="Person" domain="[]" context="{'group_by':'employee_id'}"/>
@@ -49,11 +49,11 @@
                         <!-- <button name="action_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '=', 'paid'),('name', '=', 'New')]}" class="btn btn-primary" />
                         <button name="reset_pembayaran_lines" type="object" string="Reset" invisible="1" class="oe_edit_only btn btn-default" />
                         <button name="action_print" type="object" string="Print" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" class="btn btn-default" /> -->
-                        <button name="action_print_view" type="object" string="Print View" attrs="{'invisible':[('state', '=', 'draft')]}" /> 
-                        <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
-                        <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
-                        <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" /> 
-                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '=', 'draft')]}" class="bg-red" /> 
+                        <button name="action_print_view" type="object" string="Print View" attrs="{'invisible':[('state', '=', 'draft')]}" />
+                        <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
+                        <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
+                        <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
+                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '=', 'draft')]}" class="bg-red" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,post,first,second,done"/>
                     </header>
                     <sheet>
@@ -97,8 +97,8 @@
                             <page string="Muatan Materi">
                                 <div class="o_horizontal_separator">Muatan Materi</div>
                                 <button type="object" name="generate_muatan_materi" string="Generate Muatan Materi" attrs="{'invisible':[('state', '!=', 'draft')]}" />
-                                <div style="height:5px;" ></div>
-                                <field name="muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}" > 
+                                <div style="height:5px;"></div>
+                                <field name="muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}">
                                     <tree>
                                         <field name="tanggal" />
                                         <field name="base_muatan_materi_ids" />
@@ -111,6 +111,16 @@
             </field>
         </record>
 
+        <record model="ir.actions.server" id="siswa_rppm_action_server">
+            <field name="name">RPPM Server Action</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_siswa_rppm"/>
+             <field name="state">code</field>
+            <field name="code">
+                action = model.get_rppm_action()
+            </field>
+        </record>
+
         <record id="siswa_rppm_action_window" model="ir.actions.act_window">
             <field name="name">RPPM</field>
             <field name="res_model">siswa.rppm</field>
@@ -119,6 +129,19 @@
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_rppm_list_view')}), 
                 (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_rppm_form_view')})
                 ]"/>
+            <field name="context">{'search_default_filter_draft':True}</field>
+            <!-- <field groups="siswa_kurikulum.kurikulum_manager" name="context">{'search_default_filter_post':True}</field> -->
+        </record>
+
+        <record id="siswa_rppm_manager_action_window" model="ir.actions.act_window">
+            <field name="name">RPPM</field>
+            <field name="res_model">siswa.rppm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_rppm_list_view')}), 
+                (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_rppm_form_view')})
+                ]"/>
+            <field name="context">{'search_default_filter_post':True}</field>
         </record>
 
         <!-- Muatan materi rel view -->
