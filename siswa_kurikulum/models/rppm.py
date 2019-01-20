@@ -40,17 +40,33 @@ class Rppm(models.Model):
         inverse_name='rppm_id',
     )
 
-    @api.multi 
+    rppm_setting_id = fields.Many2one(
+        string=u'RPPM Setting',
+        comodel_name='rppm.setting',
+        ondelete='restrict',
+        default=lambda self: self.get_rppm_setting()
+    )
+
+    @api.multi
+    def get_rppm_setting(self):
+        self.ensure_one
+        ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
+            [('active', '=', True)])
+        rppm_set_id = self.env['rppm.setting'].search(
+            [('tahunajaran_id', '=', ta_aktif.id)], limit=1)
+        return rppm_set_id
+
+    @api.multi
     def action_print_view(self):
         self.ensure_one()
-        print('Action Print View')
+        return self.env.ref('siswa_kurikulum.rppm_report_action').report_action(self)
 
-    @api.multi 
+    @api.multi
     def action_first_confirm(self):
         for rec in self:
             print('first confirm')
-    
-    @api.multi 
+
+    @api.multi
     def action_second_confirm(self):
         for rec in self:
             print('second confirm')
@@ -64,7 +80,8 @@ class Rppm(models.Model):
                 rec.state = 'post'
             else:
                 # alert error
-                raise exceptions.ValidationError(_('Submit form gagal, lengkapi data yang diperlukan.'))
+                raise exceptions.ValidationError(
+                    _('Submit form gagal, lengkapi data yang diperlukan.'))
 
     @api.multi
     def generate_muatan_materi(self):
@@ -108,8 +125,9 @@ class Rppm(models.Model):
         res = []
         for rec in self:
             if rec.state != 'draft':
-                raise exceptions.except_orm(_('Warning'), _('You can not delete at this state.'))
+                raise exceptions.except_orm(_('Warning'), _(
+                    'You can not delete at this state.'))
             else:
                 res.append(super(Rppm, self).unlink())
-                
+
         return res
