@@ -23,7 +23,8 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/user_groups.xml',
+        'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'views/kompetensi_inti_view.xml',
         'views/kompetensi_dasar_view.xml',

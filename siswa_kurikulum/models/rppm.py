@@ -22,11 +22,12 @@ class Rppm(models.Model):
     job_id = fields.Many2one(string=u'Job Position', comodel_name='hr.job',
                              ondelete='restrict', related="employee_id.job_id")
     tanggal = fields.Date('Tanggal', required=True)
-    state = fields.Selection([('draft', 'Draft'), ('post', 'Posted'), ('first', 'First Confirmed'), (
+    state = fields.Selection([('reject', 'Reject'),('draft', 'Draft'), ('post', 'Posted'), ('first', 'First Confirmed'), (
         'second', 'Second Confirmed'), ('done', 'Done')], string='State', required=True, default='draft')
     semester = fields.Selection([('ganjil', 'Semester 1'), ('genap', 'Semester 2')],
                                 string='Semester', required=True, default='ganjil')
     materi = fields.Text(string=u'Materi')
+    desc = fields.Html('Catatan')
     kompetensi_dasar_ids = fields.Many2many(
         string=u'Kompetensi Dasar',
         comodel_name='kompetensi.dasar',
@@ -47,6 +48,12 @@ class Rppm(models.Model):
         default=lambda self: self.get_rppm_setting()
     )
 
+    @api.multi 
+    def action_reject(self):
+        self.ensure_one()
+        self.state = 'reject'
+        print('Reject Application')
+
     @api.multi
     def get_rppm_setting(self):
         self.ensure_one
@@ -64,7 +71,7 @@ class Rppm(models.Model):
     @api.multi
     def action_first_confirm(self):
         for rec in self:
-            print('first confirm')
+            self.state = 'first'
 
     @api.multi
     def action_second_confirm(self):
