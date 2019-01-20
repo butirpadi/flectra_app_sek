@@ -1,7 +1,7 @@
 <odoo>
     <data>
         <menuitem name="Kurikulum" id="menu_kurikulum_root"
-			sequence="107" web_icon="siswa_kurikulum,static/description/icon.png" />
+			sequence="107" web_icon="siswa_kurikulum,static/description/icon.png" groups="siswa_kurikulum.kurikulum_guru" />
 
         <menuitem name="Dashboard"
 			id="menu_kurikulum_dashboard"

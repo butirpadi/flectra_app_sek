@@ -2,7 +2,7 @@
 	<data>
 	
 		<menuitem name="Keuangan" id="siswa_ocb11.keuangan_menu"
-			sequence="101" web_icon="siswa_keu_ocb11,static/description/icon.png" />
+			sequence="101" web_icon="siswa_keu_ocb11,static/description/icon.png" groups="siswa_keu_ocb11.siswa_keu_group_user" />
 
 		<menuitem name="Dashboard"
 			id="siswa_keu_ocb11.menu_dashboard_keuangan"

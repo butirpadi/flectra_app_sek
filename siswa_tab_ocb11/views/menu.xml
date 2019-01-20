@@ -4,7 +4,7 @@
 		<!-- Top menu item -->
 		<menuitem name="Tabungan"
 			id="siswa_tab_ocb11.tabungan_master_menu" sequence="103"
-			web_icon="siswa_tab_ocb11,static/description/icon.png" />
+			web_icon="siswa_tab_ocb11,static/description/icon.png" groups="siswa_tab_ocb11.siswa_tab_group_user" />
 
 		<!-- menu categories -->
 		<menuitem name="Dashboard"
