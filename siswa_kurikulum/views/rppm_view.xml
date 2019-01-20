@@ -53,7 +53,7 @@
                         <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
                         <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
                         <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
-                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '=', 'draft')]}" class="bg-red" />
+                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '=', 'draft')]}" class="bg-red" groups="siswa_kurikulum.kurikulum_manager" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,post,first,second,done"/>
                     </header>
                     <sheet>
