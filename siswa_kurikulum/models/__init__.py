@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+# from . import tahunajaran
+# from . import hr_job
+from . import tema
+from . import subtema
+from . import protah
+from . import protah_tema_rel
+from . import prosem
 from . import kompetensi_inti
 from . import kompetensi_dasar
 from . import kategori_muatan_materi

@@ -18,11 +18,13 @@ class Rppm(models.Model):
     periode_awal = fields.Date('Periode Awal', required=True)
     periode_akhir = fields.Date('Periode Akhir', required=True)
     periode_str = fields.Char('Periode')
-    employee_id = fields.Many2one('hr.employee', string="Person")
+    employee_id = fields.Many2one(
+        'hr.employee', string="Person", default=lambda self: self.get_employee())
     job_id = fields.Many2one(string=u'Job Position', comodel_name='hr.job',
                              ondelete='restrict', related="employee_id.job_id")
-    tanggal = fields.Date('Tanggal', required=True)
-    state = fields.Selection([('reject', 'Reject'), ('draft', 'Draft'), ('post', 'Posted'), ('first', 'First Confirmed'), (
+    tanggal = fields.Date('Tanggal', required=True,
+                          default=datetime.datetime.today().date())
+    state = fields.Selection([('reject', 'Reject'), ('draft', 'Draft'), ('post', 'Posted'), ('first', 'Confirmed'), (
         'second', 'Second Confirmed'), ('done', 'Done')], string='State', required=True, default='draft')
     semester = fields.Selection([('ganjil', 'Semester 1'), ('genap', 'Semester 2')],
                                 string='Semester', required=True, default='ganjil')
@@ -48,16 +50,24 @@ class Rppm(models.Model):
         default=lambda self: self.get_rppm_setting()
     )
 
+    @api.multi
+    def get_employee(self):
+        emp = self.env['hr.employee'].search(
+            [('user_id', '=', self.env.user.id)])
+        return emp
+
     @api.model
     def get_rppm_action(self):
         # self.ensure_one()
         if self.env.user.has_group('siswa_kurikulum.kurikulum_manager'):
             print('Manager')
-            action = self.env.ref('siswa_kurikulum.siswa_rppm_manager_action_window').read()[0]
+            action = self.env.ref(
+                'siswa_kurikulum.siswa_rppm_manager_action_window').read()[0]
             # return self.env.ref('siswa_rppm_manager_action_window').window_action(self)
         elif self.env.user.has_group('siswa_kurikulum.kurikulum_guru'):
             print('Guru')
-            action = self.env.ref('siswa_kurikulum.siswa_rppm_action_window').read()[0]
+            action = self.env.ref(
+                'siswa_kurikulum.siswa_rppm_action_window').read()[0]
             # return self.env.ref('siswa_rppm_action_window').window_action(self)
 
         # action =  self.env.ref('siswa_rppm_manager_action_window').window_action(self)
@@ -74,10 +84,13 @@ class Rppm(models.Model):
     @api.multi
     def get_rppm_setting(self):
         self.ensure_one
-        ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
-            [('active', '=', True)])
+        # ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
+        #     [('active', '=', True)])
+        # rppm_set_id = self.env['rppm.setting'].search(
+        #     [('tahunajaran_id', '=', ta_aktif.id)], limit=1)
+        # get rppm setting yang aktif
         rppm_set_id = self.env['rppm.setting'].search(
-            [('tahunajaran_id', '=', ta_aktif.id)], limit=1)
+            [('aktif', '=', True)], limir=1)
         return rppm_set_id
 
     @api.multi

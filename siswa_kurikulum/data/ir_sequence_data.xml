@@ -9,6 +9,14 @@
             <field name="padding">6</field>
             <!-- <field name="company_id" eval="False"/> -->
         </record>
+        
+        <record id="_protah_sequence_" model="ir.sequence">
+            <field name="name">RPPM Sequence</field>
+            <field name="code">siswa.protah.sequence</field>
+            <field name="prefix">PT/%(range_year)s/%(range_month)s/</field>
+            <field name="padding">6</field>
+            <!-- <field name="company_id" eval="False"/> -->
+        </record>
 
     </data>
 </odoo>

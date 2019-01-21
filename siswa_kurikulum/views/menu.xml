@@ -17,9 +17,12 @@
         <menuitem name="Configuration" id="menu_kurikulum_configuration"
 			parent="menu_kurikulum_root" sequence="4" groups="siswa_kurikulum.kurikulum_administrator" />
 
+        <menuitem name="PROTAH" id="menu_siswa_protah"
+			parent="menu_kurikulum_operation"
+			action="siswa_protah_action_server" sequence="1" />
         <menuitem name="RPPM" id="menu_siswa_rppm"
 			parent="menu_kurikulum_operation"
-			action="siswa_rppm_action_server" sequence="1" />
+			action="siswa_rppm_action_server" sequence="3" />
         
 		<menuitem name="Kompetensi Inti" id="menu_kompetensi_inti"
 			parent="menu_kurikulum_master"

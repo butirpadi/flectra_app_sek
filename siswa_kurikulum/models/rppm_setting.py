@@ -8,6 +8,8 @@ class RppmSetting(models.Model):
     _name = 'rppm.setting'
 
     name = fields.Char('Name')
+    aktif = fields.Boolean('Aktif', default=False)
+    active = fields.Boolean('Archived', default=True)
     tahunajaran_id = fields.Many2one('siswa_ocb11.tahunajaran', string='Tahun Ajaran', required=True,
                                      default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
     kategori_muatan_ids = fields.One2many(
@@ -53,6 +55,12 @@ class RppmSetting(models.Model):
             is_update_muatan = True
 
         for rec in self:
+
+            if 'aktif' in vals:
+                if vals['aktif']:
+                    # Non Aktifkan yang lain
+                    self.env.cr.execute("update rppm_setting set aktif = 'False' where id != " + str(rec.id))
+
             res = super(RppmSetting, self).write(vals)
             # update sort_order on muatan materi
             if is_update_muatan:

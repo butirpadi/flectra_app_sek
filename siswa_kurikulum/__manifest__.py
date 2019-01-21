@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'siswa_ocb11', 'siswa_employee'],
+    'depends': ['base', 'hr', 'siswa_ocb11', 'siswa_employee'],
 
     # always loaded
     'data': [
@@ -31,6 +31,7 @@
         'views/kompetensi_dasar_view.xml',
         'views/kategori_muatan_view.xml',
         'views/muatan_materi_view.xml',
+        'views/protah_view.xml',
         'views/rppm_setting_view.xml',
         'views/rppm_view.xml',
         'views/menu.xml',
