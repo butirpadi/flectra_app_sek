@@ -2,6 +2,7 @@
 
 # from . import tahunajaran
 # from . import hr_job
+from . import kurikulum_setting
 from . import tema
 from . import subtema
 from . import protah

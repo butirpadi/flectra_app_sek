@@ -13,6 +13,7 @@ class Rppm(models.Model):
                                      default=lambda x: x.env['siswa_ocb11.tahunajaran'].search([('active', '=', True)]))
     jenjang_id = fields.Many2one(
         'siswa_ocb11.jenjang', string="Kelompok", required=True)
+    tema_id = fields.Many2one('siswa.tema',string="Tema")
     tema = fields.Char('Tema', required=True)
     subtema = fields.Char('Subtema')
     periode_awal = fields.Date('Periode Awal', required=True)
@@ -49,6 +50,13 @@ class Rppm(models.Model):
         ondelete='restrict',
         default=lambda self: self.get_rppm_setting()
     )
+    
+    prosem_id = fields.Many2one(
+        string=u'PROSEM',
+        comodel_name='siswa.prosem',
+        ondelete='restrict',
+    )
+    
 
     @api.multi
     def get_employee(self):
@@ -90,7 +98,7 @@ class Rppm(models.Model):
         #     [('tahunajaran_id', '=', ta_aktif.id)], limit=1)
         # get rppm setting yang aktif
         rppm_set_id = self.env['rppm.setting'].search(
-            [('aktif', '=', True)], limir=1)
+            [('aktif', '=', True)], limit=1)
         return rppm_set_id
 
     @api.multi

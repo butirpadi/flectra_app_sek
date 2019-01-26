@@ -17,12 +17,18 @@
         <menuitem name="Configuration" id="menu_kurikulum_configuration"
 			parent="menu_kurikulum_root" sequence="4" groups="siswa_kurikulum.kurikulum_administrator" />
 
-        <menuitem name="PROTAH" id="menu_siswa_protah"
+        <menuitem name="Program Tahunan" id="menu_siswa_protah"
 			parent="menu_kurikulum_operation"
 			action="siswa_protah_action_server" sequence="1" />
-        <menuitem name="RPPM" id="menu_siswa_rppm"
+        <menuitem name="Program Semester" id="menu_siswa_prosem"
+			parent="menu_kurikulum_operation"
+			action="siswa_prosem_user_action_window" sequence="2" />
+        <menuitem name="Program Mingguan" id="menu_siswa_rppm"
 			parent="menu_kurikulum_operation"
 			action="siswa_rppm_action_server" sequence="3" />
+        <menuitem name="Program Harian" id="menu_siswa_rpph"
+			parent="menu_kurikulum_operation"
+			action="siswa_rppm_action_server" sequence="4" />
         
 		<menuitem name="Kompetensi Inti" id="menu_kompetensi_inti"
 			parent="menu_kurikulum_master"
@@ -36,10 +42,19 @@
         <menuitem name="Muatan Materi" id="menu_muatan_materi"
 			parent="menu_kurikulum_master"
 			action="muatan_materi_action_window" sequence="4" /> 
+        <menuitem name="Tema Pembelajaran" id="menu_tema"
+			parent="menu_kurikulum_master"
+			action="tema_action_window" sequence="5" /> 
+        <menuitem name="Subtema Pembelajaran" id="menu_subtema"
+			parent="menu_kurikulum_master"
+			action="subtema_action_window" sequence="6" /> 
         
+		<menuitem name="General Setting" id="menu_kurikulum_setting"
+			parent="menu_kurikulum_configuration"
+			action="kurikulum_setting_action" sequence="1" /> 
 		<menuitem name="RPPM Setting" id="menu_rppm_setting"
 			parent="menu_kurikulum_configuration"
-			action="rppm_setting_action" sequence="1" /> 
+			action="rppm_setting_action" sequence="2" /> 
 
     </data>
 </odoo>

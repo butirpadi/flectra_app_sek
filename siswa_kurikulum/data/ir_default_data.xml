@@ -4,6 +4,10 @@
 		<record model="rppm.setting" id="rppm_default_setting">
 			<field name="name">RPPM Setting</field>
 		</record>
+		
+		<record model="kurikulum.setting" id="_general_kurikulum_setting">
+			<field name="name">General Setting</field>
+		</record>
 
 	</data>
 </odoo>

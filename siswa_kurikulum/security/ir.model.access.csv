@@ -47,3 +47,9 @@ acc_kur_thn_adm,acc.kur.thn.adm,siswa_ocb11.model_siswa_ocb11_tahunajaran,siswa_
 acc_kur_jj_gr,acc.kur.jj.gr,siswa_ocb11.model_siswa_ocb11_jenjang,siswa_kurikulum.kurikulum_guru,1,0,0,0
 acc_kur_jj_mgr,acc.kur.jj.mgr,siswa_ocb11.model_siswa_ocb11_jenjang,siswa_kurikulum.kurikulum_manager,1,0,0,0
 acc_kur_jj_adm,acc.kur.jj.adm,siswa_ocb11.model_siswa_ocb11_jenjang,siswa_kurikulum.kurikulum_administrator,1,1,1,1
+acc_kur_set_gr,acc.kur.set.gr,model_kurikulum_setting,siswa_kurikulum.kurikulum_guru,1,0,0,0
+acc_kur_set_mgr,acc.kur.set.mgr,model_kurikulum_setting,siswa_kurikulum.kurikulum_manager,1,0,0,0
+acc_kur_set_adm,acc.kur.set.adm,model_kurikulum_setting,siswa_kurikulum.kurikulum_administrator,1,1,1,1
+acs_prosm_gr,acc.prosm.gr,model_siswa_prosem,siswa_kurikulum.kurikulum_guru,1,1,1,0
+acs_prosm_mgr,acc.prosm.mgr,model_siswa_prosem,siswa_kurikulum.kurikulum_manager,1,1,1,0
+acs_prosm_adm,acc.prosm.adm,model_siswa_prosem,siswa_kurikulum.kurikulum_administrator,1,1,1,1

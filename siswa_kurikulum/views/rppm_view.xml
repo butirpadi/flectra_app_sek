@@ -5,7 +5,7 @@
             <field name="model">siswa.rppm</field>
             <field name="arch" type="xml">
                 <search string="Search Name">
-                    <field name="name" string="Nama" filter_domain="['|','|','|',('name','ilike',self),('employee_id','ilike',self),('tema','ilike',self),('subtema','ilike',self)]"/>
+                    <field name="name" string="Nama" filter_domain="['|','|','|','|',('name','ilike',self),('employee_id','ilike',self),('tema','ilike',self),('subtema','ilike',self),('tema_id','ilike',self)]"/>
                     <filter string="Draft" name="filter_draft" domain="[('state','=','draft')]"/>
                     <filter string="Posted" name="filter_post" domain="[('state','=','post')]"/>
                     <filter string="Confirmed" name="filter_first" domain="[('state','=','first')]"/>
@@ -32,9 +32,9 @@
                     <field name="tahunajaran_id"/>
                     <field name="periode_str"/>
                     <field name="semester"/>
-                    <field name="tema"/>
-                    <field name="subtema"/>
-                    <field name="employee_id"/>
+                    <field name="tema_id"/>
+                    <!-- <field name="subtema"/> -->
+                    <field name="employee_id" groups="siswa_kurikulum.kurikulum_manager" />
                     <field name="state"/>
                 </tree>
             </field>
@@ -73,13 +73,14 @@
                                     <field name="periode_awal" class="o_address_city" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
                                     <field name="periode_akhir" class="o_address_state" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
                                 </div>
+                                <field name="prosem_id" readonly="1"/>
                             </group>
                             <group>
                                 <field name="jenjang_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                <field name="tema" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+                                <field name="tema_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
                                 <field name="subtema" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                <field name="employee_id" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                <field name="job_id" attrs="{'invisible':[('employee_id', '=', False)]}" readonly="1" />
+                                <field name="employee_id" attrs="{'readonly':[('state', '!=', 'draft')]}" groups="siswa_kurikulum.kurikulum_manager" />
+                                <field name="job_id" attrs="{'invisible':[('employee_id', '=', False)]}" readonly="1" groups="siswa_kurikulum.kurikulum_manager" />
                             </group>
                         </group>
 
@@ -97,7 +98,7 @@
                             </page>
                             <page string="Muatan Materi">
                                 <div class="o_horizontal_separator">Muatan Materi</div>
-                                <button type="object" name="generate_muatan_materi" string="Generate Muatan Materi" attrs="{'invisible':[('state', '!=', 'draft')]}" />
+                                <button type="object" name="generate_muatan_materi" string="Generate Muatan Materi" attrs="{'invisible':[('state', '!=', 'draft')]}" class="oe_edit_only" />
                                 <div style="height:5px;"></div>
                                 <field name="muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}">
                                     <tree>
@@ -113,7 +114,7 @@
         </record>
 
         <record model="ir.actions.server" id="siswa_rppm_action_server">
-            <field name="name">Perencanaan Pelaksanaan Program Mingguan</field>
+            <field name="name">Perencanaan Program Mingguan</field>
             <field name="type">ir.actions.server</field>
             <field name="model_id" ref="model_siswa_rppm"/>
              <field name="state">code</field>
@@ -123,7 +124,7 @@
         </record>
 
         <record id="siswa_rppm_action_window" model="ir.actions.act_window">
-            <field name="name">Perencanaan Pelaksanaan Program Mingguan</field>
+            <field name="name">Perencanaan Program Mingguan</field>
             <field name="res_model">siswa.rppm</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0), 
@@ -135,7 +136,7 @@
         </record>
 
         <record id="siswa_rppm_manager_action_window" model="ir.actions.act_window">
-            <field name="name">Perencanaan Pelaksanaan Program Mingguan</field>
+            <field name="name">Perencanaan Program Mingguan</field>
             <field name="res_model">siswa.rppm</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0), 

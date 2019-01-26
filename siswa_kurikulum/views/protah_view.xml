@@ -6,10 +6,11 @@
             <field name="arch" type="xml">
                 <search string="Search Name">
                     <field name="name" string="Nama" filter_domain="['|','|','|',('name','ilike',self),('employee_id','ilike',self),('tema','ilike',self),('subtema','ilike',self)]"/>
+                    <filter string="Reject" name="filter_reject" domain="[('state','=','reject')]"/>
                     <filter string="Draft" name="filter_draft" domain="[('state','=','draft')]"/>
                     <filter string="Posted" name="filter_post" domain="[('state','=','post')]"/>
                     <filter string="Confirmed" name="filter_first" domain="[('state','=','first')]"/>
-                    <filter string="Second Confirmed" name="filter_second" domain="[('state','=','second')]"/>
+                    <filter string="Post Confirmed" name="filter_second" domain="[('state','=','second')]"/>
                     <filter string="Done" name="filter_done" domain="[('state','=','done')]"/>
                     <group string="Group By Name">
                         <filter name="group_by_state" string="State" domain="[]" context="{'group_by':'state'}"/>
@@ -26,7 +27,7 @@
             <field name="name">protah.list.view</field>
             <field name="model">siswa.protah</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-warning="state=='reject'" decoration-muted="state=='cancel'" decoration-success="state=='done'" >
                     <field name="name"/>
                     <field name="tahunajaran_id"/>
                     <field name="jenjang_id"/>
@@ -40,13 +41,16 @@
             <field name="name">siswa.protah.form</field>
             <field name="model">siswa.protah</field>
             <field name="arch" type="xml">
-                <form duplicate="0" string="Program Tahunan" class="o_sale_order">
+                <form string="Program Tahunan" class="o_sale_order">
                     <header>
                         <!-- <button name="action_print_view" type="object" string="Print View" attrs="{'invisible':[('state', '=', 'draft')]}" /> -->
-                        <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="bg-blue" />
-                        <!-- <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
-                        <button name="action_second_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" />
-                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '=', 'draft')]}" class="bg-red" groups="siswa_kurikulum.kurikulum_manager" /> -->
+                        <button name="action_set_to_draft" type="object" string="Set to Draft" attrs="{'invisible':[('state', '!=', 'reject')]}" />
+                        <button name="action_submit" type="object" string="Submit" attrs="{'invisible':['|',('state', '!=', 'draft'),('name', '=', 'New')]}" class="bg-blue oe_edit_only" />
+                        <button name="action_first_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '!=', 'post'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" groups="siswa_kurikulum.kurikulum_manager" />
+                        <button name="action_second_confirm" type="object" string="Post Confirm" attrs="{'invisible':['|',('state', '!=', 'first'),('name', '=', 'New')]}" class="oe_edit_only bg-blue" groups="siswa_kurikulum.kurikulum_manager" />
+                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '!=', 'post')]}" class="bg-red oe_edit_only" groups="siswa_kurikulum.kurikulum_manager" />
+                        <button confirm="Are you sure?" name="action_reject" type="object" string="Reject" attrs="{'invisible':[('state', '!=', 'first')]}" class="bg-red oe_edit_only" groups="siswa_kurikulum.kurikulum_manager" />
+                        <button name="action_cancel" confirm="Are you sure, to cancel this document?" type="object" string="Cancel" attrs="{'invisible':[('state', '!=', 'draft')]}" class="oe_edit_only" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,post,first,second,done"/>
                     </header>
                     <sheet>                        
@@ -58,13 +62,7 @@
                         <group>
                             <group>
                                 <field name="tahunajaran_id" attrs="{'readonly':[('state', '!=', 'draft')]}" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' context="{'active_test': False}" />
-                                <!-- <field name="tanggal" attrs="{'readonly':[('state', '!=', 'draft')]}" options="{'datepicker':{'format': 'MMM Y'}}" /> -->
                                 <field name="tanggal" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                <!-- <label for="periode_awal" string="Periode"/>
-                                <div class="o_address_format">
-                                    <field name="periode_awal" class="o_address_city" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                    <field name="periode_akhir" class="o_address_state" style="width:45%;" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                                </div> -->
                             </group>
                             <group>
                                 <field name="jenjang_id" attrs="{'readonly':[('state', '!=', 'draft')]}" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' />
@@ -82,38 +80,13 @@
                                 <field name="periode_akhir" />
                             </tree>
                         </field>
-
-                        <!-- <notebook>
-                            <page string="Materi">
-                                <div class="o_horizontal_separator">Materi</div>
-                                <field name="materi" attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                            </page>
-                            <page string="Kompetensi Dasar">
-                                <div class="o_horizontal_separator">Kompetensi Dasar</div>
-                                <field name="kompetensi_dasar_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}" />
-                            </page>
-                            <page string="Muatan Materi">
-                                <div class="o_horizontal_separator">Muatan Materi</div>
-                                <button type="object" name="generate_muatan_materi" string="Generate Muatan Materi" attrs="{'invisible':[('state', '!=', 'draft')]}" />
-                                <div style="height:5px;"></div>
-                                <field name="muatan_materi_ids" options='{"no_open": True, "no_create_edit":True,"no_edit":True, "no_create":True}' attrs="{'readonly':[('state', '!=', 'draft')]}">
-                                    <tree>
-                                        <field name="tanggal" />
-                                        <field name="base_muatan_materi_ids" />
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook> -->
-
-                        <!-- <div class="o_horizontal_separator">Catatan</div>
-                        <field name="desc" attrs="{'invisible':[('state', '=', 'draft')]}" /> -->
                     </sheet>
                 </form>
             </field>
         </record>
 
         <record model="ir.actions.server" id="siswa_protah_action_server">
-            <field name="name">Perencanaan Pelaksanaan Pembelajaran Tahunan</field>
+            <field name="name">Perencanaan Program Tahunan</field>
             <field name="type">ir.actions.server</field>
             <field name="model_id" ref="model_siswa_protah"/>
              <field name="state">code</field>
@@ -123,18 +96,18 @@
         </record>
 
         <record id="siswa_protah_action_window" model="ir.actions.act_window">
-            <field name="name">Perencanaan Pelaksanaan Pembelajaran Tahunan</field>
+            <field name="name">Perencanaan Program Tahunan</field>
             <field name="res_model">siswa.protah</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0), 
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_protah_list_view')}), 
                 (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_protah_form_view')})
                 ]"/>
-            <field name="context">{'search_default_filter_draft':True}</field>
+            <field name="context">{'search_default_filter_draft':True, 'search_default_filter_reject':True}</field>
         </record>
 
         <record id="siswa_protah_manager_action_window" model="ir.actions.act_window">
-            <field name="name">Perencanaan Pelaksanaan Pembelajaran Tahunan</field>
+            <field name="name">Perencanaan Program Tahunan</field>
             <field name="res_model">siswa.protah</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0), 
@@ -142,6 +115,27 @@
                 (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_protah_form_view')})
                 ]"/>
             <field name="context">{'search_default_filter_post':True}</field>
+        </record>
+        
+        <record id="siswa_protah_manager_two_level_action_window" model="ir.actions.act_window">
+            <field name="name">Perencanaan Program Tahunan</field>
+            <field name="res_model">siswa.protah</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_protah_list_view')}), 
+                (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_protah_form_view')})
+                ]"/>
+            <field name="context">{'search_default_filter_first':True}</field>
+        </record>
+
+        <record id="siswa_protah_root_action_window" model="ir.actions.act_window">
+            <field name="name">Perencanaan Program Tahunan</field>
+            <field name="res_model">siswa.protah</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('siswa_protah_list_view')}), 
+                (0, 0, {'view_mode': 'form', 'view_id': ref('siswa_protah_form_view')})
+                ]"/>
         </record>
 
         <!-- Muatan materi rel view -->
