@@ -64,7 +64,7 @@ class siswa(models.Model):
 
     @api.multi
     def set_active_rombel(self):
-        self.ensure_one()
+        # self.ensure_one()
         # for rec in self:
         #     print('inside loop compute')
         #     ta_aktif = self.env['siswa_ocb11.tahunajaran'].search([('active','=',True)])
@@ -72,14 +72,16 @@ class siswa(models.Model):
         #     # pprint(rec.rombels)
         #     rec.active_rombel_id = rombel_aktif.rombel_id
         #     print(rec.name)
-        print('inside loop compute rombel aktif')
-        ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
-            [('active', '=', True)])
-        rombel_aktif = self.rombels.search(
-            [('siswa_id', '=', self.id), ('tahunajaran_id', '=', ta_aktif.id)])
-        # pprint(rec.rombels)
-        self.active_rombel_id = rombel_aktif.rombel_id
-        print(self.name)
+        # print('inside loop compute rombel aktif')
+        for rec in self:
+            ta_aktif = self.env['siswa_ocb11.tahunajaran'].search(
+                [('active', '=', True)])
+            rombel_aktif = rec.rombels.search(
+                [('siswa_id', '=', rec.id), ('tahunajaran_id', '=', ta_aktif.id)])
+            # pprint(rec.rombels)
+            if rombel_aktif:
+                rec.active_rombel_id = rombel_aktif.rombel_id
+            print(rec.name)
 
     @api.onchange('rombels')
     def rombels_onchange(self):

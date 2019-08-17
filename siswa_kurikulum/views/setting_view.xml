@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+
+        <record id="kurikulum_siswa_setting_form" model="ir.ui.view">
+            <field name="name">kurikulum.siswa.setting.form</field>
+            <field name="model">siswa.setting</field>
+            <field name="inherit_id" ref="siswa_ocb11.siswa_setting_form" />
+            <field name="arch" type="xml">
+                <field name="default_siswa_number" position="after" >
+                    <field name="jumlah_hari_aktif" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
