@@ -4,6 +4,10 @@ from odoo import models, fields, api, _
 class SiswaSetting(models.Model):
     _inherit = 'siswa.setting'
 
+    default_tabungan_income_account = fields.Many2one('account.account', string="Default Tabungan Account")
+    counterpart_tabungan_income_account = fields.Many2one('account.account', string="Counterpart Tabungan Account")
+    default_tabungan_journal = fields.Many2one('account.journal', string="Tabungan Income Journal")
+
     @api.multi
     def write(self, vals):
         print('--------------- inside module tabungan ----------------------')

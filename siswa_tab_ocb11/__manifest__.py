@@ -30,6 +30,7 @@
         'views/tabungan.xml',
         'views/res_siswa.xml',
         'views/dashboard_tabungan.xml',
+        'views/setting.xml',
         'views/wizard_report_tabungan.xml',
         'views/wizard_saldo_tabungan.xml',
         'report/report_tabungan_template.xml',
