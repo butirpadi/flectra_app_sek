@@ -4,6 +4,8 @@ from odoo import models, fields, api, _
 class SiswaSetting(models.Model):
     _inherit = 'siswa.setting'
 
+    default_income_account = fields.Many2one('account.account', string="Income Account")
+
     @api.multi
     def write(self, vals):
         

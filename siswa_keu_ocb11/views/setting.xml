@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+
+		<record id="keu_siswa_setting_form" model="ir.ui.view">
+			<field name="name">keu.siswa.setting.form</field>
+			<field name="model">siswa.setting</field>
+            <field name="inherit_id" ref="siswa_ocb11.siswa_setting_form"/>
+            <field eval="20" name="priority"/>
+			<field name="arch" type="xml">
+				<field name="default_siswa_number" position="after" >
+                    <field name="default_income_account" />
+                </field>
+			</field>
+		</record>
+
+	</data>
+</odoo>
