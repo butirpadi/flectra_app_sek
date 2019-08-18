@@ -5,6 +5,7 @@ class SiswaSetting(models.Model):
     _inherit = 'siswa.setting'
 
     default_income_account = fields.Many2one('account.account', string="Income Account")
+    default_income_journal = fields.Many2one('account.journal', string="Income Journal")
 
     @api.multi
     def write(self, vals):

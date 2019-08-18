@@ -8,6 +8,7 @@
             <field eval="20" name="priority"/>
 			<field name="arch" type="xml">
 				<field name="default_siswa_number" position="after" >
+                    <field name="default_income_journal" />
                     <field name="default_income_account" />
                 </field>
 			</field>

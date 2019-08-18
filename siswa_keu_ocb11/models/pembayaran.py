@@ -46,8 +46,13 @@ class pembayaran(models.Model):
 
     @api.model
     def _default_journal(self):
-        return self.env['account.journal'].search(
-            [('type', '=', 'sale')], order="create_date asc", limit=1)
+        def_income_journal = self.env['siswa.setting'].search(
+            [], limit=1).default_income_journal
+        if def_income_journal:
+            return def_income_journal
+        else:
+            return self.env['account.journal'].search(
+                [('type', '=', 'sale')], order="create_date asc", limit=1)
 
     journal_id = fields.Many2one('account.journal', string='Journal',
                                  required=True, readonly=True, states={'draft': [('readonly', False)]},
@@ -275,7 +280,7 @@ class pembayaran(models.Model):
             if bayar.biaya_id.potongan_ids:
                 for pot in bayar.biaya_id.potongan_ids:
                     pot.state = 'open'
-            
+
             # reset & delete account move
             self.account_move_id.button_cancel()
             self.account_move_id.unlink()
