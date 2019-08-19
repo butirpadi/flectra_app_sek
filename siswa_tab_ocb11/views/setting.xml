@@ -4,14 +4,21 @@
 		<record id="tab_siswa_setting_form" model="ir.ui.view">
 			<field name="name">tab.siswa.setting.form</field>
 			<field name="model">siswa.setting</field>
-            <field name="inherit_id" ref="siswa_ocb11.siswa_setting_form"/>
-            <field eval="22" name="priority"/>
+			<field name="inherit_id" ref="siswa_ocb11.siswa_setting_form"/>
+			<field eval="22" name="priority"/>
 			<field name="arch" type="xml">
-				<field name="default_siswa_number" position="after" >
-                    <field name="default_tabungan_journal" />
-                    <field name="default_tabungan_income_account" />
-                    <field name="counterpart_tabungan_income_account" />
-                </field>
+				<page name="siswa-page" position="after">
+					<page name="page-tabungan" string="Tabungan">
+						<group name="tabungan-setting" >
+							<group>
+								<field name="default_tabungan_journal" />
+								<field name="default_tabungan_income_account" />
+								<field name="counterpart_tabungan_income_account" />
+							</group>
+							<group></group>
+						</group>
+					</page>
+				</page>
 			</field>
 		</record>
 

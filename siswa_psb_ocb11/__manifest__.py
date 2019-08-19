@@ -46,6 +46,7 @@
         'views/tahunajaran.xml',
         'views/psb_dashboard.xml',
         'views/pembayaran.xml',
+        # 'views/setting.xml',
         'views/menu.xml',
         # 'views/templates.xml',
     ],

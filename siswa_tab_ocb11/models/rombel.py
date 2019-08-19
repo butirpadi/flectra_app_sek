@@ -6,6 +6,9 @@ from pprint import pprint
 class rombel(models.Model):
     _inherit = 'siswa_ocb11.rombel'
 
+    tabungan_income_journal_id = fields.Many2one('account.journal', string="Tabungan Income Journal")
+    tabungan_income_account_id = fields.Many2one('account.account', string="Tabungan Income Account")
+
     @api.multi
     def write(self, vals):
         print('Inside Write on Siswa_Tab_ocb11')

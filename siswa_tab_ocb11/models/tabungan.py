@@ -157,15 +157,25 @@ class tabungan(models.Model):
 
         # add journal entries
         if self.jenis == 'setor':
-            debit_account = self.env['siswa.setting'].search(
-                [], limit=1).default_tabungan_income_account
+            # get from rombel
+            if self.active_rombel_id.tabungan_income_account_id:
+                debit_account = self.active_rombel_id.tabungan_income_account_id
+            else:
+                debit_account = self.env['siswa.setting'].search(
+                    [], limit=1).default_tabungan_income_account
+
             credit_account = self.env['siswa.setting'].search(
                 [], limit=1).counterpart_tabungan_income_account
         else:
             debit_account = self.env['siswa.setting'].search(
                 [], limit=1).counterpart_tabungan_income_account
-            credit_account = self.env['siswa.setting'].search(
-                [], limit=1).default_tabungan_income_account
+            
+            if self.active_rombel_id.tabungan_income_account_id:
+                credit_account = self.active_rombel_id.tabungan_income_account_id
+            else:
+                credit_account = self.env['siswa.setting'].search(
+                    [], limit=1).default_tabungan_income_account
+
 
         aml_dict = []
         aml_dict.append((0, 0, {
@@ -185,9 +195,13 @@ class tabungan(models.Model):
             'account_id': credit_account.id
         }))
 
+        tabungan_journal_id = self.env['siswa.setting'].search([], limit=1).default_tabungan_journal
+        if self.active_rombel_id.tabungan_income_journal_id:
+            tabungan_journal_id = self.active_rombel_id.tabungan_income_journal_id
+
         acc_move = {
             'ref': self.name,
-            'journal_id': self.env['siswa.setting'].search([], limit=1).default_tabungan_journal.id,
+            'journal_id': tabungan_journal_id.id,
             'date': self.tanggal,
             'line_ids': aml_dict
         }

@@ -14,3 +14,4 @@ from . import siswa_biaya_ta_jenjang_on_calon_siswa_rel
 from . import psb_dashboard
 from . import tahunajaran
 from . import pembayaran
+# from . import setting

@@ -1,18 +1,18 @@
 <odoo>
 	<data>
 
-		<record id="keu_siswa_setting_form" model="ir.ui.view">
-			<field name="name">keu.siswa.setting.form</field>
+		<record id="psb_siswa_setting_form" model="ir.ui.view">
+			<field name="name">psb.siswa.setting.form</field>
 			<field name="model">siswa.setting</field>
 			<field name="inherit_id" ref="siswa_ocb11.siswa_setting_form"/>
 			<field eval="20" name="priority"/>
 			<field name="arch" type="xml">
 				<page name="siswa-page" position="after">
-					<page name="page-keuangan" string="Keuangan">
-						<group name="keuangan-setting" >
+					<page name="page-psb" string="PSB">
+						<group name="psb-setting" >
 							<group>
-								<field name="default_income_journal" />
-								<field name="default_income_account" />
+								<field name="default_psb_income_journal" />
+								<field name="default_psb_income_account" />
 							</group>
 							<group></group>
 						</group>

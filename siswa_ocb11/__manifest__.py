@@ -20,7 +20,7 @@
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account_accountant_cbc'],
+    'depends': ['base', 'account_accountant_cbc', 'account_cancel'],
 
     # always loaded
     'data': [
@@ -47,6 +47,7 @@
         'views/wizard_report_form_presensi.xml',
         'views/wizard_label_identitas.xml',
         'views/setting.xml',
+        'views/account_view.xml',
         # 'views/wizard_naik_kelas.xml',
         'report/report_master.xml',
         'report/report_siswa.xml',

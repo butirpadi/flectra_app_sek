@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="siswa_view_account_journal_form_inherit" model="ir.ui.view">
+            <field name="name">siswa.account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account_cancel.view_account_journal_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="update_posted" position="replace">
+                    <field name="update_posted"  />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

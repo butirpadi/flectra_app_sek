@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="tab_view_rombel_form" model="ir.ui.view">
+            <field name="name">tab.rombel.ocb11.form</field>
+            <field name="model">siswa_ocb11.rombel</field>
+            <field name="inherit_id" ref="siswa_ocb11.view_rombel_form"/>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="after">
+                    <group string="Account Setting" >
+                        <field name="tabungan_income_journal_id" />
+                        <field name="tabungan_income_account_id" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
