@@ -57,7 +57,7 @@
                 <form duplicate="0" string="pembayaran" class="o_sale_order">
                     <header>
                         <button name="action_confirm" type="object" string="Confirm" attrs="{'invisible':['|',('state', '=', 'paid'),('name', '=', 'New')]}" class="btn btn-primary" />
-                        <button name="reset_pembayaran_lines" type="object" string="Reset" invisible="1" class="oe_edit_only btn btn-default" />
+                        <button name="reset_pembayaran_lines" type="object" string="Reset" invisible="1" class="oe_edit_only btn btn-danger" />
                         <button name="action_print" type="object" string="Print" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" class="btn btn-default" />
                         <button confirm="Are you sure you want to do this?" name="action_cancel" type="object" string="Reset" attrs="{'invisible':['|',('state', '=', 'draft'),('name', '=', 'New')]}" class="oe_edit_only btn btn-default" groups="siswa_keu_ocb11.siswa_keu_group_admin" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
@@ -79,7 +79,7 @@
                                 <field name="siswa_id" domain="[('is_siswa','=',True)]" options="{'no_create':True, 'no_edit':True, 'no_create_edit': True, 'no_open':True}" attrs="{'readonly':[('name', '!=', 'New')]}" />
                                 <field name="journal_id" invisible="1" />
                                 <field name="account_account_type_id" invisible="1" />
-                                <field name="debit_account_id" domain="[('user_type_id','=',account_account_type_id)]" />
+                                <field name="debit_account_id" domain="[('user_type_id','=',account_account_type_id)]" string="Income Account" />
                                 <field name="induk" attrs="{'invisible':[('default_siswa_number', '=', 'nis')]}" readonly="1" />
                                 <field name="nis" attrs="{'invisible':[('default_siswa_number', '=', 'induk')]}" readonly="1" />
                                 <field name="rombel_id" />                        

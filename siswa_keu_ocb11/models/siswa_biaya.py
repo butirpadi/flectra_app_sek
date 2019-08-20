@@ -33,11 +33,12 @@ class siswa_biaya(models.Model):
     potongan_ids = fields.One2many('siswa.potongan_biaya',inverse_name='siswa_biaya_id')
     jumlah_potongan = fields.Float('Jumlah Potongan', compute="_compute_jumlah_potongan", store=True)
     
-    @api.depends('potongan_ids')
+    @api.depends('potongan_ids','potongan_ids.state')
     def _compute_jumlah_potongan(self):
         for rec in self:
             for pot in rec.potongan_ids:
-                rec.jumlah_potongan += pot.jumlah_potongan
+                if pot.state =='open':
+                    rec.jumlah_potongan += pot.jumlah_potongan  
 
     # @api.depends('biaya_id')
     # def biaya_id_onchange(self):
