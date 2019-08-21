@@ -56,6 +56,7 @@
         'report/report_form_presensi_monthly.xml',
         'report/report_label_identitas.xml',
         'views/menu.xml',
+        # 'views/hide_menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

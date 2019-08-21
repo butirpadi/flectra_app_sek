@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <!-- Report Management -->
+        <!-- <delete model="ir.ui.menu" id="account.account_reports_management_menu" />
+        <delete model="ir.ui.menu" id="account.menu_finance_entries_actions" /> -->
+    </data>
+</odoo>
+
