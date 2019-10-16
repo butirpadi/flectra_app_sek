@@ -48,6 +48,8 @@
         'views/wizard_label_identitas.xml',
         'views/setting.xml',
         'views/account_view.xml',
+        'views/golongan_gaji_view.xml',
+        'views/hide_menu_view.xml',
         # 'views/wizard_naik_kelas.xml',
         'report/report_master.xml',
         'report/report_siswa.xml',

@@ -13,3 +13,4 @@ from . import res_currency
 from . import res_company
 from . import res_lang
 from . import setting
+from . import golongan_gaji

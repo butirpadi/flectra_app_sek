@@ -38,6 +38,12 @@
 		<menuitem name="Siswa" id="siswa_ocb11.menu_siswa"
 			parent="siswa_ocb11.submenu_master"
 			action="siswa_ocb11.res_siswa_action_window" sequence="5" />
+		<menuitem 
+            id="submenu_golongan_gaji"
+            name="Golongan Gaji"
+            parent="siswa_ocb11.submenu_master"
+            action="golongan_gaji_action"
+        />
 
 
 		<menuitem name="Reports" id="siswa_ocb11.submenu_report"

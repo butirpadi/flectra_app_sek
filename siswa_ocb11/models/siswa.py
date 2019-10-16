@@ -21,10 +21,14 @@ class siswa(models.Model):
     alamat = fields.Char(string='Alamat')
     telp = fields.Char(string='Telp')
     ayah = fields.Char(string='Ayah')
+    tempat_lahir_ayah = fields.Char('Tempat Lahir')
+    tanggal_lahir_ayah = fields.Date(string='Tanggal Lahir')
     pekerjaan_ayah_id = fields.Many2one(
         'siswa_ocb11.pekerjaan', string='Pekerjaan Ayah')
     telp_ayah = fields.Char(string='Telp. Ayah')
     ibu = fields.Char(string='Ibu')
+    tempat_lahir_ibu = fields.Char('Tempat Lahir')
+    tanggal_lahir_ibu = fields.Date(string='Tanggal Lahir')
     pekerjaan_ibu_id = fields.Many2one(
         'siswa_ocb11.pekerjaan', string='Pekerjaan Ibu')
     telp_ibu = fields.Char(string='Telp. Ibu')

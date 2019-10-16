@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="golongan_gaji_tree">
+            <field name="name">golongan.gaji.tree</field>
+            <field name="model">golongan.gaji</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="batas_bawah"/>
+                    <field name="batas_atas"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="golongan_gaji_form">
+            <field name="name">golongan.gaji.form</field>
+            <field name="model">golongan.gaji</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="batas_bawah"/>
+                                <field name="batas_atas"/>
+                                <field name="currency_id" invisible="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="golongan_gaji_action">
+            <field name="name">Golongan Gaji</field>
+            <field name="res_model">golongan.gaji</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
