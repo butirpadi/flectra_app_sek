@@ -20,5 +20,15 @@
 			<field name="default_siswa_number">induk</field>
 		</record>
 
+		<record id="login_form_disable_footer" model="ir.config_parameter">
+            <field name="key">login_form_disable_footer</field>
+            <field name="value">False</field>
+        </record>
+
+		<record id="login_form_disable_database_manager" model="ir.config_parameter">
+            <field name="key">login_form_disable_database_manager</field>
+            <field name="value">False</field>
+        </record>
+
 	</data>
 </odoo>

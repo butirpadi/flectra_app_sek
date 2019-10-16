@@ -1,0 +1,5 @@
+<odoo>
+    <template id="login" inherit_id="web.login" name="Login Inherit">
+        <xpath expr="//label[@for='db']/parent::div" position="replace" />
+    </template>
+</odoo>

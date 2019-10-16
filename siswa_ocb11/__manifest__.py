@@ -29,6 +29,7 @@
         'data/ir_sequence_data.xml',
         'data/ir_model_data.xml',
         'data/ir_default_data.xml',
+        'views/webclient_templates.xml',
         'views/tahunajaran.xml',
         'views/jenjang.xml',
         'views/rombel.xml',
